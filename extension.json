@@ -1,0 +1,13 @@
+{
+  "code": "igniter.translate",
+  "name": "Translate",
+  "description": "Allows multilingual websites with TastyIgniter, making it easy to translate menu items.",
+  "version": "1.0.0",
+  "author": "SamPoyigi",
+  "icon": {
+    "class": "fa fa-language",
+    "backgroundColor": "#7BE4FF",
+    "color": "#198BA6"
+  },
+  "homepage": "https://github.com/tastyigniter/ti-ext-translate"
+}
