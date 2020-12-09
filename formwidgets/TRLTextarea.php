@@ -1,15 +1,14 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\Classes\BaseFormWidget;
-use System\Models\Languages_model;
 
 class TRLTextarea extends BaseFormWidget
 {
     use \Igniter\Translate\FormWidgets\TRLBase;
 
-    protected $defaultAlias = 'trltextarea';
-
     const FALLBACK_TYPE = 'textarea';
+
+    protected $defaultAlias = 'trltextarea';
 
     public function initialize()
     {
@@ -18,19 +17,19 @@ class TRLTextarea extends BaseFormWidget
 
     public function render()
     {
-        $this->isSupported = Languages_model::supportsLocale();
+        $this->prepareLocaleVars();
 
-        if ($this->isSupported) {
-            $this->prepareLocaleVars();
-
+        if ($this->isSupported)
             return $this->makePartial('trltextarea/trltextarea');
-        }
 
         return $this->renderFallbackField();
     }
 
     public function getSaveValue($value)
     {
+        if (!$this->isSupported)
+            return $value;
+
         return $this->getLocaleSaveValue($value);
     }
 

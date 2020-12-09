@@ -7,11 +7,15 @@
     var TRLRepeater = function (element, options) {
         this.options = options
         this.$el = $(element)
-        this.$selector = $('[data-locale-dropdown]', this.$el)
-        this.$activeLocale = $('[data-repeater-locale-active]', this.$el)
+        this.$dropdown = $('[data-locale-dropdown]', this.$el)
+        this.$activeButton = $('[data-repeater-locale-active]', this.$el)
         this.activeLocale = options.localeDefault
 
-        this.init()
+        this.$activeButton.text(this.activeLocale)
+
+        // this.$dropdown.on('click', '[data-locale-switch]', this.$activeButton, this.onSwitchLocale.bind(this));
+
+        // this.init()
     }
 
     TRLRepeater.DEFAULTS = {
@@ -20,35 +24,33 @@
     }
 
     TRLRepeater.prototype.init = function () {
-        this.$el.translatable()
+        // this.$el.translatable()
 
         // this.checkEmptyItems()
         //
-        // $(document).on('render', this.proxy(this.checkEmptyItems))
+        // $(document).on('render', this.checkEmptyItems.bind(this))
 
-        this.$el.on('setLocale.ti.translatable', this.proxy(this.onSetLocale))
+        // this.$el.on('setLocale.ti.translatable', this.onSetLocale.bind(this))
 
-        // this.$el.one('dispose-control', this.proxy(this.dispose))
+        // this.$el.one('dispose-control', this.dispose.bind(this))
     }
 
     TRLRepeater.prototype.dispose = function () {
 
-        $(document).off('render', this.proxy(this.checkEmptyItems))
+        // $(document).off('render', this.checkEmptyItems.bind(this))
+        //
+        // this.$el.off('setLocale.ti.translatable', this.onSetLocale.bind(this))
+        //
+        // this.$el.off('dispose-control', this.dispose.bind(this))
 
-        this.$el.off('setLocale.oc.multilingual', this.proxy(this.onSetLocale))
+        this.$el.removeData('ti.trlRepeater')
 
-        this.$el.off('dispose-control', this.proxy(this.dispose))
-
-        this.$el.removeData('oc.trlRepeater')
-
-        this.$selector = null
-        this.$locale = null
-        this.locale = null
+        this.$dropdown = null
+        this.$activeLocale = null
+        this.activeLocale = null
         this.$el = null
 
         this.options = null
-
-        BaseProto.dispose.call(this)
     }
 
     TRLRepeater.prototype.checkEmptyItems = function () {
@@ -56,28 +58,31 @@
         this.$el.toggleClass('is-empty', isEmpty)
     }
 
-    TRLRepeater.prototype.onSetLocale = function (e, locale, localeValue) {
-        var self = this,
-            previousLocale = this.locale
-
-        this.$el
-        .addClass('loading-indicator-container size-form-field')
-        .loadIndicator()
-
-        this.locale = locale
-        this.$locale.val(locale)
-
-        this.$el.request(this.options.switchHandler, {
-            data: {
-                _repeater_previous_locale: previousLocale,
-                _repeater_locale: locale
-            },
-            success: function (data) {
-                self.$el.multiLingual('setLocaleValue', data.updateValue, data.updateLocale)
-                self.$el.loadIndicator('hide')
-                this.success(data)
-            }
-        })
+    TRLRepeater.prototype.onSwitchLocale = function (event) {
+        // this.$el.translatable('onSwitchLocale', event)
+        // var self = this,
+        //     previousLocale = this.activeLocale
+        //
+        // this.$el
+        //     .addClass('loading-indicator-container size-form-field')
+        //     .progressIndicator()
+        //
+        // this.activeLocale = locale
+        // this.$activeLocale.val(locale)
+        //
+        // this.$el.request(this.options.switchHandler, {
+        //     data: {
+        //         _repeater_previous_locale: previousLocale,
+        //         _repeater_locale: locale
+        //     },
+        //     success: function (data) {
+        //         self.$el.translatable('setLocaleValue', data.updateValue, data.updateLocale)
+        //         self.$el.progressIndicator('hide')
+        //         this.success(data)
+        //     }
+        // }).always(function () {
+        //     self.$el.progressIndicator('hide')
+        // })
     }
 
     // TRLREPEATER PLUGIN DEFINITION

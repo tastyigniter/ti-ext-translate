@@ -17,7 +17,7 @@ trait TRLBase
      */
     public $isSupported;
 
-    protected $parentViewPath;
+    protected $parentPartialPath;
 
     protected $parentAssetPath;
 
@@ -25,21 +25,6 @@ trait TRLBase
     {
         $this->defaultLocale = Languages_model::getDefault();
         $this->isSupported = Languages_model::supportsLocale();
-    }
-
-    protected function runAsParent($callback)
-    {
-        $originalAssetPath = $this->assetPath;
-        $originalViewPath = $this->viewPath;
-        $this->assetPath = $this->parentAssetPath;
-        $this->viewPath = $this->parentViewPath;
-
-        $result = $callback();
-
-        $this->assetPath = $originalAssetPath;
-        $this->viewPath = $originalViewPath;
-
-        return $result;
     }
 
     public function prepareLocaleVars()
@@ -57,7 +42,7 @@ trait TRLBase
 
     public function renderFallbackField()
     {
-        return $this->makeTRLPartial('fallback_field');
+        return $this->makeTRLPartial('trlbase/fallback_field');
     }
 
     public function makeTRLPartial($partial, $params = [])
@@ -128,11 +113,15 @@ trait TRLBase
         return $values;
     }
 
-    protected function makeRenderFormField()
+    public function getFallbackType()
     {
-        if ($this->isSupported) {
+        return defined('static::FALLBACK_TYPE') ? static::FALLBACK_TYPE : 'text';
+    }
+
+    protected function makeRenderFormField($fieldType = null)
+    {
+        if ($this->isSupported)
             return $this->formField;
-        }
 
         $field = clone $this->formField;
         $field->type = $this->getFallbackType();
@@ -140,12 +129,18 @@ trait TRLBase
         return $field;
     }
 
-    /**
-     * Returns the fallback field type.
-     * @return string
-     */
-    public function getFallbackType()
+    protected function maskAsParent($callback)
     {
-        return defined('static::FALLBACK_TYPE') ? static::FALLBACK_TYPE : 'text';
+        $originalAssetPath = $this->assetPath;
+        $originalPartialPath = $this->partialPath;
+        $this->assetPath = array_merge($this->parentAssetPath, $originalAssetPath);
+        $this->partialPath = array_merge($this->parentPartialPath, $originalPartialPath);
+
+        $result = $callback();
+
+        $this->assetPath = $originalAssetPath;
+        $this->partialPath = $originalPartialPath;
+
+        return $result;
     }
 }

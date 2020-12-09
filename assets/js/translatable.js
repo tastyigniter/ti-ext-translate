@@ -5,7 +5,6 @@
     // ============================
 
     var Translatable = function (element, options) {
-        var self = this
         this.options = options
         this.$el = $(element)
         this.$dropdown = $('[data-locale-dropdown]', this.$el)
@@ -17,26 +16,26 @@
 
         this.$activeButton.text(this.activeLocale)
 
-        this.$dropdown.on('click', '[data-locale-select]', this.$activeButton, $.proxy(this.onSelectItemLocale, this));
+        this.$dropdown.on('click', '[data-locale-switch]', this.$activeButton, this.onSwitchLocale.bind(this));
 
         this.bindLocaleInput()
     }
 
     Translatable.DEFAULTS = {
         localeDefault: 'en',
-        defaultField: null,
         placeholderField: null
     }
 
-    Translatable.prototype.onSelectItemLocale = function (event) {
-        var currentLocale = event.data.text();
-        var selectedLocale = $(event.currentTarget).data('locale-select')
+    Translatable.prototype.onSwitchLocale = function (event) {
+        var currentLocale = event.data.text(),
+            selectedLocale = $(event.currentTarget).data('locale-switch')
 
         if (selectedLocale !== currentLocale) {
             this.setLocale(selectedLocale)
-        }
 
-        $('[data-locale-select="' + selectedLocale + '"]').click()
+            event.preventDefault()
+            $('[data-locale-switch="' + selectedLocale + '"]').trigger('click')
+        }
     }
 
     Translatable.prototype.bindLocaleInput = function () {
@@ -107,7 +106,6 @@
     // ===============
     $(document).render(function () {
         $('[data-control="translatable"]').translatable();
-        $('[data-control="trlrepeater"]').translatable();
     })
 
 }(window.jQuery);

@@ -36,14 +36,14 @@
 }
 
 .field-translatable.field-translatable-text .trl-btn {
-  right: 4px;
+  right: 6px;
   top: 50%;
   margin-top: -21px;
   height: 44px;
 }
 
 .field-translatable.field-translatable-textarea .trl-btn {
-  right: 4px;
+  right: 6px;
   top: 0;
 }
 
@@ -74,4 +74,14 @@
 .field-translatable.field-translatable-repeater.is-empty .trl-dropdown-menu {
   top: 15px;
   right: -7px
+}
+
+.field-translatable.field-translatable-markdowneditor .trl-btn {
+  top: 8px;
+}
+
+.field-translatable.field-translatable-richeditor .trl-btn {
+  top: 4px;
+  right: 15px;
+  z-index: 9999;
 }

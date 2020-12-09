@@ -5,6 +5,11 @@ namespace Igniter\Translate\Actions;
 use Igniter\Flame\Support\Str;
 use System\Actions\ModelAction;
 
+/**
+ * Translatable Model Action base Class
+ *
+ * Adapted from rainlab\translate\classes\TranslatableBehavior
+ */
 abstract class TranslatableAction extends ModelAction
 {
     /**
@@ -44,7 +49,7 @@ abstract class TranslatableAction extends ModelAction
 
     /**
      * Constructor
-     * @param \October\Rain\Database\Model $model The extended model.
+     * @param \Illuminate\Database\Eloquent\Model $model The extended model.
      */
     public function __construct($model)
     {

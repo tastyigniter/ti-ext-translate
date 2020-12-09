@@ -1,8 +1,11 @@
 <?php namespace Igniter\Translate\Classes;
 
+use Admin\Models\Menu_option_values_model;
+use Admin\Models\Menu_options_model;
 use Igniter\Flame\Traits\Singleton;
 use Igniter\Pages\Classes\Page as StaticPage;
 use Main\Template\Page as ThemePage;
+use System\Models\Mail_templates_model;
 
 class EventRegistry
 {
@@ -57,6 +60,24 @@ class EventRegistry
         }
     }
 
+    public function bootTranslatableModels()
+    {
+        Menu_options_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['option_name', 'option_values']);
+        });
+
+        Menu_option_values_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['value']);
+        });
+
+        Mail_templates_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['subject', 'body']);
+        });
+    }
+
     //
     // Helpers
     //
@@ -73,9 +94,8 @@ class EventRegistry
             $translatableFields = [
                 'text',
                 'textarea',
-//                'markdown',
-//                'mediafinder'
-//                'richeditor',
+                'markdowneditor',
+                'richeditor',
                 'repeater',
             ];
 

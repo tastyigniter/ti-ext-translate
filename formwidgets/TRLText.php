@@ -1,7 +1,6 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\Classes\BaseFormWidget;
-use System\Models\Languages_model;
 
 class TRLText extends BaseFormWidget
 {
@@ -16,19 +15,19 @@ class TRLText extends BaseFormWidget
 
     public function render()
     {
-        $this->isSupported = Languages_model::supportsLocale();
+        $this->prepareLocaleVars();
 
-        if ($this->isSupported) {
-            $this->prepareLocaleVars();
-
+        if ($this->isSupported)
             return $this->makePartial('trltext/trltext');
-        }
 
         return $this->renderFallbackField();
     }
 
     public function getSaveValue($value)
     {
+        if (!$this->isSupported)
+            return $value;
+
         return $this->getLocaleSaveValue($value);
     }
 

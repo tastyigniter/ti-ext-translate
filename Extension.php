@@ -9,11 +9,6 @@ use System\Classes\BaseExtension;
  */
 class Extension extends BaseExtension
 {
-    /**
-     * Register method, called when the extension is first registered.
-     *
-     * @return void
-     */
     public function register()
     {
         Event::listen('admin.form.extendFieldsBefore', function ($widget) {
@@ -21,20 +16,11 @@ class Extension extends BaseExtension
         }, -1);
     }
 
-    /**
-     * Boot method, called right before the request route.
-     *
-     * @return void
-     */
     public function boot()
     {
+        EventRegistry::instance()->bootTranslatableModels();
     }
 
-    /**
-     * Registers any front-end components implemented in this extension.
-     *
-     * @return array
-     */
     public function registerComponents()
     {
         return [
@@ -43,11 +29,6 @@ class Extension extends BaseExtension
         ];
     }
 
-    /**
-     * Registers any admin permissions used by this extension.
-     *
-     * @return array
-     */
     public function registerPermissions()
     {
 // Remove this line and uncomment block to activate
@@ -67,7 +48,6 @@ class Extension extends BaseExtension
             'Igniter\Translate\FormWidgets\TRLRichEditor' => ['code' => 'trlricheditor'],
             'Igniter\Translate\FormWidgets\TRLMarkdownEditor' => ['code' => 'trlmarkdowneditor'],
             'Igniter\Translate\FormWidgets\TRLRepeater' => ['code' => 'trlrepeater'],
-            'Igniter\Translate\FormWidgets\TRLMediaFinder' => ['code' => 'trlmediafinder'],
         ];
     }
 }

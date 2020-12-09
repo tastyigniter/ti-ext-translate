@@ -1,10 +1,8 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\Repeater;
-use ApplicationException;
-use October\Rain\Html\Helper as HtmlHelper;
+use Igniter\Flame\Html\Helper as HtmlHelper;
 use Request;
-use System\Models\Languages_model;
 
 class TRLRepeater extends Repeater
 {
@@ -14,32 +12,29 @@ class TRLRepeater extends Repeater
 
     public function __construct($controller, $formField, $configuration = [])
     {
-        parent::__construct($controller, $formField, $configuration);
+        $this->parentPartialPath[] = '~/app/admin/formwidgets';
+        $this->parentPartialPath[] = '~/app/admin/formwidgets/repeater';
+        $this->parentAssetPath[] = '~/app/admin/formwidgets/repeater/assets';
 
-        $this->partialPath[] = '~/app/admin/formwidgets';
+        parent::__construct($controller, $formField, $configuration);
+//        $this->partialPath[] = '~/app/admin/formwidgets';
     }
 
     public function initialize()
     {
         parent::initialize();
 
-        $this->parentViewPath = '~/app/admin/formwidgets/repeater';
-        $this->parentAssetPath = '~/app/admin/formwidgets/repeater/assets';
-
         $this->initLocale();
     }
 
     public function render()
     {
-        $this->isSupported = Languages_model::supportsLocale();
-
-        $parentContent = $this->runAsParent(function () {
+        $parentContent = $this->maskAsParent(function () {
             return parent::render();
         });
 
-        if (!$this->isSupported) {
+        if (!$this->isSupported)
             return $parentContent;
-        }
 
         $this->vars['repeater'] = $parentContent;
 
@@ -52,7 +47,19 @@ class TRLRepeater extends Repeater
         $this->prepareLocaleVars();
     }
 
-    protected function processsItemDefinitions()
+    public function loadAssets()
+    {
+        $this->maskAsParent(function () {
+            parent::loadAssets();
+        });
+
+        if ($this->isSupported) {
+            $this->loadLocaleAssets();
+            $this->addJs('js/trlrepeater.js');
+        }
+    }
+
+    protected function processItemDefinitions()
     {
         parent::processItemDefinitions();
 
@@ -62,74 +69,21 @@ class TRLRepeater extends Repeater
                 'textarea',
             ];
 
-            if (in_array($field['type'], $translatableFields))
+            if (in_array($field['type'], $translatableFields)) {
                 $field['type'] = 'trl'.$field['type'];
-        }
-    }
-
-    /**
-     * Returns an array of translated values for this field
-     * @return array
-     */
-    public function getSaveValue($value)
-    {
-        $this->rewritePostValues();
-
-        return $this->getLocaleSaveValue(is_array($value) ? array_values($value) : $value);
-    }
-
-    public function loadAssets()
-    {
-        $this->runAsParent(function () {
-            parent::loadAssets();
-        });
-
-        if (Languages_model::supportsLocale()) {
-            $this->loadLocaleAssets();
-            $this->addJs('js/trlrepeater.js');
-        }
-    }
-
-    public function onAddItem()
-    {
-        $this->actAsParent();
-
-        return parent::onAddItem();
-    }
-
-    public function onSwitchItemLocale()
-    {
-        if (!$locale = post('_repeater_locale')) {
-            throw new ApplicationException('Unable to find a repeater locale for: '.$locale);
-        }
-
-        // Store previous value
-        $previousLocale = post('_repeater_previous_locale');
-        $previousValue = $this->getPrimarySaveDataAsArray();
-
-        // Update widget to show form for switched locale
-        $lockerData = $this->getLocaleSaveDataAsArray($locale) ?: [];
-        $this->reprocessLocaleItems($lockerData);
-
-        foreach ($this->formWidgets as $key => $widget) {
-            $value = array_shift($lockerData);
-            if (!$value) {
-                unset($this->formWidgets[$key]);
-            }
-            else {
-                $widget->setFormValues($value);
+                $field['hideLocaleSelector'] = TRUE;
             }
         }
+    }
 
-        $this->actAsParent();
-        $parentContent = parent::render();
-        $this->actAsParent(FALSE);
+    protected function processSaveValue($value)
+    {
+        $value = parent::processSaveValue($value);
 
-        return [
-            '#'.$this->getId('mlRepeater') => $parentContent,
-            'updateValue' => json_encode($previousValue),
-            'updateLocale' => $previousLocale,
-        ];
+        if (!$this->isSupported)
+            return $value;
+
+        return $this->getLocaleSaveValue($value);
     }
 
     /**
@@ -186,7 +140,7 @@ class TRLRepeater extends Repeater
         /*
          * Get the selected locale at postback
          */
-        $data = post('RLTranslateRepeaterLocale');
+        $data = post('TRLRepeaterLocale');
         $fieldName = implode('.', HtmlHelper::nameToArray($this->fieldName));
         $locale = array_get($data, $fieldName);
 
