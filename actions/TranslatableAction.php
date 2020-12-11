@@ -120,7 +120,7 @@ abstract class TranslatableAction extends ModelAction
         $attributes = $this->model->getAttributes();
         $translatable = $this->model->getTranslatableAttributes();
         $originalValues = array_intersect_key($original, array_flip($translatable));
-        $this->model->attributes = array_merge($attributes, $originalValues);
+        $this->model->setRawAttributes(array_merge($attributes, $originalValues));
     }
 
     public function translatableSetActiveLocale($locale = null)
@@ -188,7 +188,7 @@ abstract class TranslatableAction extends ModelAction
     public function hasTranslation($key, $locale)
     {
         if ($locale == $this->translatableActiveLocale) {
-            $translatableAttributes = $this->model->attributes;
+            $translatableAttributes = $this->model->getAttributes();
         }
         else {
             if (!isset($this->translatableAttributes[$locale]))
@@ -219,7 +219,7 @@ abstract class TranslatableAction extends ModelAction
                 $result = $this->getAttributeFromData($this->translatableAttributes[$locale], $key);
             }
             elseif ($this->translatableUseFallback) {
-                $result = $this->getAttributeFromData($this->model->attributes, $key);
+                $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
             }
         }
 
@@ -231,8 +231,11 @@ abstract class TranslatableAction extends ModelAction
         if (is_null($locale))
             $locale = $this->translatableActiveLocale;
 
-        if ($locale == $this->translatableDefaultLocale)
-            return $this->setAttributeFromData($this->model->attributes, $key, $value);
+        if ($locale == $this->translatableDefaultLocale) {
+            $attributes = $this->model->getAttributes();
+
+            return $this->setAttributeFromData($attributes, $key, $value);
+        }
 
         if (!array_key_exists($locale, $this->translatableAttributes))
             $this->loadTranslatableAttributes($locale);
