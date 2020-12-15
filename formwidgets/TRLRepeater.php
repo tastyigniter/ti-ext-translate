@@ -1,8 +1,8 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\Repeater;
-use Igniter\Flame\Html\Helper as HtmlHelper;
 use Request;
+use System\Models\Languages_model;
 
 class TRLRepeater extends Repeater
 {
@@ -53,7 +53,7 @@ class TRLRepeater extends Repeater
             parent::loadAssets();
         });
 
-        if ($this->isSupported) {
+        if (Languages_model::supportsLocale()) {
             $this->loadLocaleAssets();
             $this->addJs('js/trlrepeater.js');
         }
@@ -71,7 +71,7 @@ class TRLRepeater extends Repeater
 
             if (in_array($field['type'], $translatableFields)) {
                 $field['type'] = 'trl'.$field['type'];
-                $field['hideLocaleSelector'] = TRUE;
+                $field['controlType'] = 'translatable-repeater';
             }
         }
     }
@@ -95,7 +95,7 @@ class TRLRepeater extends Repeater
         $this->formWidgets = [];
         $this->formField->value = $data;
 
-        $key = implode('.', HtmlHelper::nameToArray($this->formField->getName()));
+        $key = implode('.', name_to_array($this->formField->getName()));
         $requestData = Request::all();
         array_set($requestData, $key, $data);
         Request::merge($requestData);
@@ -141,7 +141,7 @@ class TRLRepeater extends Repeater
          * Get the selected locale at postback
          */
         $data = post('TRLRepeaterLocale');
-        $fieldName = implode('.', HtmlHelper::nameToArray($this->fieldName));
+        $fieldName = implode('.', name_to_array($this->fieldName));
         $locale = array_get($data, $fieldName);
 
         if (!$locale) {
@@ -152,7 +152,7 @@ class TRLRepeater extends Repeater
          * Splice the save data in to the locker data for selected locale
          */
         $data = $this->getPrimarySaveDataAsArray();
-        $fieldName = 'RLTranslate.'.$locale.'.'.implode('.', HtmlHelper::nameToArray($this->fieldName));
+        $fieldName = 'RLTranslate.'.$locale.'.'.implode('.', name_to_array($this->fieldName));
 
         $requestData = Request::all();
         array_set($requestData, $fieldName, json_encode($data));

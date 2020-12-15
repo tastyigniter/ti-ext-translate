@@ -44,8 +44,8 @@
         }
     }
 
-    TRLMarkdownEditor.prototype.onChangeContent = function (ev, markdowneditor, value) {
-        this.$el.translatable('setLocaleValue', value)
+    TRLMarkdownEditor.prototype.onChangeContent = function (codeMirror, changeObj) {
+        this.$el.translatable('setLocaleValue', codeMirror.getValue())
     }
 
     var old = $.fn.trlMarkdownEditor
@@ -75,6 +75,4 @@
     $(document).render(function () {
         $('[data-control="trlmarkdowneditor"]').trlMarkdownEditor()
     })
-
-
 }(window.jQuery);

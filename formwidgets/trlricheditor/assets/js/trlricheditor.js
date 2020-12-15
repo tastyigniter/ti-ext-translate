@@ -44,8 +44,8 @@
         }
     }
 
-    TRLRichEditor.prototype.onChangeContent = function (ev, richeditor, value) {
-        this.$el.translatable('setLocaleValue', value)
+    TRLRichEditor.prototype.onChangeContent = function (ev, value) {
+        this.$el.translatable('setLocaleValue', this.richEditor.$textarea.summernote('code'))
     }
 
     var old = $.fn.trlRichEditor
@@ -75,6 +75,4 @@
     $(document).render(function () {
         $('[data-control="trlricheditor"]').trlRichEditor()
     })
-
-
 }(window.jQuery);

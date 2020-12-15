@@ -84,6 +84,7 @@ abstract class TranslatableAction extends ModelAction
     public function performGetTranslatableAttribute($key)
     {
         $value = $this->getAttributeTranslatedValue($key);
+
         if ($this->model->hasGetMutator($key)) {
             $method = 'get'.Str::studly($key).'Attribute';
             $value = $this->model->{$method}($value);

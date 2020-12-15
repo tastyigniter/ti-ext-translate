@@ -34,5 +34,6 @@ class TRLText extends BaseFormWidget
     public function loadAssets()
     {
         $this->loadLocaleAssets();
+        $this->addJs('$/igniter/translate/formwidgets/trlrepeater/assets/js/trlrepeater.js', 'trlrepeater-js');
     }
 }

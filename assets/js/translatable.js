@@ -8,13 +8,15 @@
         this.options = options
         this.$el = $(element)
         this.$dropdown = $('[data-locale-dropdown]', this.$el)
-        this.$placeholder = $(this.options.placeholderField)
         this.$activeButton = $('[data-locale-active]', this.$el)
+        this.$placeholder = $(this.options.placeholderField)
 
         this.activeLocale = this.options.localeDefault
         this.$activeField = this.getLocaleElement(this.activeLocale)
 
         this.$activeButton.text(this.activeLocale)
+
+        this.toggleActiveLocale(this.activeLocale)
 
         this.$dropdown.on('click', '[data-locale-switch]', this.$activeButton, this.onSwitchLocale.bind(this));
 
@@ -30,11 +32,15 @@
         var currentLocale = event.data.text(),
             selectedLocale = $(event.currentTarget).data('locale-switch')
 
+        this.toggleActiveLocale(selectedLocale)
+
         if (selectedLocale !== currentLocale) {
             this.setLocale(selectedLocale)
+        }
 
+        if (event.ctrlKey || event.metaKey) {
             event.preventDefault()
-            $('[data-locale-switch="' + selectedLocale + '"]').trigger('click')
+            this.$el.closest('form').find('[data-locale-switch="' + selectedLocale + '"]').trigger('click')
         }
     }
 
@@ -43,6 +49,15 @@
 
         this.$placeholder.on('input', function () {
             self.$activeField.val(this.value)
+        })
+    }
+
+    Translatable.prototype.toggleActiveLocale = function (locale) {
+        this.$dropdown.find('[data-locale-switch]').each(function () {
+            $(this).removeClass('active')
+
+            if ($(this).data('localeSwitch') === locale)
+                $(this).addClass('active')
         })
     }
 
@@ -58,7 +73,8 @@
 
     Translatable.prototype.setLocaleValue = function (value, locale) {
         if (locale) {
-            this.getLocaleElement(locale).val(value)
+            var el = this.getLocaleElement(locale)
+            el ? el.val(value) : null
         } else {
             this.$activeField.val(value)
         }
@@ -67,9 +83,10 @@
     Translatable.prototype.setLocale = function (locale) {
         this.activeLocale = locale
         this.$activeField = this.getLocaleElement(locale)
-        this.$activeButton.text(locale)
 
+        this.$activeButton.text(locale)
         this.$placeholder.val(this.getLocaleValue(locale))
+
         this.$el.trigger('setLocale.ti.translatable', [locale, this.getLocaleValue(locale)])
     }
 

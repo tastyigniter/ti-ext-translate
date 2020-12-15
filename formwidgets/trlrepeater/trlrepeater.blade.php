@@ -4,12 +4,11 @@
     data-control="trlrepeater"
     data-locale-default="{{ $defaultLocale->code }}"
 >
-
     <div class="dropdown">
         <button
             class="btn btn-default trl-btn"
             data-toggle="dropdown"
-            data-repeater-locale-active
+            data-locale-active
             type="button">
         </button>
 

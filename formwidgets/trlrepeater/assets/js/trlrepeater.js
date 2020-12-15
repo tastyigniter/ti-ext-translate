@@ -8,40 +8,29 @@
         this.options = options
         this.$el = $(element)
         this.$dropdown = $('[data-locale-dropdown]', this.$el)
-        this.$activeButton = $('[data-repeater-locale-active]', this.$el)
+        this.$activeButton = $('[data-locale-active]', this.$el)
         this.activeLocale = options.localeDefault
 
-        this.$activeButton.text(this.activeLocale)
-
-        // this.$dropdown.on('click', '[data-locale-switch]', this.$activeButton, this.onSwitchLocale.bind(this));
-
-        // this.init()
+        this.init()
     }
 
     TRLRepeater.DEFAULTS = {
         localeDefault: 'en',
-        switchHandler: null
+        translatableSelector: '[data-control=translatable-repeater]'
     }
 
     TRLRepeater.prototype.init = function () {
-        // this.$el.translatable()
+        this.$el.translatable()
 
-        // this.checkEmptyItems()
-        //
-        // $(document).on('render', this.checkEmptyItems.bind(this))
+        this.bindLocaleInput()
 
-        // this.$el.on('setLocale.ti.translatable', this.onSetLocale.bind(this))
+        this.$el.on('setLocale.ti.translatable', this.onSetLocale.bind(this))
 
-        // this.$el.one('dispose-control', this.dispose.bind(this))
+        $(window).on('repeaterItemAdded', this.bindLocaleInput.bind(this))
     }
 
     TRLRepeater.prototype.dispose = function () {
-
-        // $(document).off('render', this.checkEmptyItems.bind(this))
-        //
-        // this.$el.off('setLocale.ti.translatable', this.onSetLocale.bind(this))
-        //
-        // this.$el.off('dispose-control', this.dispose.bind(this))
+        this.$el.off('setLocale.ti.translatable', this.onSetLocale.bind(this))
 
         this.$el.removeData('ti.trlRepeater')
 
@@ -53,36 +42,33 @@
         this.options = null
     }
 
-    TRLRepeater.prototype.checkEmptyItems = function () {
-        var isEmpty = !$('ul.field-repeater-items > li', this.$el).length
-        this.$el.toggleClass('is-empty', isEmpty)
+    TRLRepeater.prototype.onSetLocale = function (event, locale, localeValue) {
+        this.activeLocale = locale
+
+        $(this.options.translatableSelector, this.$el).each(function () {
+            var $el = $(this),
+                $placeholder = $($el.data('placeholderField')),
+                $activeField = $el.find('[data-locale-value="' + locale + '"]')
+
+            $placeholder.val($activeField.val());
+        })
     }
 
-    TRLRepeater.prototype.onSwitchLocale = function (event) {
-        // this.$el.translatable('onSwitchLocale', event)
-        // var self = this,
-        //     previousLocale = this.activeLocale
-        //
-        // this.$el
-        //     .addClass('loading-indicator-container size-form-field')
-        //     .progressIndicator()
-        //
-        // this.activeLocale = locale
-        // this.$activeLocale.val(locale)
-        //
-        // this.$el.request(this.options.switchHandler, {
-        //     data: {
-        //         _repeater_previous_locale: previousLocale,
-        //         _repeater_locale: locale
-        //     },
-        //     success: function (data) {
-        //         self.$el.translatable('setLocaleValue', data.updateValue, data.updateLocale)
-        //         self.$el.progressIndicator('hide')
-        //         this.success(data)
-        //     }
-        // }).always(function () {
-        //     self.$el.progressIndicator('hide')
-        // })
+    TRLRepeater.prototype.bindLocaleInput = function () {
+        var self = this
+
+        $(this.options.translatableSelector, this.$el).each(function () {
+            var $el = $(this),
+                $placeholder = $($el.data('placeholderField'))
+
+            if (!$el.hasClass('trl-loaded')) {
+                $el.addClass('trl-loaded')
+
+                $placeholder.on('input', function () {
+                    $el.find('[data-locale-value="' + self.activeLocale + '"]').val(this.value)
+                })
+            }
+        })
     }
 
     // TRLREPEATER PLUGIN DEFINITION

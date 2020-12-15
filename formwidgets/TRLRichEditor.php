@@ -1,6 +1,7 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\RichEditor;
+use System\Models\Languages_model;
 
 class TRLRichEditor extends RichEditor
 {
@@ -57,7 +58,7 @@ class TRLRichEditor extends RichEditor
             parent::loadAssets();
         });
 
-        if ($this->isSupported) {
+        if (Languages_model::supportsLocale()) {
             $this->loadLocaleAssets();
             $this->addJs('js/trlricheditor.js');
         }

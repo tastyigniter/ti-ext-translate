@@ -24,19 +24,11 @@ class Extension extends BaseExtension
     public function registerComponents()
     {
         return [
-// Remove this line and uncomment the line below to activate
-//            'Igniter\Translate\Components\MyComponent' => 'myComponent',
-        ];
-    }
-
-    public function registerPermissions()
-    {
-// Remove this line and uncomment block to activate
-        return [
-//            'Igniter.Translate.SomePermission' => [
-//                'description' => 'Some permission',
-//                'group' => 'module',
-//            ],
+            'Igniter\Translate\Components\LocalePicker' => [
+                'code' => 'localePicker',
+                'name' => 'Language Switcher',
+                'description' => 'Displays a dropdown to select a front-end language.',
+            ],
         ];
     }
 

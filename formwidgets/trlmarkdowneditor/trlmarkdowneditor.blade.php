@@ -6,17 +6,18 @@
     data-placeholder-field="#{{ $this->getId('textarea') }}"
     class="field-translatable field-translatable-markdowneditor dropdown size-{{ $size }}"
 >
+    <div class="dropdown">
+        <button
+            class="btn btn-default trl-btn"
+            data-toggle="dropdown"
+            data-locale-active
+            type="button">
+        </button>
+
+        {!! $this->makeTRLPartial('trlbase/locale_selector') !!}
+    </div>
 
     {!! $markdowneditor !!}
 
-    <button
-        class="btn btn-default trl-btn"
-        data-toggle="dropdown"
-        data-locale-active
-        type="button">
-    </button>
-
     {!! $this->makeTRLPartial('trlbase/locale_values') !!}
-
-    {!! $this->makeTRLPartial('trlbase/locale_selector') !!}
 </div>

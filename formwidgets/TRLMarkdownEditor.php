@@ -1,6 +1,7 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\MarkdownEditor;
+use System\Models\Languages_model;
 
 class TRLMarkdownEditor extends MarkdownEditor
 {
@@ -54,7 +55,7 @@ class TRLMarkdownEditor extends MarkdownEditor
             parent::loadAssets();
         });
 
-        if ($this->isSupported) {
+        if (Languages_model::supportsLocale()) {
             $this->loadLocaleAssets();
             $this->addJs('js/trlmarkdowneditor.js');
         }
