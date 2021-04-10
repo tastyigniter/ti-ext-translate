@@ -1,7 +1,7 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\Repeater;
-use Request;
+use Igniter\Flame\Support\Str;
 use System\Models\Languages_model;
 
 class TRLRepeater extends Repeater
@@ -63,15 +63,18 @@ class TRLRepeater extends Repeater
     {
         parent::processItemDefinitions();
 
-        foreach ($this->itemDefinitions['fields'] as &$field) {
-            $translatableFields = [
-                'text',
-                'textarea',
-            ];
+        $translatableFields = [
+            'text',
+            'textarea',
+        ];
 
+        foreach ($this->itemDefinitions['fields'] as &$field) {
             if (in_array($field['type'], $translatableFields)) {
                 $field['type'] = 'trl'.$field['type'];
                 $field['controlType'] = 'translatable-repeater';
+                $field['attributes'] = array_merge($field['attributes'] ?? [], [
+                    'data-translatable-repeater' => implode('.', name_to_array($this->fieldName)),
+                ]);
             }
         }
     }
@@ -83,79 +86,53 @@ class TRLRepeater extends Repeater
         if (!$this->isSupported)
             return $value;
 
-        return $this->getLocaleSaveValue($value);
-    }
-
-    /**
-     * Ensure that the current locale data is processed by the repeater instead of the original non-translated data
-     * @return void
-     */
-    protected function reprocessLocaleItems($data)
-    {
-        $this->formWidgets = [];
-        $this->formField->value = $data;
-
-        $key = implode('.', name_to_array($this->formField->getName()));
-        $requestData = Request::all();
-        array_set($requestData, $key, $data);
-        Request::merge($requestData);
-
-        $this->processItems();
-    }
-
-    /**
-     * Gets the active values from the selected locale.
-     * @return array
-     */
-    protected function getPrimarySaveDataAsArray()
-    {
-        $data = post($this->formField->getName()) ?: [];
-
-        return $this->processSaveValue($data);
-    }
-
-    /**
-     * Returns the stored locale data as an array.
-     * @return array
-     */
-    protected function getLocaleSaveDataAsArray($locale)
-    {
-        $saveData = array_get($this->getLocaleSaveData(), $locale, []);
-
-        if (!is_array($saveData)) {
-            $saveData = json_decode($saveData, TRUE);
-        }
-
-        return $saveData;
-    }
-
-    /**
-     * Since the locker does always contain the latest values, this method
-     * will take the save data from the repeater and merge it in to the
-     * locker based on which ever locale is selected using an item map
-     * @return void
-     */
-    protected function rewritePostValues()
-    {
-        /*
-         * Get the selected locale at postback
-         */
-        $data = post('TRLRepeaterLocale');
         $fieldName = implode('.', name_to_array($this->fieldName));
-        $locale = array_get($data, $fieldName);
+        $localeData = array_get(post('TRLTranslate'), $fieldName);
 
-        if (!$locale) {
-            return;
+        $result = [];
+        foreach ($value as $index => $data) {
+            $result[$index] = array_merge($data, array_get($localeData, $index, []));
         }
 
-        /*
-         * Splice the save data in to the locker data for selected locale
-         */
-        $data = $this->getPrimarySaveDataAsArray();
-        $fieldName = 'RLTranslate.'.$locale.'.'.implode('.', name_to_array($this->fieldName));
+        return $result;
+    }
 
-        $requestData = Request::all();
-        array_set($requestData, $fieldName, json_encode($data));
-        Request::merge($requestData);
+    public function getLocaleSaveValue($value, $fieldName)
+    {
+//        $fieldName = $this->valueFrom ?: $this->fieldName;
+        $localeData = $this->getLocaleSaveData($fieldName);
+
+        $studKey = Str::studly(implode(' ', name_to_array($fieldName)));
+        $mutateMethod = 'set'.$studKey.'AttributeTranslatedValue';
+
+        foreach ($localeData as $locale => $_value) {
+            if ($this->model->methodExists($mutateMethod)) {
+                $this->model->$mutateMethod($_value, $locale);
+            }
+            elseif ($this->model->methodExists('setAttributeTranslatedValue')) {
+                $this->model->setAttributeTranslatedValue($fieldName, $_value, $locale);
+            }
+        }
+
+        return $value;
+    }
+
+    public function getLocaleSaveData($fieldName = null)
+    {
+        $values = [];
+        $data = post('TRLTranslate');
+
+        if (!is_array($data))
+            return $values;
+
+        if (is_null($fieldName))
+            $fieldName = implode('.', name_to_array($this->fieldName));
+
+        foreach ($data as $locale => $_data) {
+            $value = array_get($_data, $fieldName);
+            $values[$locale] = $value;
+        }
+
+        return $values;
     }
 }

@@ -8,10 +8,10 @@
         this.options = options
         this.$el = $(element)
         this.$dropdown = $('[data-locale-dropdown]', this.$el)
-        this.$activeButton = $('[data-locale-active]', this.$el)
+        this.$activeButton = $('[data-locale-toggle]', this.$el)
         this.$placeholder = $(this.options.placeholderField)
 
-        this.activeLocale = this.options.localeDefault
+        this.activeLocale = this.options.localeActive
         this.$activeField = this.getLocaleElement(this.activeLocale)
 
         this.$activeButton.text(this.activeLocale)
@@ -24,7 +24,7 @@
     }
 
     Translatable.DEFAULTS = {
-        localeDefault: 'en',
+        localeActive: 'en',
         placeholderField: null
     }
 

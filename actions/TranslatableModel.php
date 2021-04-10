@@ -42,7 +42,7 @@ class TranslatableModel extends TranslatableAction
     protected function loadTranslatableAttributes($locale = null)
     {
         if (!$locale)
-            $locale = $this->translatableContext;
+            $locale = $this->translatableActiveLocale;
 
         if (!$this->model->exists)
             return $this->translatableAttributes[$locale] = [];

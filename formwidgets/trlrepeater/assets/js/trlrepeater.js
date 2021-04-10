@@ -8,14 +8,14 @@
         this.options = options
         this.$el = $(element)
         this.$dropdown = $('[data-locale-dropdown]', this.$el)
-        this.$activeButton = $('[data-locale-active]', this.$el)
-        this.activeLocale = options.localeDefault
+        this.$activeButton = $('[data-locale-toggle]', this.$el)
+        this.activeLocale = options.localeActive
 
         this.init()
     }
 
     TRLRepeater.DEFAULTS = {
-        localeDefault: 'en',
+        localeActive: 'en',
         translatableSelector: '[data-control=translatable-repeater]'
     }
 
@@ -105,6 +105,23 @@
 
     $(document).render(function () {
         $('[data-control="trlrepeater"]').trlRepeater()
+
+        $('[data-control="translatable-repeater"]').each(function () {
+            var $el = $(this)
+
+            $el.find('[data-locale-value]').each(function () {
+                var $input = $(this),
+                    $parent = $input.closest('[data-item-index]'),
+                    inputName = $input.attr('name'),
+                    postName = inputName.substr(0, inputName.indexOf('[')),
+                    postNameLength = postName.length,
+                    fieldName = $($el.data('placeholderField')).data('translatableRepeater')
+
+                if ($input.data('ti.trlRepeaterValue')) return;
+                $input.data('ti.trlRepeaterValue', true)
+                $input.attr('name', inputName.slice(0, postNameLength)+'['+fieldName+']['+$parent.data('itemIndex')+']'+inputName.slice(postNameLength))
+            })
+        })
     })
 
 }(window.jQuery);

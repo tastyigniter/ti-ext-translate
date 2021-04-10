@@ -14,7 +14,7 @@
     }
 
     TRLRichEditor.DEFAULTS = {
-        localeDefault: 'en',
+        localeActive: 'en',
         placeholderField: null
     }
 

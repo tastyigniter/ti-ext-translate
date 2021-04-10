@@ -2,7 +2,7 @@
     id="{{ $this->getId('trl-control') }}"
     data-control="trlricheditor"
     data-textarea-element="#{{ $this->getId('textarea') }}"
-    data-locale-default="{{ $defaultLocale->code }}"
+    data-locale-active="{{ $activeLocale->code }}"
     data-placeholder-field="#{{ $this->getId('textarea') }}"
     class="field-translatable field-translatable-richeditor size-{{ $size }}"
 >
@@ -11,7 +11,7 @@
         <button
             class="btn btn-default trl-btn"
             data-toggle="dropdown"
-            data-locale-active
+            data-locale-toggle
             type="button">
         </button>
 

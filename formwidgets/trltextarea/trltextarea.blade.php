@@ -5,7 +5,7 @@
         id="{{ $this->getId('trl-control') }}"
         class="field-translatable field-translatable-textarea dropdown"
         data-control="{{ $field->getConfig('controlType', 'translatable') }}"
-        data-locale-default="{{ $defaultLocale->code }}"
+        data-locale-active="{{ $activeLocale->code }}"
         data-placeholder-field="#{{ $field->getId('placeholderField') }}"
     >
         <textarea
@@ -21,7 +21,7 @@
             <button
                 class="btn btn-default trl-btn{{ $field->getConfig('hideLocaleSelector', FALSE) ? ' d-none' : '' }}"
                 data-toggle="dropdown"
-                data-locale-active
+                data-locale-toggle
                 type="button"
             ></button>
 

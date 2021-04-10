@@ -14,7 +14,7 @@
     }
 
     TRLMarkdownEditor.DEFAULTS = {
-        localeDefault: 'en',
+        localeActive: 'en',
         placeholderField: null
     }
 

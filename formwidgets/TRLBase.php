@@ -10,7 +10,7 @@ trait TRLBase
     /**
      * @var string
      */
-    protected $defaultLocale;
+    protected $activeLocale;
 
     /**
      * @var bool
@@ -23,13 +23,13 @@ trait TRLBase
 
     public function initLocale()
     {
-        $this->defaultLocale = Languages_model::getDefault();
+        $this->activeLocale = Languages_model::getActiveLocale();
         $this->isSupported = Languages_model::supportsLocale();
     }
 
     public function prepareLocaleVars()
     {
-        $this->vars['defaultLocale'] = $this->defaultLocale;
+        $this->vars['activeLocale'] = $this->activeLocale;
         $this->vars['locales'] = Languages_model::listSupported();
         $this->vars['field'] = $this->makeRenderFormField();
     }
@@ -65,7 +65,7 @@ trait TRLBase
         if ($this->model->methodExists($mutateMethod)) {
             $value = $this->model->$mutateMethod($locale);
         }
-        elseif ($this->defaultLocale->code != $locale AND $this->model->methodExists('getAttributeTranslatedValue')) {
+        elseif ($this->activeLocale->code != $locale AND $this->model->methodExists('getAttributeTranslatedValue')) {
             $value = $this->model->translatableNoFallbackLocale()->getAttributeTranslatedValue($key, $locale);
         }
         else {
@@ -92,7 +92,7 @@ trait TRLBase
             }
         }
 
-        return array_get($localeData, $this->defaultLocale->code, $value);
+        return array_get($localeData, $this->activeLocale->code, $value);
     }
 
     public function getLocaleSaveData()
@@ -105,12 +105,7 @@ trait TRLBase
 
         $fieldName = implode('.', name_to_array($this->fieldName));
 
-        foreach ($data as $locale => $_data) {
-            $value = array_get($_data, $fieldName);
-            $values[$locale] = $value;
-        }
-
-        return $values;
+        return array_get($data, $fieldName, []);
     }
 
     public function getFallbackType()

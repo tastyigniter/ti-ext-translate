@@ -67,6 +67,15 @@ abstract class TranslatableAction extends ModelAction
             if ($this->isTranslatableAttribute($key)) {
                 return $this->performSetTranslatableAttribute($key, $value);
             }
+            elseif (in_array($key, $this->model->getTranslatableAttributes()) AND is_array($value)) {
+                if (array_key_exists($this->translatableActiveLocale, $value)) {
+                    foreach ($value as $locale => $_value) {
+                        $this->setAttributeTranslatedValue($key, $_value, $locale);
+                    }
+
+                    return array_get($value, $this->translatableActiveLocale, $value);
+                }
+            }
         });
 
         $this->model->bindEvent('model.saveInternal', function () {
@@ -136,6 +145,9 @@ abstract class TranslatableAction extends ModelAction
         if ($key === 'translatable' OR $this->translatableDefaultLocale == $this->translatableActiveLocale) {
             return FALSE;
         }
+
+        if ($this->model->hasRelation($key))
+            return FALSE;
 
         return in_array($key, $this->model->getTranslatableAttributes());
     }
@@ -209,7 +221,7 @@ abstract class TranslatableAction extends ModelAction
         $result = '';
 
         if ($locale == $this->translatableDefaultLocale) {
-            $result = $this->getAttributeFromData($this->model->attributes, $key);
+            $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
         }
         else {
             if (!array_key_exists($locale, $this->translatableAttributes)) {

@@ -1,9 +1,14 @@
 <?php namespace Igniter\Translate\Classes;
 
+use Admin\Models\Allergens_model;
+use Admin\Models\Categories_model;
 use Admin\Models\Menu_option_values_model;
 use Admin\Models\Menu_options_model;
+use Admin\Models\Menus_model;
 use Igniter\Flame\Traits\Singleton;
 use Igniter\Pages\Classes\Page as StaticPage;
+use Igniter\Pages\Models\MenuItem;
+use Igniter\Pages\Models\Pages_model;
 use Main\Template\Page as ThemePage;
 use System\Models\Mail_templates_model;
 
@@ -62,6 +67,21 @@ class EventRegistry
 
     public function bootTranslatableModels()
     {
+        Allergens_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['name', 'description']);
+        });
+
+        Categories_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['name', 'description']);
+        });
+
+        Mail_templates_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['subject', 'body']);
+        });
+
         Menu_options_model::extend(function ($model) {
             $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
             $model->addDynamicProperty('translatable', ['option_name', 'option_values']);
@@ -72,9 +92,19 @@ class EventRegistry
             $model->addDynamicProperty('translatable', ['value']);
         });
 
-        Mail_templates_model::extend(function ($model) {
+        Menus_model::extend(function ($model) {
             $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
-            $model->addDynamicProperty('translatable', ['subject', 'body']);
+            $model->addDynamicProperty('translatable', ['menu_name', 'menu_description']);
+        });
+
+        MenuItem::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['title', 'description']);
+        });
+
+        Pages_model::extend(function ($model) {
+            $model->implement[] = 'Igniter\Translate\Actions\TranslatableModel';
+            $model->addDynamicProperty('translatable', ['title', 'content', 'meta_description', 'meta_keywords']);
         });
     }
 

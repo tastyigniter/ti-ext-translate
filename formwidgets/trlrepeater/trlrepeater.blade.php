@@ -2,13 +2,13 @@
     id="{{ $this->getId('trl-control') }}"
     class="field-translatable field-translatable-repeater"
     data-control="trlrepeater"
-    data-locale-default="{{ $defaultLocale->code }}"
+    data-locale-active="{{ $activeLocale->code }}"
 >
     <div class="dropdown">
         <button
             class="btn btn-default trl-btn"
             data-toggle="dropdown"
-            data-locale-active
+            data-locale-toggle
             type="button">
         </button>
 
