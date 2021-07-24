@@ -1,7 +1,7 @@
 <?php namespace Igniter\Translate\Components;
 
-use Redirect;
-use Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use System\Classes\BaseComponent;
 use System\Models\Languages_model;
 

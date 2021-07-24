@@ -1,6 +1,6 @@
 <?php namespace Igniter\Translate\Models;
 
-use Model;
+use Igniter\Flame\Database\Model;
 
 /**
  * Attribute Model
