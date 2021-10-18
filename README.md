@@ -1,1 +1,3 @@
-translate
+# This extension is incomplete, still under development and should not be used 'just yet'. :smile:
+
+More coming soon...
