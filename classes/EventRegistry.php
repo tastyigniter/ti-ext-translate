@@ -57,10 +57,10 @@ class EventRegistry
         if (!$model = $widget->model)
             return;
 
-        if ($model instanceof ThemePage AND isset($widget->fields['settings[url]'])) {
+        if ($model instanceof ThemePage && isset($widget->fields['settings[url]'])) {
             $widget->fields['settings[url]']['type'] = 'trltext';
         }
-        elseif ($model instanceof StaticPage AND isset($widget->fields['viewBag[url]'])) {
+        elseif ($model instanceof StaticPage && isset($widget->fields['viewBag[url]'])) {
             $widget->fields['viewBag[url]']['type'] = 'trltext';
         }
     }

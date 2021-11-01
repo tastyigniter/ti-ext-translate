@@ -67,7 +67,7 @@ abstract class TranslatableAction extends ModelAction
             if ($this->isTranslatableAttribute($key)) {
                 return $this->performSetTranslatableAttribute($key, $value);
             }
-            elseif (in_array($key, $this->model->getTranslatableAttributes()) AND is_array($value)) {
+            elseif (in_array($key, $this->model->getTranslatableAttributes()) && is_array($value)) {
                 if (array_key_exists($this->translatableActiveLocale, $value)) {
                     foreach ($value as $locale => $_value) {
                         $this->setAttributeTranslatedValue($key, $_value, $locale);

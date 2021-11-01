@@ -65,7 +65,7 @@ trait TRLBase
         if ($this->model->methodExists($mutateMethod)) {
             $value = $this->model->$mutateMethod($locale);
         }
-        elseif ($this->activeLocale->code != $locale AND $this->model->methodExists('getAttributeTranslatedValue')) {
+        elseif ($this->activeLocale->code != $locale && $this->model->methodExists('getAttributeTranslatedValue')) {
             $value = $this->model->translatableNoFallbackLocale()->getAttributeTranslatedValue($key, $locale);
         }
         else {
