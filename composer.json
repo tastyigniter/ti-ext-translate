@@ -1,0 +1,24 @@
+{
+  "name": "tastyigniter/ti-ext-translate",
+  "type": "tastyigniter-extension",
+  "description": "Allows multilingual websites with TastyIgniter, making it easy to translate menu items.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SamPoyigi",
+      "email": "sam@sampoyigi.com"
+    }
+  ],
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "igniter.translate",
+      "name": "Translate",
+      "icon": {
+        "class": "fa fa-language",
+        "backgroundColor": "#7BE4FF",
+        "color": "#198BA6"
+      },
+      "homepage": "https://github.com/tastyigniter/ti-ext-translate"
+    }
+  }
+}
