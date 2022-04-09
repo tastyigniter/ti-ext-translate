@@ -11,7 +11,7 @@ class TranslatableModel extends TranslatableAction
         parent::__construct($model);
 
         $model->relation['morphMany']['translations'] = [
-            'Igniter\Translate\Models\Attribute', 'name' => 'translatable',
+            \Igniter\Translate\Models\Attribute::class, 'name' => 'translatable',
         ];
     }
 

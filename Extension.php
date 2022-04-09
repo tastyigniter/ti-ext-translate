@@ -24,7 +24,7 @@ class Extension extends BaseExtension
     public function registerComponents()
     {
         return [
-            'Igniter\Translate\Components\LocalePicker' => [
+            \Igniter\Translate\Components\LocalePicker::class => [
                 'code' => 'localePicker',
                 'name' => 'Language Switcher',
                 'description' => 'Displays a dropdown to select a front-end language.',
@@ -35,11 +35,11 @@ class Extension extends BaseExtension
     public function registerFormWidgets()
     {
         return [
-            'Igniter\Translate\FormWidgets\TRLText' => ['code' => 'trltext'],
-            'Igniter\Translate\FormWidgets\TRLTextarea' => ['code' => 'trltextarea'],
-            'Igniter\Translate\FormWidgets\TRLRichEditor' => ['code' => 'trlricheditor'],
-            'Igniter\Translate\FormWidgets\TRLMarkdownEditor' => ['code' => 'trlmarkdowneditor'],
-            'Igniter\Translate\FormWidgets\TRLRepeater' => ['code' => 'trlrepeater'],
+            \Igniter\Translate\FormWidgets\TRLText::class => ['code' => 'trltext'],
+            \Igniter\Translate\FormWidgets\TRLTextarea::class => ['code' => 'trltextarea'],
+            \Igniter\Translate\FormWidgets\TRLRichEditor::class => ['code' => 'trlricheditor'],
+            \Igniter\Translate\FormWidgets\TRLMarkdownEditor::class => ['code' => 'trlmarkdowneditor'],
+            \Igniter\Translate\FormWidgets\TRLRepeater::class => ['code' => 'trlrepeater'],
         ];
     }
 }
