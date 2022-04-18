@@ -6,7 +6,7 @@
   background: transparent;
   border-color: transparent;
   position: absolute;
-  color: var(--gray-600);
+  color: var(--bs-gray-600);
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 1px;
@@ -27,7 +27,7 @@
 .field-translatable .trl-btn:hover,
 .field-translatable .trl-btn:active,
 .field-translatable .trl-btn:focus {
-  color: var(--gray-800) !important;
+  color: var(--bs-gray-800) !important;
 }
 
 .field-translatable.field-translatable-text .form-control,
