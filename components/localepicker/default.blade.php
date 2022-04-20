@@ -2,7 +2,7 @@
 <select
     name="locale"
     data-request="{{ $__SELF__.'::onSwitchLocale'}}"
-    class="form-control"
+    class="form-select"
     autocomplete="off"
 >
     @foreach($__SELF__->locales as $code => $name)
