@@ -1,6 +1,6 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
-use Admin\Classes\BaseFormWidget;
+use Igniter\Admin\Classes\BaseFormWidget;
 
 class TRLTextarea extends BaseFormWidget
 {

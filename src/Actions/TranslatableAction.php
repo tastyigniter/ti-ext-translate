@@ -3,7 +3,7 @@
 namespace Igniter\Translate\Actions;
 
 use Igniter\Flame\Support\Str;
-use System\Actions\ModelAction;
+use Igniter\System\Actions\ModelAction;
 
 /**
  * Translatable Model Action base Class
@@ -30,7 +30,7 @@ abstract class TranslatableAction extends ModelAction
     /**
      * @var bool Determines if empty translations should be replaced by default values.
      */
-    protected $translatableUseFallback = TRUE;
+    protected $translatableUseFallback = true;
 
     /**
      * @var array Data store for translated attributes.
@@ -143,11 +143,11 @@ abstract class TranslatableAction extends ModelAction
     public function isTranslatableAttribute($key)
     {
         if ($key === 'translatable' OR $this->translatableDefaultLocale == $this->translatableActiveLocale) {
-            return FALSE;
+            return false;
         }
 
         if ($this->model->hasRelation($key))
-            return FALSE;
+            return false;
 
         return in_array($key, $this->model->getTranslatableAttributes());
     }
@@ -193,7 +193,7 @@ abstract class TranslatableAction extends ModelAction
      */
     public function translatableNoFallbackLocale()
     {
-        $this->translatableUseFallback = FALSE;
+        $this->translatableUseFallback = false;
 
         return $this->model;
     }

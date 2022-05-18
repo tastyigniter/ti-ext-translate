@@ -1,16 +1,15 @@
 <?php namespace Igniter\Translate\Classes;
 
-use Admin\Models\Allergens_model;
-use Admin\Models\Categories_model;
-use Admin\Models\Menu_option_values_model;
-use Admin\Models\Menu_options_model;
-use Admin\Models\Menus_model;
+use Igniter\Admin\Models\Category;
+use Igniter\Admin\Models\Menu;
+use Igniter\Admin\Models\MenuOption;
+use Igniter\Admin\Models\MenuOptionValue;
 use Igniter\Flame\Traits\Singleton;
+use Igniter\Main\Template\Page as ThemePage;
 use Igniter\Pages\Classes\Page as StaticPage;
 use Igniter\Pages\Models\MenuItem;
-use Igniter\Pages\Models\Pages_model;
-use Main\Template\Page as ThemePage;
-use System\Models\Mail_templates_model;
+use Igniter\Pages\Models\Page;
+use Igniter\System\Models\MailTemplate;
 
 class EventRegistry
 {
@@ -67,32 +66,32 @@ class EventRegistry
 
     public function bootTranslatableModels()
     {
-        Allergens_model::extend(function ($model) {
+        Allergen::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['name', 'description']);
         });
 
-        Categories_model::extend(function ($model) {
+        Category::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['name', 'description']);
         });
 
-        Mail_templates_model::extend(function ($model) {
+        MailTemplate::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['subject', 'body']);
         });
 
-        Menu_options_model::extend(function ($model) {
+        MenuOption::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['option_name', 'option_values']);
         });
 
-        Menu_option_values_model::extend(function ($model) {
+        MenuOptionValue::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['value']);
         });
 
-        Menus_model::extend(function ($model) {
+        Menu::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['menu_name', 'menu_description']);
         });
@@ -102,7 +101,7 @@ class EventRegistry
             $model->addDynamicProperty('translatable', ['title', 'description']);
         });
 
-        Pages_model::extend(function ($model) {
+        Page::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['title', 'content', 'meta_description', 'meta_keywords']);
         });

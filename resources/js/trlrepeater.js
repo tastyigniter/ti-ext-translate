@@ -48,7 +48,7 @@
         $(this.options.translatableSelector, this.$el).each(function () {
             var $el = $(this),
                 $placeholder = $($el.data('placeholderField')),
-                $activeField = $el.find('[data-locale-value="' + locale + '"]')
+                $activeField = $el.find('[data-locale-value="'+locale+'"]')
 
             $placeholder.val($activeField.val());
         })
@@ -65,7 +65,7 @@
                 $el.addClass('trl-loaded')
 
                 $placeholder.on('input', function () {
-                    $el.find('[data-locale-value="' + self.activeLocale + '"]').val(this.value)
+                    $el.find('[data-locale-value="'+self.activeLocale+'"]').val(this.value)
                 })
             }
         })

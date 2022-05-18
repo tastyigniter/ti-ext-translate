@@ -1,8 +1,8 @@
 <?php namespace Igniter\Translate;
 
+use Igniter\System\Classes\BaseExtension;
 use Igniter\Translate\Classes\EventRegistry;
 use Illuminate\Support\Facades\Event;
-use System\Classes\BaseExtension;
 
 /**
  * Translate Extension Information File

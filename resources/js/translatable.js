@@ -40,7 +40,7 @@
 
         if (event.ctrlKey || event.metaKey) {
             event.preventDefault()
-            this.$el.closest('form').find('[data-locale-switch="' + selectedLocale + '"]').trigger('click')
+            this.$el.closest('form').find('[data-locale-switch="'+selectedLocale+'"]').trigger('click')
         }
     }
 
@@ -62,7 +62,7 @@
     }
 
     Translatable.prototype.getLocaleElement = function (locale) {
-        var el = this.$el.find('[data-locale-value="' + locale + '"]')
+        var el = this.$el.find('[data-locale-value="'+locale+'"]')
         return el.length ? el : null
     }
 

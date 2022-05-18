@@ -1,9 +1,9 @@
 <?php namespace Igniter\Translate\Components;
 
+use Igniter\System\Classes\BaseComponent;
+use Igniter\System\Models\Language;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-use System\Classes\BaseComponent;
-use System\Models\Languages_model;
 
 class LocalePicker extends BaseComponent
 {
@@ -43,7 +43,7 @@ class LocalePicker extends BaseComponent
             return $redirect;
         }
 
-        $this->locales = Languages_model::listSupported();
+        $this->locales = Language::listSupported();
         $this->activeLocale = $this->localization->getLocale();
         $this->activeLocaleName = array_get($this->locales, $this->activeLocale);
     }

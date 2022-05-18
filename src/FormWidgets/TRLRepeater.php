@@ -1,8 +1,8 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
-use Admin\FormWidgets\Repeater;
+use Igniter\Admin\FormWidgets\Repeater;
 use Igniter\Flame\Support\Str;
-use System\Models\Languages_model;
+use Igniter\System\Models\Language;
 
 class TRLRepeater extends Repeater
 {
@@ -53,7 +53,7 @@ class TRLRepeater extends Repeater
             parent::loadAssets();
         });
 
-        if (Languages_model::supportsLocale()) {
+        if (Language::supportsLocale()) {
             $this->loadLocaleAssets();
             $this->addJs('js/trlrepeater.js');
         }

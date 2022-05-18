@@ -1,16 +1,16 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
-use Admin\FormWidgets\MarkdownEditor;
-use System\Models\Languages_model;
+use Igniter\Admin\FormWidgets\RichEditor;
+use Igniter\System\Models\Language;
 
-class TRLMarkdownEditor extends MarkdownEditor
+class TRLRichEditor extends RichEditor
 {
     use \Igniter\Translate\FormWidgets\TRLBase;
 
     /**
      * {@inheritDoc}
      */
-    protected $defaultAlias = 'trlmarkdowneditor';
+    protected $defaultAlias = 'trlricheditor';
 
     public $originalAssetPath;
 
@@ -19,8 +19,8 @@ class TRLMarkdownEditor extends MarkdownEditor
     public function __construct($controller, $formField, $configuration = [])
     {
         $this->parentPartialPath[] = '~/app/admin/formwidgets';
-        $this->parentPartialPath[] = '~/app/admin/formwidgets/markdowneditor';
-        $this->parentAssetPath[] = '~/app/admin/formwidgets/markdowneditor/assets';
+        $this->parentPartialPath[] = '~/app/admin/formwidgets/richeditor';
+        $this->parentAssetPath[] = '~/app/admin/formwidgets/richeditor/assets';
 
         parent::__construct($controller, $formField, $configuration);
     }
@@ -38,9 +38,12 @@ class TRLMarkdownEditor extends MarkdownEditor
             return parent::render();
         });
 
-        $this->vars['markdowneditor'] = $parentContent;
+        if (!$this->isSupported)
+            return $parentContent;
 
-        return $this->makePartial('trlmarkdowneditor/trlmarkdowneditor');
+        $this->vars['richeditor'] = $parentContent;
+
+        return $this->makePartial('trlricheditor/trlricheditor');
     }
 
     public function prepareVars()
@@ -55,9 +58,9 @@ class TRLMarkdownEditor extends MarkdownEditor
             parent::loadAssets();
         });
 
-        if (Languages_model::supportsLocale()) {
+        if (Language::supportsLocale()) {
             $this->loadLocaleAssets();
-            $this->addJs('js/trlmarkdowneditor.js');
+            $this->addJs('js/trlricheditor.js');
         }
     }
 

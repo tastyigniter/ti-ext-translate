@@ -3,7 +3,7 @@
 namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Flame\Support\Str;
-use System\Models\Languages_model;
+use Igniter\System\Models\Language;
 
 trait TRLBase
 {
@@ -23,14 +23,14 @@ trait TRLBase
 
     public function initLocale()
     {
-        $this->activeLocale = Languages_model::getActiveLocale();
-        $this->isSupported = Languages_model::supportsLocale();
+        $this->activeLocale = Language::getActiveLocale();
+        $this->isSupported = Language::supportsLocale();
     }
 
     public function prepareLocaleVars()
     {
         $this->vars['activeLocale'] = $this->activeLocale;
-        $this->vars['locales'] = Languages_model::listSupported();
+        $this->vars['locales'] = Language::listSupported();
         $this->vars['field'] = $this->makeRenderFormField();
     }
 
