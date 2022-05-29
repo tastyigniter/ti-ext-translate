@@ -43,6 +43,8 @@ class LocalePicker extends BaseComponent
             return $redirect;
         }
 
+        $this->addCss('css/locale-picker.css');
+
         $this->locales = Languages_model::listSupported();
         $this->activeLocale = $this->localization->getLocale();
         $this->activeLocaleName = array_get($this->locales, $this->activeLocale);
