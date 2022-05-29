@@ -45,6 +45,7 @@ abstract class TranslatableAction extends ModelAction
     /**
      * @var array Properties that must exist in the model using this action.
      */
+    protected $requiredProperties = [];
 
     /**
      * Constructor
