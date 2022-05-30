@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate;
+<?php
+
+namespace Igniter\Translate;
 
 use Igniter\Translate\Classes\EventRegistry;
 use Illuminate\Support\Facades\Event;

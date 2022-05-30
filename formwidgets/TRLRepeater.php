@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\FormWidgets;
+<?php
+
+namespace Igniter\Translate\FormWidgets;
 
 use Admin\FormWidgets\Repeater;
 use Igniter\Flame\Support\Str;
