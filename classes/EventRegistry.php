@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\Classes;
+<?php
+
+namespace Igniter\Translate\Classes;
 
 use Admin\Models\Allergens_model;
 use Admin\Models\Categories_model;

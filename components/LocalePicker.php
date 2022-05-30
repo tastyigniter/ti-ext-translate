@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\Components;
+<?php
+
+namespace Igniter\Translate\Components;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -63,7 +65,7 @@ class LocalePicker extends BaseComponent
 
     protected function redirectForceUrl()
     {
-        if (Request::ajax() OR $this->localization->loadLocaleFromRequest()) {
+        if (Request::ajax() || $this->localization->loadLocaleFromRequest()) {
             return;
         }
     }

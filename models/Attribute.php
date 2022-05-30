@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\Models;
+<?php
+
+namespace Igniter\Translate\Models;
 
 use Igniter\Flame\Database\Model;
 
