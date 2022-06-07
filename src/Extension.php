@@ -11,14 +11,16 @@ class Extension extends BaseExtension
 {
     public function register()
     {
+        $this->app->singleton(EventRegistry::class);
+
         Event::listen('admin.form.extendFieldsBefore', function ($widget) {
-            EventRegistry::instance()->registerFormFieldReplacements($widget);
+            resolve(EventRegistry::class)->registerFormFieldReplacements($widget);
         }, -1);
     }
 
     public function boot()
     {
-        EventRegistry::instance()->bootTranslatableModels();
+        resolve(EventRegistry::class)->bootTranslatableModels();
     }
 
     public function registerComponents()

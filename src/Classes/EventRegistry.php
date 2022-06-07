@@ -4,7 +4,6 @@ use Igniter\Admin\Models\Category;
 use Igniter\Admin\Models\Menu;
 use Igniter\Admin\Models\MenuOption;
 use Igniter\Admin\Models\MenuOptionValue;
-use Igniter\Flame\Traits\Singleton;
 use Igniter\Main\Template\Page as ThemePage;
 use Igniter\Pages\Classes\Page as StaticPage;
 use Igniter\Pages\Models\MenuItem;
@@ -13,8 +12,6 @@ use Igniter\System\Models\MailTemplate;
 
 class EventRegistry
 {
-    use Singleton;
-
     public function registerFormFieldReplacements($widget)
     {
         $this->registerModelTranslatableFields($widget);
