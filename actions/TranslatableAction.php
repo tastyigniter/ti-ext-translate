@@ -45,7 +45,6 @@ abstract class TranslatableAction extends ModelAction
     /**
      * @var array Properties that must exist in the model using this action.
      */
-    protected $requiredProperties = ['translatable'];
 
     /**
      * Constructor
@@ -258,13 +257,13 @@ abstract class TranslatableAction extends ModelAction
 
     public function getTranslatableAttributes()
     {
-        return $this->model->translatable ?? [];
+        return $this->model->translatable() ?? [];
     }
 
     public function hasTranslatableAttributes()
     {
-        return is_array($this->model->translatable) &&
-            count($this->model->translatable) > 0;
+        return is_array($this->model->translatable()) &&
+            count($this->model->translatable()) > 0;
     }
 
     protected function getAttributeFromData($data, $attribute)
