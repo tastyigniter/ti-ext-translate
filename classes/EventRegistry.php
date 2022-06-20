@@ -4,6 +4,7 @@ namespace Igniter\Translate\Classes;
 
 use Admin\Models\Allergens_model;
 use Admin\Models\Categories_model;
+use Admin\Models\Locations_model;
 use Admin\Models\Menu_option_values_model;
 use Admin\Models\Menu_options_model;
 use Admin\Models\Menus_model;
@@ -61,7 +62,8 @@ class EventRegistry
 
         if ($model instanceof ThemePage && isset($widget->fields['settings[url]'])) {
             $widget->fields['settings[url]']['type'] = 'trltext';
-        } elseif ($model instanceof StaticPage && isset($widget->fields['viewBag[url]'])) {
+        }
+        elseif ($model instanceof StaticPage && isset($widget->fields['viewBag[url]'])) {
             $widget->fields['viewBag[url]']['type'] = 'trltext';
         }
     }
@@ -79,6 +81,13 @@ class EventRegistry
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicMethod('translatable', function () use ($model) {
                 return ['name', 'description'];
+            });
+        });
+
+        Locations_model::extend(function ($model) {
+            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
+            $model->addDynamicMethod('translatable', function () use ($model) {
+                return ['location_name', 'description'];
             });
         });
 
@@ -147,7 +156,7 @@ class EventRegistry
             ];
 
             if (in_array($type, $translatableFields))
-                $fields[$name]['type'] = 'trl' . $type;
+                $fields[$name]['type'] = 'trl'.$type;
         }
 
         return $fields;
