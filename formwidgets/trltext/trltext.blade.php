@@ -23,7 +23,6 @@
         @if ($field->getConfig('controlType', 'translatable') == 'translatable')
             <button
                 class="btn btn-default trl-btn"
-                data-toggle="dropdown"
                 data-bs-toggle="dropdown"
                 data-locale-toggle
                 type="button"
