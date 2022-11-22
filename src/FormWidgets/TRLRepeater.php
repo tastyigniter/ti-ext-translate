@@ -1,8 +1,8 @@
 <?php namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\FormWidgets\Repeater;
-use Igniter\Flame\Support\Str;
 use Igniter\System\Models\Language;
+use Illuminate\Support\Str;
 
 class TRLRepeater extends Repeater
 {

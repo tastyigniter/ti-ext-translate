@@ -2,8 +2,8 @@
 
 namespace Igniter\Translate\Actions;
 
-use Igniter\Flame\Support\Str;
 use Igniter\System\Actions\ModelAction;
+use Illuminate\Support\Str;
 
 /**
  * Translatable Model Action base Class

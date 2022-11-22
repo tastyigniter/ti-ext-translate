@@ -2,8 +2,8 @@
 
 namespace Igniter\Translate\FormWidgets;
 
-use Igniter\Flame\Support\Str;
 use Igniter\System\Models\Language;
+use Illuminate\Support\Str;
 
 trait TRLBase
 {
