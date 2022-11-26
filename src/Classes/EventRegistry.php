@@ -1,6 +1,7 @@
 <?php namespace Igniter\Translate\Classes;
 
 use Igniter\Admin\Models\Category;
+use Igniter\Admin\Models\Ingredient;
 use Igniter\Admin\Models\Menu;
 use Igniter\Admin\Models\MenuOption;
 use Igniter\Admin\Models\MenuOptionValue;
@@ -63,7 +64,7 @@ class EventRegistry
 
     public function bootTranslatableModels()
     {
-        Allergen::extend(function ($model) {
+        Ingredient::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicProperty('translatable', ['name', 'description']);
         });
