@@ -28,7 +28,7 @@ class Extension extends BaseExtension
         return [
             \Igniter\Translate\Components\LocalePicker::class => [
                 'code' => 'localePicker',
-                'name' => 'Language Switcher',
+                'name' => 'Language Picker',
                 'description' => 'Displays a dropdown to select a front-end language.',
             ],
         ];

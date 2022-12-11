@@ -3,7 +3,7 @@
 Using the LocalePicker component a visitor can choose their preferred language. This component shows a simple dropdown,
 which will change the language of the page depending on the selection.
 
-Add the `Local Picker` component to your layout or page
+Add the `Language Picker` component to your layout or page
 
 ```html
 ---
