@@ -5,6 +5,7 @@ namespace Igniter\Translate;
 use Igniter\Translate\Classes\EventRegistry;
 use Illuminate\Support\Facades\Event;
 use System\Classes\BaseExtension;
+use System\Facades\Assets;
 
 /**
  * Translate Extension Information File
@@ -21,6 +22,16 @@ class Extension extends BaseExtension
     public function boot()
     {
         EventRegistry::instance()->bootTranslatableModels();
+
+    }
+
+    public function loadTranslatableAssets()
+    {
+//        Always load assets in admin area as a workaround for popups that are loaded via ajax (no assets loaded)
+        if (app()->runningInAdmin()) {
+            Assets::addJs('$/igniter/translate/assets/js/translatable.js', 'translatable-js');
+            Assets::addCss('$/igniter/translate/assets/css/translatable.css', 'translatable-css');
+        }
     }
 
     public function registerComponents()
