@@ -4,6 +4,7 @@ namespace Igniter\Translate\Classes;
 
 use Igniter\Admin\Models\Category;
 use Igniter\Admin\Models\Ingredient;
+use Igniter\Admin\Models\Location;
 use Igniter\Admin\Models\Menu;
 use Igniter\Admin\Models\MenuOption;
 use Igniter\Admin\Models\MenuOptionValue;
@@ -84,7 +85,7 @@ class EventRegistry
             });
         });
 
-        Locations_model::extend(function ($model) {
+        Location::extend(function ($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
             $model->addDynamicMethod('translatable', function () {
                 return ['location_name', 'description'];
