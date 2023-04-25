@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\FormWidgets;
+<?php
+
+namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\Classes\BaseFormWidget;
 

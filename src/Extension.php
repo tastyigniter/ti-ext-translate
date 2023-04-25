@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate;
+<?php
+
+namespace Igniter\Translate;
 
 use Igniter\System\Classes\BaseExtension;
 use Igniter\Translate\Classes\EventRegistry;
@@ -28,7 +30,7 @@ class Extension extends BaseExtension
         return [
             \Igniter\Translate\Components\LocalePicker::class => [
                 'code' => 'localePicker',
-                'name' => 'Language Switcher',
+                'name' => 'Language Picker',
                 'description' => 'Displays a dropdown to select a front-end language.',
             ],
         ];

@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\FormWidgets;
+<?php
+
+namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\FormWidgets\MarkdownEditor;
 use Igniter\System\Models\Language;
@@ -18,9 +20,9 @@ class TRLMarkdownEditor extends MarkdownEditor
 
     public function __construct($controller, $formField, $configuration = [])
     {
-        $this->parentPartialPath[] = '~/app/admin/formwidgets';
-        $this->parentPartialPath[] = '~/app/admin/formwidgets/markdowneditor';
-        $this->parentAssetPath[] = '~/app/admin/formwidgets/markdowneditor/assets';
+        $this->parentPartialPath[] = 'igniter.admin::_partials.formwidgets';
+        $this->parentPartialPath[] = 'igniter.admin::_partials.formwidgets.markdowneditor';
+        $this->parentAssetPath[] = 'igniter.admin::_partials.formwidgets.markdowneditor';
 
         parent::__construct($controller, $formField, $configuration);
     }

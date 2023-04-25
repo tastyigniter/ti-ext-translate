@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\FormWidgets;
+<?php
+
+namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\FormWidgets\RichEditor;
 use Igniter\System\Models\Language;

@@ -1,4 +1,6 @@
-<?php namespace Igniter\Translate\Components;
+<?php
+
+namespace Igniter\Translate\Components;
 
 use Igniter\System\Classes\BaseComponent;
 use Igniter\System\Models\Language;
@@ -43,6 +45,8 @@ class LocalePicker extends BaseComponent
             return $redirect;
         }
 
+        $this->addCss('css/locale-picker.css');
+
         $this->locales = Language::listSupported();
         $this->activeLocale = $this->localization->getLocale();
         $this->activeLocaleName = array_get($this->locales, $this->activeLocale);
@@ -63,7 +67,7 @@ class LocalePicker extends BaseComponent
 
     protected function redirectForceUrl()
     {
-        if (Request::ajax() OR $this->localization->loadLocaleFromRequest()) {
+        if (Request::ajax() || $this->localization->loadLocaleFromRequest()) {
             return;
         }
     }

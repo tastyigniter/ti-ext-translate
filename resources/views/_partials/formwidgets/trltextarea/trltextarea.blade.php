@@ -19,7 +19,7 @@
 
         @if ($field->getConfig('controlType', 'translatable') == 'translatable')
             <button
-                class="btn btn-default trl-btn{{ $field->getConfig('hideLocaleSelector', FALSE) ? ' d-none' : '' }}"
+                class="btn btn-default trl-btn{{ $field->getConfig('hideLocaleSelector', false) ? ' d-none' : '' }}"
                 data-bs-toggle="dropdown"
                 data-locale-toggle
                 type="button"
