@@ -17,8 +17,9 @@ class TranslatableModel extends TranslatableAction
 
     protected function storeTranslatableAttributes($locale = null)
     {
-        if (!$locale)
+        if (!$locale) {
             $locale = $this->translatableActiveLocale;
+        }
 
         if (!$this->model->exists) {
             $this->model->bindEventOnce('model.afterCreate', function () use ($locale) {
@@ -41,11 +42,13 @@ class TranslatableModel extends TranslatableAction
 
     protected function loadTranslatableAttributes($locale = null)
     {
-        if (!$locale)
+        if (!$locale) {
             $locale = $this->translatableActiveLocale;
+        }
 
-        if (!$this->model->exists)
+        if (!$this->model->exists) {
             return $this->translatableAttributes[$locale] = [];
+        }
 
         $translation = $this->model->translations->first(function ($value, $key) use ($locale) {
             return $value->getAttribute('locale') === $locale;

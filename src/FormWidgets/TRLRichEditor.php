@@ -40,8 +40,9 @@ class TRLRichEditor extends RichEditor
             return parent::render();
         });
 
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $parentContent;
+        }
 
         $this->vars['richeditor'] = $parentContent;
 
@@ -72,8 +73,9 @@ class TRLRichEditor extends RichEditor
      */
     public function getSaveValue($value)
     {
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $value;
+        }
 
         return $this->getLocaleSaveValue($value);
     }

@@ -19,7 +19,7 @@ class TRLRepeater extends Repeater
         $this->parentAssetPath[] = '~/app/admin/formwidgets/repeater/assets';
 
         parent::__construct($controller, $formField, $configuration);
-//        $this->partialPath[] = '~/app/admin/formwidgets';
+        //        $this->partialPath[] = '~/app/admin/formwidgets';
     }
 
     public function initialize()
@@ -35,8 +35,9 @@ class TRLRepeater extends Repeater
             return parent::render();
         });
 
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $parentContent;
+        }
 
         $this->vars['repeater'] = $parentContent;
 
@@ -85,8 +86,9 @@ class TRLRepeater extends Repeater
     {
         $value = parent::processSaveValue($value);
 
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $value;
+        }
 
         $fieldName = implode('.', name_to_array($this->fieldName));
         $localeData = array_get(post('TRLTranslate'), $fieldName);
@@ -101,7 +103,7 @@ class TRLRepeater extends Repeater
 
     public function getLocaleSaveValue($value, $fieldName)
     {
-//        $fieldName = $this->valueFrom ?: $this->fieldName;
+        //        $fieldName = $this->valueFrom ?: $this->fieldName;
         $localeData = $this->getLocaleSaveData($fieldName);
 
         $studKey = Str::studly(implode(' ', name_to_array($fieldName)));
@@ -110,8 +112,7 @@ class TRLRepeater extends Repeater
         foreach ($localeData as $locale => $_value) {
             if ($this->model->methodExists($mutateMethod)) {
                 $this->model->$mutateMethod($_value, $locale);
-            }
-            elseif ($this->model->methodExists('setAttributeTranslatedValue')) {
+            } elseif ($this->model->methodExists('setAttributeTranslatedValue')) {
                 $this->model->setAttributeTranslatedValue($fieldName, $_value, $locale);
             }
         }
@@ -124,11 +125,13 @@ class TRLRepeater extends Repeater
         $values = [];
         $data = post('TRLTranslate');
 
-        if (!is_array($data))
+        if (!is_array($data)) {
             return $values;
+        }
 
-        if (is_null($fieldName))
+        if (is_null($fieldName)) {
             $fieldName = implode('.', name_to_array($this->fieldName));
+        }
 
         foreach ($data as $locale => $_data) {
             $value = array_get($_data, $fieldName);

@@ -21,16 +21,18 @@ class TRLTextarea extends BaseFormWidget
     {
         $this->prepareLocaleVars();
 
-        if ($this->isSupported)
+        if ($this->isSupported) {
             return $this->makePartial('trltextarea/trltextarea');
+        }
 
         return $this->renderFallbackField();
     }
 
     public function getSaveValue($value)
     {
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $value;
+        }
 
         return $this->getLocaleSaveValue($value);
     }

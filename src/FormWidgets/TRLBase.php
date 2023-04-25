@@ -64,11 +64,9 @@ trait TRLBase
 
         if ($this->model->methodExists($mutateMethod)) {
             $value = $this->model->$mutateMethod($locale);
-        }
-        elseif ($this->activeLocale->code != $locale && $this->model->methodExists('getAttributeTranslatedValue')) {
+        } elseif ($this->activeLocale->code != $locale && $this->model->methodExists('getAttributeTranslatedValue')) {
             $value = $this->model->translatableNoFallbackLocale()->getAttributeTranslatedValue($key, $locale);
-        }
-        else {
+        } else {
             $value = $this->formField->value;
         }
 
@@ -86,8 +84,7 @@ trait TRLBase
         foreach ($localeData as $locale => $_value) {
             if ($this->model->methodExists($mutateMethod)) {
                 $this->model->$mutateMethod($_value, $locale);
-            }
-            elseif ($this->model->methodExists('setAttributeTranslatedValue')) {
+            } elseif ($this->model->methodExists('setAttributeTranslatedValue')) {
                 $this->model->setAttributeTranslatedValue($key, $_value, $locale);
             }
         }
@@ -100,8 +97,9 @@ trait TRLBase
         $values = [];
         $data = post('TRLTranslate');
 
-        if (!is_array($data))
+        if (!is_array($data)) {
             return $values;
+        }
 
         $fieldName = implode('.', name_to_array($this->fieldName));
 
@@ -115,8 +113,9 @@ trait TRLBase
 
     protected function makeRenderFormField($fieldType = null)
     {
-        if ($this->isSupported)
+        if ($this->isSupported) {
             return $this->formField;
+        }
 
         $field = clone $this->formField;
         $field->type = $this->getFallbackType();

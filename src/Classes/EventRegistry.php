@@ -24,17 +24,21 @@ class EventRegistry
 
     public function registerModelTranslatableFields($widget)
     {
-        if (!$model = $widget->model)
+        if (!$model = $widget->model) {
             return;
+        }
 
-        if (!method_exists($model, 'isClassExtendedWith'))
+        if (!method_exists($model, 'isClassExtendedWith')) {
             return;
+        }
 
-        if (!$model->isClassExtendedWith(\Igniter\Translate\Actions\TranslatableModel::class))
+        if (!$model->isClassExtendedWith(\Igniter\Translate\Actions\TranslatableModel::class)) {
             return;
+        }
 
-        if (!$model->hasTranslatableAttributes())
+        if (!$model->hasTranslatableAttributes()) {
             return;
+        }
 
         $translatable = array_flip($model->getTranslatableAttributes());
 
@@ -53,13 +57,13 @@ class EventRegistry
 
     public function registerPageTranslatableFields($widget)
     {
-        if (!$model = $widget->model)
+        if (!$model = $widget->model) {
             return;
+        }
 
         if ($model instanceof ThemePage && isset($widget->fields['settings[url]'])) {
             $widget->fields['settings[url]']['type'] = 'trltext';
-        }
-        elseif ($model instanceof StaticPage && isset($widget->fields['viewBag[url]'])) {
+        } elseif ($model instanceof StaticPage && isset($widget->fields['viewBag[url]'])) {
             $widget->fields['viewBag[url]']['type'] = 'trltext';
         }
     }
@@ -151,8 +155,9 @@ class EventRegistry
                 'repeater',
             ];
 
-            if (in_array($type, $translatableFields))
+            if (in_array($type, $translatableFields)) {
                 $fields[$name]['type'] = 'trl'.$type;
+            }
         }
 
         return $fields;

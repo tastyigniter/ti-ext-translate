@@ -69,8 +69,9 @@ class TRLMarkdownEditor extends MarkdownEditor
      */
     public function getSaveValue($value)
     {
-        if (!$this->isSupported)
+        if (!$this->isSupported) {
             return $value;
+        }
 
         return $this->getLocaleSaveValue($value);
     }
