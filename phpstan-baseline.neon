@@ -1,79 +1,14 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined static method Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:extensionExtendCallback\\(\\)\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method bindEvent\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\|Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:translatable\\(\\)\\.$#"
 			count: 3
 			path: src/Actions/TranslatableAction.php
 
 		-
-			message: "#^Call to method getAttributes\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 5
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method getOriginal\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
+			message: "#^Access to an undefined property Igniter\\\\Flame\\\\Database\\\\Model\\|Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:\\$translations\\.$#"
 			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method getTranslatableAttributes\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 3
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method hasGetMutator\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method hasRelation\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method hasSetMutator\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method setRawAttributes\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Call to method translatable\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 3
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Function array_get not found\\.$#"
-			count: 2
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Function array_set not found\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 2
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but Igniter\\\\Translate\\\\Actions\\\\TranslatableAction does not extend any class\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
-
-		-
-			message: "#^Property Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:\\$model has unknown class Igniter\\\\Flame\\\\Database\\\\Model as its type\\.$#"
-			count: 1
-			path: src/Actions/TranslatableAction.php
+			path: src/Actions/TranslatableModel.php
 
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$relation\\.$#"
@@ -81,32 +16,7 @@ parameters:
 			path: src/Actions/TranslatableModel.php
 
 		-
-			message: "#^Access to property \\$exists on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 2
-			path: src/Actions/TranslatableModel.php
-
-		-
-			message: "#^Access to property \\$translations on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableModel.php
-
-		-
 			message: "#^Call to an undefined static method Igniter\\\\Translate\\\\Models\\\\Attribute\\:\\:updateOrCreate\\(\\)\\.$#"
-			count: 1
-			path: src/Actions/TranslatableModel.php
-
-		-
-			message: "#^Call to method bindEventOnce\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableModel.php
-
-		-
-			message: "#^Call to method getKey\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
-			count: 1
-			path: src/Actions/TranslatableModel.php
-
-		-
-			message: "#^Call to method getMorphClass\\(\\) on an unknown class Igniter\\\\Flame\\\\Database\\\\Model\\.$#"
 			count: 1
 			path: src/Actions/TranslatableModel.php
 
@@ -126,47 +36,12 @@ parameters:
 			path: src/Classes/EventRegistry.php
 
 		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Admin\\\\Models\\\\Category\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Admin\\\\Models\\\\Ingredient\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Admin\\\\Models\\\\Menu\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Admin\\\\Models\\\\MenuOption\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Admin\\\\Models\\\\MenuOptionValue\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
 			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Pages\\\\Models\\\\MenuItem\\.$#"
 			count: 1
 			path: src/Classes/EventRegistry.php
 
 		-
 			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Pages\\\\Models\\\\Page\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\MailTemplate\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Translate\\\\Classes\\\\Locations_model\\.$#"
 			count: 1
 			path: src/Classes/EventRegistry.php
 
@@ -181,69 +56,9 @@ parameters:
 			path: src/Classes/EventRegistry.php
 
 		-
-			message: "#^Class Igniter\\\\Main\\\\Template\\\\Page not found\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
 			message: "#^Class Igniter\\\\Pages\\\\Classes\\\\Page not found\\.$#"
 			count: 1
 			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Function array_get not found\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\Components\\\\LocalePicker\\:\\:\\$controller\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\Components\\\\LocalePicker\\:\\:addCss\\(\\)\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Call to method getLocale\\(\\) on an unknown class Igniter\\\\Flame\\\\Translation\\\\Localization\\.$#"
-			count: 2
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Call to method loadLocaleFromRequest\\(\\) on an unknown class Igniter\\\\Flame\\\\Translation\\\\Localization\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Call to method setLocale\\(\\) on an unknown class Igniter\\\\Flame\\\\Translation\\\\Localization\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Function array_get not found\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Property Igniter\\\\Translate\\\\Components\\\\LocalePicker\\:\\:\\$localization has unknown class Igniter\\\\Flame\\\\Translation\\\\Localization as its type\\.$#"
-			count: 1
-			path: src/Components/LocalePicker.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\Extension\\:\\:\\$app\\.$#"
-			count: 1
-			path: src/Extension.php
 
 		-
 			message: "#^Static method Illuminate\\\\Support\\\\Facades\\\\Event\\:\\:listen\\(\\) invoked with 3 parameters, 1\\-2 required\\.$#"
@@ -251,73 +66,13 @@ parameters:
 			path: src/Extension.php
 
 		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$assetPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$fieldName\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$formField\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$model\\.$#"
-			count: 8
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$partialPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$valueFrom\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$vars\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:\\$viewPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:addCss\\(\\)\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:setAttributeTranslatedValue\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLMarkdownEditor.php
 
 		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:addJs\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:makePartial\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Call to static method getActiveLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatableNoFallbackLocale\\(\\)\\.$#"
 			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Call to static method supportsLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 2
 			path: src/FormWidgets/TRLMarkdownEditor.php
 
 		-
@@ -326,118 +81,13 @@ parameters:
 			path: src/FormWidgets/TRLMarkdownEditor.php
 
 		-
-			message: "#^Function array_get not found\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:initialize\\(\\) calls parent\\:\\:initialize\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:loadAssets\\(\\) calls parent\\:\\:loadAssets\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:prepareVars\\(\\) calls parent\\:\\:prepareVars\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor\\:\\:render\\(\\) calls parent\\:\\:render\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLMarkdownEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLMarkdownEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$assetPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$fieldName\\.$#"
-			count: 4
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$formField\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$itemDefinitions\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:setAttributeTranslatedValue\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLRepeater.php
 
 		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$model\\.$#"
-			count: 8
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$partialPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$valueFrom\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatableNoFallbackLocale\\(\\)\\.$#"
 			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$vars\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:\\$viewPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:addCss\\(\\)\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:addJs\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:makePartial\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to static method getActiveLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Call to static method supportsLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 2
 			path: src/FormWidgets/TRLRepeater.php
 
 		-
@@ -446,123 +96,13 @@ parameters:
 			path: src/FormWidgets/TRLRepeater.php
 
 		-
-			message: "#^Function array_get not found\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 5
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:initialize\\(\\) calls parent\\:\\:initialize\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:loadAssets\\(\\) calls parent\\:\\:loadAssets\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:prepareVars\\(\\) calls parent\\:\\:prepareVars\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:processItemDefinitions\\(\\) calls parent\\:\\:processItemDefinitions\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:processSaveValue\\(\\) calls parent\\:\\:processSaveValue\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater\\:\\:render\\(\\) calls parent\\:\\:render\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRepeater does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRepeater.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$assetPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$fieldName\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$formField\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$model\\.$#"
-			count: 8
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$partialPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$valueFrom\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$vars\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:\\$viewPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:addCss\\(\\)\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:setAttributeTranslatedValue\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLRichEditor.php
 
 		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:addJs\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:makePartial\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Call to static method getActiveLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatableNoFallbackLocale\\(\\)\\.$#"
 			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Call to static method supportsLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 2
 			path: src/FormWidgets/TRLRichEditor.php
 
 		-
@@ -571,112 +111,12 @@ parameters:
 			path: src/FormWidgets/TRLRichEditor.php
 
 		-
-			message: "#^Function array_get not found\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:initialize\\(\\) calls parent\\:\\:initialize\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:loadAssets\\(\\) calls parent\\:\\:loadAssets\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:prepareVars\\(\\) calls parent\\:\\:prepareVars\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor\\:\\:render\\(\\) calls parent\\:\\:render\\(\\) but Igniter\\\\Translate\\\\FormWidgets\\\\TRLRichEditor does not extend any class\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLRichEditor.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$assetPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$fieldName\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$formField\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$model\\.$#"
-			count: 8
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$partialPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$valueFrom\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$vars\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:setAttributeTranslatedValue\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLText.php
 
 		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:\\$viewPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:addCss\\(\\)\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:addJs\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLText\\:\\:makePartial\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to static method getActiveLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Call to static method supportsLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatableNoFallbackLocale\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLText.php
 
@@ -686,106 +126,16 @@ parameters:
 			path: src/FormWidgets/TRLText.php
 
 		-
-			message: "#^Function array_get not found\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLText.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$assetPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$fieldName\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$formField\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$model\\.$#"
-			count: 8
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$partialPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$valueFrom\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$vars\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:setAttributeTranslatedValue\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLTextarea.php
 
 		-
-			message: "#^Access to an undefined property Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:\\$viewPath\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:addCss\\(\\)\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:addJs\\(\\)\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to an undefined method Igniter\\\\Translate\\\\FormWidgets\\\\TRLTextarea\\:\\:makePartial\\(\\)\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to static method getActiveLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to static method listSupported\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
-			count: 1
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Call to static method supportsLocale\\(\\) on an unknown class Igniter\\\\System\\\\Models\\\\Language\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatableNoFallbackLocale\\(\\)\\.$#"
 			count: 1
 			path: src/FormWidgets/TRLTextarea.php
 
 		-
 			message: "#^Cannot access property \\$code on string\\.$#"
 			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Function array_get not found\\.$#"
-			count: 2
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Function name_to_array not found\\.$#"
-			count: 3
-			path: src/FormWidgets/TRLTextarea.php
-
-		-
-			message: "#^Function post not found\\.$#"
-			count: 1
 			path: src/FormWidgets/TRLTextarea.php
