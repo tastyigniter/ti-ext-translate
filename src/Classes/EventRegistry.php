@@ -2,12 +2,12 @@
 
 namespace Igniter\Translate\Classes;
 
-use Igniter\Admin\Models\Category;
-use Igniter\Admin\Models\Ingredient;
-use Igniter\Admin\Models\Location;
-use Igniter\Admin\Models\Menu;
-use Igniter\Admin\Models\MenuOption;
-use Igniter\Admin\Models\MenuOptionValue;
+use Igniter\Cart\Models\Category;
+use Igniter\Cart\Models\Ingredient;
+use Igniter\Cart\Models\Menu;
+use Igniter\Cart\Models\MenuOption;
+use Igniter\Cart\Models\MenuOptionValue;
+use Igniter\Local\Models\Location;
 use Igniter\Main\Template\Page as ThemePage;
 use Igniter\Pages\Classes\Page as StaticPage;
 use Igniter\Pages\Models\MenuItem;
