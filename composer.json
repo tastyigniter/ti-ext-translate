@@ -1,55 +1,56 @@
 {
-	"name": "tastyigniter/ti-ext-translate",
-	"type": "tastyigniter-package",
-	"description": "Allows multilingual websites with TastyIgniter, making it easy to translate menu items.",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Sam Poyigi",
-			"email": "sam@sampoyigi.com"
-		}
-	],
-	"require-dev": {
-		"laravel/pint": "^1.2",
-		"nunomaduro/larastan": "^2.4.0",
-		"orchestra/testbench": "^8.5",
-		"pestphp/pest-plugin-laravel": "^2.0",
-		"tastyigniter/core": "dev-master"
-	},
-	"autoload": {
-		"psr-4": {
-			"Igniter\\Translate\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Igniter\\Translate\\Tests\\": "tests/"
-		}
-	},
-	"extra": {
-		"tastyigniter-extension": {
-			"code": "igniter.translate",
-			"name": "Translate",
-			"icon": {
-				"class": "fa fa-language",
-				"backgroundColor": "#7BE4FF",
-				"color": "#198BA6"
-			},
-			"homepage": "https://github.com/tastyigniter/ti-ext-translate"
-		}
-	},
-	"scripts": {
-		"test": "vendor/bin/pest",
-		"test-coverage": "vendor/bin/pest --coverage",
-		"format": "vendor/bin/pint",
-		"static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
-	},
-	"config": {
-		"allow-plugins": {
-			"pestphp/pest-plugin": true,
-			"php-http/discovery": true,
-			"composer/installers": true
-		},
-		"sort-packages": true
-	}
+    "name": "tastyigniter/ti-ext-translate",
+    "type": "tastyigniter-package",
+    "description": "Allows multilingual websites with TastyIgniter, making it easy to translate menu items.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Poyigi",
+            "email": "sam@sampoyigi.com"
+        }
+    ],
+    "require-dev": {
+        "laravel/pint": "^1.2",
+        "nunomaduro/larastan": "^2.4.0",
+        "orchestra/testbench": "^8.5",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "tastyigniter/core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Igniter\\Translate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Igniter\\Translate\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "tastyigniter-extension": {
+            "code": "igniter.translate",
+            "name": "Translate",
+            "icon": {
+                "class": "fa fa-language",
+                "backgroundColor": "#7BE4FF",
+                "color": "#198BA6"
+            },
+            "homepage": "https://github.com/tastyigniter/ti-ext-translate"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "composer/installers": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
 }
