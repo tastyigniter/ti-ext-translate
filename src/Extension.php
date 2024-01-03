@@ -25,17 +25,6 @@ class Extension extends BaseExtension
         resolve(EventRegistry::class)->bootTranslatableModels();
     }
 
-    public function registerComponents()
-    {
-        return [
-            \Igniter\Translate\Components\LocalePicker::class => [
-                'code' => 'localePicker',
-                'name' => 'Language Picker',
-                'description' => 'Displays a dropdown to select a front-end language.',
-            ],
-        ];
-    }
-
     public function registerFormWidgets()
     {
         return [
