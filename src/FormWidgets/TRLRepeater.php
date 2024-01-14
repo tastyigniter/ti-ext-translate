@@ -10,7 +10,7 @@ class TRLRepeater extends Repeater
 {
     use \Igniter\Translate\FormWidgets\TRLBase;
 
-    protected $defaultAlias = 'trlrepeater';
+    protected string $defaultAlias = 'trlrepeater';
 
     public function __construct($controller, $formField, $configuration = [])
     {

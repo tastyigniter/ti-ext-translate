@@ -12,7 +12,7 @@ class TRLMarkdownEditor extends MarkdownEditor
     /**
      * {@inheritDoc}
      */
-    protected $defaultAlias = 'trlmarkdowneditor';
+    protected string $defaultAlias = 'trlmarkdowneditor';
 
     public $originalAssetPath;
 
@@ -67,7 +67,7 @@ class TRLMarkdownEditor extends MarkdownEditor
      * Returns an array of translated values for this field
      * @return array
      */
-    public function getSaveValue($value)
+    public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
             return $value;

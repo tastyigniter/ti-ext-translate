@@ -25,7 +25,7 @@ class Extension extends BaseExtension
         resolve(EventRegistry::class)->bootTranslatableModels();
     }
 
-    public function registerFormWidgets()
+    public function registerFormWidgets(): array
     {
         return [
             \Igniter\Translate\FormWidgets\TRLText::class => ['code' => 'trltext'],

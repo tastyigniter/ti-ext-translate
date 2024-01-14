@@ -10,7 +10,7 @@ class TRLTextarea extends BaseFormWidget
 
     const FALLBACK_TYPE = 'textarea';
 
-    protected $defaultAlias = 'trltextarea';
+    protected string $defaultAlias = 'trltextarea';
 
     public function initialize()
     {
@@ -28,7 +28,7 @@ class TRLTextarea extends BaseFormWidget
         return $this->renderFallbackField();
     }
 
-    public function getSaveValue($value)
+    public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
             return $value;

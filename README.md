@@ -39,7 +39,7 @@ specifying which attributes to translate in the class.
 
 class Category
 {
-    public $implement = [\Igniter\Translate\Actions\TranslatableModel::class];
+    public array $implement = [\Igniter\Translate\Actions\TranslatableModel::class];
 
     public function translatable() {
         return ['name'];

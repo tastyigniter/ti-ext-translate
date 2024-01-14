@@ -8,7 +8,7 @@ class TRLText extends BaseFormWidget
 {
     use \Igniter\Translate\FormWidgets\TRLBase;
 
-    protected $defaultAlias = 'trltext';
+    protected string $defaultAlias = 'trltext';
 
     public function initialize()
     {
@@ -26,7 +26,7 @@ class TRLText extends BaseFormWidget
         return $this->renderFallbackField();
     }
 
-    public function getSaveValue($value)
+    public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
             return $value;

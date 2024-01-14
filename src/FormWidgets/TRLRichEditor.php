@@ -12,7 +12,7 @@ class TRLRichEditor extends RichEditor
     /**
      * {@inheritDoc}
      */
-    protected $defaultAlias = 'trlricheditor';
+    protected string $defaultAlias = 'trlricheditor';
 
     public $originalAssetPath;
 
@@ -71,7 +71,7 @@ class TRLRichEditor extends RichEditor
      * Returns an array of translated values for this field
      * @return array
      */
-    public function getSaveValue($value)
+    public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
             return $value;
