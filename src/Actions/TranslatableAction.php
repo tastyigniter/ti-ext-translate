@@ -2,8 +2,8 @@
 
 namespace Igniter\Translate\Actions;
 
-use Igniter\System\Actions\ModelAction;
 use Igniter\Flame\Database\Model;
+use Igniter\System\Actions\ModelAction;
 use Illuminate\Support\Str;
 
 /**
