@@ -1,12 +1,17 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\|Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:translatable\\(\\)\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:getTranslatableAttributes\\(\\)\\.$#"
 			count: 3
 			path: src/Actions/TranslatableAction.php
 
 		-
-			message: "#^Access to an undefined property Igniter\\\\Flame\\\\Database\\\\Model\\|Igniter\\\\Translate\\\\Actions\\\\TranslatableAction\\:\\:\\$translations\\.$#"
+			message: "#^Call to an undefined method Igniter\\\\Flame\\\\Database\\\\Model\\:\\:translatable\\(\\)\\.$#"
+			count: 3
+			path: src/Actions/TranslatableAction.php
+
+		-
+			message: "#^Access to an undefined property Igniter\\\\Flame\\\\Database\\\\Model\\:\\:\\$translations\\.$#"
 			count: 1
 			path: src/Actions/TranslatableModel.php
 

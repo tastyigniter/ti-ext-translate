@@ -3,6 +3,7 @@
 namespace Igniter\Translate\Actions;
 
 use Igniter\System\Actions\ModelAction;
+use Igniter\Flame\Database\Model;
 use Illuminate\Support\Str;
 
 /**
@@ -12,11 +13,6 @@ use Illuminate\Support\Str;
  */
 abstract class TranslatableAction extends ModelAction
 {
-    /**
-     * @var \Igniter\Flame\Database\Model|self Reference to the extended model.
-     */
-    protected $model;
-
     /**
      * @var string Active locale for translations.
      */

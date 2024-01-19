@@ -82,7 +82,7 @@ class TRLRepeater extends Repeater
         }
     }
 
-    protected function processSaveValue($value)
+    protected function processSaveValue($value): mixed
     {
         $value = parent::processSaveValue($value);
 
