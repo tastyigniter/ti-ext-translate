@@ -2,7 +2,6 @@
 
 namespace Igniter\Translate\Actions;
 
-use Igniter\Flame\Database\Model;
 use Igniter\System\Actions\ModelAction;
 use Illuminate\Support\Str;
 
@@ -62,7 +61,9 @@ abstract class TranslatableAction extends ModelAction
         $this->model->bindEvent('model.beforeSetAttribute', function ($key, $value) {
             if ($this->isTranslatableAttribute($key)) {
                 return $this->performSetTranslatableAttribute($key, $value);
-            } elseif (in_array($key, $this->model->getTranslatableAttributes()) && is_array($value)) {
+            }
+
+            if (in_array($key, $this->model->getTranslatableAttributes()) && is_array($value)) {
                 if (array_key_exists($this->translatableActiveLocale, $value)) {
                     foreach ($value as $locale => $_value) {
                         $this->setAttributeTranslatedValue($key, $_value, $locale);
