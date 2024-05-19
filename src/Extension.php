@@ -15,7 +15,7 @@ class Extension extends BaseExtension
     {
         $this->app->singleton(EventRegistry::class);
 
-        Event::listen('admin.form.extendFieldsBefore', function ($widget) {
+        Event::listen('admin.form.extendFieldsBefore', function($widget) {
             resolve(EventRegistry::class)->registerFormFieldReplacements($widget);
         }, -1);
     }

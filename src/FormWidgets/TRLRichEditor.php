@@ -36,7 +36,7 @@ class TRLRichEditor extends RichEditor
 
     public function render()
     {
-        $parentContent = $this->maskAsParent(function () {
+        $parentContent = $this->maskAsParent(function() {
             return parent::render();
         });
 
@@ -57,7 +57,7 @@ class TRLRichEditor extends RichEditor
 
     public function loadAssets()
     {
-        $this->maskAsParent(function () {
+        $this->maskAsParent(function() {
             parent::loadAssets();
         });
 

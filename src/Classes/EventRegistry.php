@@ -71,65 +71,65 @@ class EventRegistry
 
     public function bootTranslatableModels()
     {
-        Ingredient::extend(function ($model) {
+        Ingredient::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['name', 'description'];
             });
         });
 
-        Category::extend(function ($model) {
+        Category::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['name', 'description'];
             });
         });
 
-        Location::extend(function ($model) {
+        Location::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['location_name', 'description'];
             });
         });
 
-        MailTemplate::extend(function ($model) {
+        MailTemplate::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['subject', 'body'];
             });
         });
 
-        MenuOption::extend(function ($model) {
+        MenuOption::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['option_name', 'option_values'];
             });
         });
 
-        MenuOptionValue::extend(function ($model) {
+        MenuOptionValue::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['value'];
             });
         });
 
-        Menu::extend(function ($model) {
+        Menu::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['menu_name', 'menu_description'];
             });
         });
 
-        MenuItem::extend(function ($model) {
+        MenuItem::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['title', 'description'];
             });
         });
 
-        Page::extend(function ($model) {
+        Page::extend(function($model) {
             $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function () {
+            $model->addDynamicMethod('translatable', function() {
                 return ['title', 'content', 'meta_description', 'meta_keywords'];
             });
         });

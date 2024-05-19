@@ -22,7 +22,7 @@ class TranslatableModel extends TranslatableAction
         }
 
         if (!$this->model->exists) {
-            $this->model->bindEventOnce('model.afterCreate', function () use ($locale) {
+            $this->model->bindEventOnce('model.afterCreate', function() use ($locale) {
                 $this->storeTranslatableAttributes($locale);
             });
 
@@ -50,7 +50,7 @@ class TranslatableModel extends TranslatableAction
             return $this->translatableAttributes[$locale] = [];
         }
 
-        $translation = $this->model->translations->first(function ($value, $key) use ($locale) {
+        $translation = $this->model->translations->first(function($value, $key) use ($locale) {
             return $value->getAttribute('locale') === $locale;
         });
 

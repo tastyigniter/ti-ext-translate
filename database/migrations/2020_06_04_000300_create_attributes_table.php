@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('igniter_translate_attributes', function (Blueprint $table) {
+        Schema::create('igniter_translate_attributes', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('locale')->index();

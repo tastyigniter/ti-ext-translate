@@ -36,7 +36,7 @@ class TRLMarkdownEditor extends MarkdownEditor
 
     public function render()
     {
-        $parentContent = $this->maskAsParent(function () {
+        $parentContent = $this->maskAsParent(function() {
             return parent::render();
         });
 
@@ -53,7 +53,7 @@ class TRLMarkdownEditor extends MarkdownEditor
 
     public function loadAssets()
     {
-        $this->maskAsParent(function () {
+        $this->maskAsParent(function() {
             parent::loadAssets();
         });
 

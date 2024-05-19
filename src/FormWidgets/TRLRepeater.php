@@ -31,7 +31,7 @@ class TRLRepeater extends Repeater
 
     public function render()
     {
-        $parentContent = $this->maskAsParent(function () {
+        $parentContent = $this->maskAsParent(function() {
             return parent::render();
         });
 
@@ -52,7 +52,7 @@ class TRLRepeater extends Repeater
 
     public function loadAssets()
     {
-        $this->maskAsParent(function () {
+        $this->maskAsParent(function() {
             parent::loadAssets();
         });
 

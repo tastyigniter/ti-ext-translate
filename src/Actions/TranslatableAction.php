@@ -52,13 +52,13 @@ abstract class TranslatableAction extends ModelAction
 
         $this->initTranslatableLocale();
 
-        $this->model->bindEvent('model.beforeGetAttribute', function ($key) {
+        $this->model->bindEvent('model.beforeGetAttribute', function($key) {
             if ($this->isTranslatableAttribute($key)) {
                 return $this->performGetTranslatableAttribute($key);
             }
         });
 
-        $this->model->bindEvent('model.beforeSetAttribute', function ($key, $value) {
+        $this->model->bindEvent('model.beforeSetAttribute', function($key, $value) {
             if ($this->isTranslatableAttribute($key)) {
                 return $this->performSetTranslatableAttribute($key, $value);
             }
@@ -74,7 +74,7 @@ abstract class TranslatableAction extends ModelAction
             }
         });
 
-        $this->model->bindEvent('model.saveInternal', function () {
+        $this->model->bindEvent('model.saveInternal', function() {
             $this->syncTranslatableAttributes();
         });
     }
