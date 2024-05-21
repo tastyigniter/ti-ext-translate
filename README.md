@@ -42,7 +42,7 @@ Visitors as well as administrators can choose their preferred language, which wi
 
 #### Admin area
 
-In the admin area, you can switch the language by selecting the desired language from the dropdown on the staff profile page. Navigate to `System > Staff members > Edit Staff` and select the desired language from the `Language` dropdown. The admin area will be displayed in the selected language.
+In the admin area, you can switch the language by selecting the desired language from the dropdown on the staff profile page. Navigate to `Manage > Staff members > Edit Staff` and select the desired language from the `Language` dropdown. The admin area will be displayed in the selected language.
 
 The `Igniter\Flame\Translation\Middleware\Localization` middleware is used to set the language of the admin area. The middleware checks if the staff member has a language set in their profile and sets the language accordingly.
 
