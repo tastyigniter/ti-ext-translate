@@ -145,7 +145,7 @@ $category->name = 'Nom de la catégorie';
 $category->save();
 ```
 
-You can store translations for multiple locales when creating a model. 
+You can store translations for multiple locales when creating a model.
 
 ```php
 $category = Category::create([
@@ -156,7 +156,7 @@ $category = Category::create([
 ]);
 ```
 
-To store the translation for a specific locale, you can use the `setLocale` method on the `translator.localization` service. 
+To store the translation for a specific locale, you can use the `setLocale` method on the `translator.localization` service.
 
 ```php
 resolve('translator.localization')->setLocale('fr');
@@ -166,7 +166,7 @@ $category->name = 'Nom de la catégorie';
 $category->save();
 ```
 
-You can store translations for multiple locales when saving a model. 
+You can store translations for multiple locales when saving a model.
 
 ```php
 $category = Category::find(1);
@@ -188,7 +188,7 @@ $category = Category::find(1);
 echo $category->name;
 ```
 
-You can retrieve translations for a specific locale by using the `getAttributeTranslatedValue` method on the model instance. 
+You can retrieve translations for a specific locale by using the `getAttributeTranslatedValue` method on the model instance.
 
 ```php
 $category = Category::find(1);
@@ -208,11 +208,12 @@ The `trltext` form widget is used to create a text input field that can store tr
     'type' => 'trltext',
 ],
 ```
-The options for the `trltext` form widget type are the same as the `text` form field type](https://tastyigniter.com/docs/extend/forms#text).
+
+The options for the `trltext` form widget type are the same as the `text` [form field type](https://tastyigniter.com/docs/extend/forms#text).
 
 #### Translatable textarea
 
-The `trltextarea` form widget is used to create a textarea input field that can store translations for multiple locales. 
+The `trltextarea` form widget is used to create a textarea input field that can store translations for multiple locales.
 
 ```php
 'my_field' => [
@@ -221,11 +222,11 @@ The `trltextarea` form widget is used to create a textarea input field that can 
 ],
 ```
 
-The options for the `trltextarea` form widget type are the same as the `textarea` form field type](https://tastyigniter.com/docs/extend/forms#textarea).
+The options for the `trltextarea` form widget type are the same as the `textarea` form field type](<https://tastyigniter.com/docs/extend/forms#textarea>).
 
 #### Translatable rich editor
 
-The `trlricheditor` form widget is used to create a rich text editor input field that can store translations for multiple locales. 
+The `trlricheditor` form widget is used to create a rich text editor input field that can store translations for multiple locales.
 
 ```php
 'my_field' => [
@@ -234,11 +235,11 @@ The `trlricheditor` form widget is used to create a rich text editor input field
 ],
 ```
 
-The options for the `trlricheditor` form widget type are the same as the `richeditor` form widget type](https://tastyigniter.com/docs/extend/forms#rich-editor--wysiwyg).
+The options for the `trlricheditor` form widget type are the same as the `richeditor` [form widget type](https://tastyigniter.com/docs/extend/forms#rich-editor--wysiwyg).
 
 #### Translatable markdown editor
 
-The `trlmarkdowneditor` form widget is used to create a markdown editor input field that can store translations for multiple locales. 
+The `trlmarkdowneditor` form widget is used to create a markdown editor input field that can store translations for multiple locales.
 
 ```php
 'my_field' => [
@@ -247,11 +248,11 @@ The `trlmarkdowneditor` form widget is used to create a markdown editor input fi
 ],
 ```
 
-The options for the `trlmarkdowneditor` form widget type are the same as the `markdowneditor` form widget type](https://tastyigniter.com/docs/extend/forms#markdown-editor).
+The options for the `trlmarkdowneditor` form widget type are the same as the `markdowneditor` [form widget type](https://tastyigniter.com/docs/extend/forms#markdown-editor).
 
 #### Translatable repeater
 
-The `trlrepeater` form widget is used to create a repeater input field that can store translations for multiple locales. 
+The `trlrepeater` form widget is used to create a repeater input field that can store translations for multiple locales.
 
 ```php
 'my_field' => [
