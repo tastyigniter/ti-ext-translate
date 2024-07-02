@@ -48,7 +48,7 @@ trait TRLBase
     public function makeTRLPartial($partial, $params = [])
     {
         $oldViewPath = $this->viewPath;
-        $this->viewPath = strtolower(str_replace('\\', '/', __TRAIT__));
+        $this->viewPath[] = strtolower(str_replace('\\', '/', __TRAIT__));
         $result = $this->makePartial($partial, $params);
         $this->viewPath = $oldViewPath;
 
