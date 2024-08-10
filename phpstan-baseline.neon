@@ -41,27 +41,12 @@ parameters:
 			path: src/Classes/EventRegistry.php
 
 		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Pages\\\\Models\\\\MenuItem\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Call to static method extend\\(\\) on an unknown class Igniter\\\\Pages\\\\Models\\\\Page\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
 			message: "#^Cannot call method getTranslatableAttributes\\(\\) on class\\-string\\|object\\.$#"
 			count: 1
 			path: src/Classes/EventRegistry.php
 
 		-
 			message: "#^Cannot call method hasTranslatableAttributes\\(\\) on class\\-string\\|object\\.$#"
-			count: 1
-			path: src/Classes/EventRegistry.php
-
-		-
-			message: "#^Class Igniter\\\\Pages\\\\Classes\\\\Page not found\\.$#"
 			count: 1
 			path: src/Classes/EventRegistry.php
 
