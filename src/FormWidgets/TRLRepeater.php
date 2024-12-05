@@ -19,7 +19,6 @@ class TRLRepeater extends Repeater
         $this->parentAssetPath[] = '~/app/admin/formwidgets/repeater/assets';
 
         parent::__construct($controller, $formField, $configuration);
-        //        $this->partialPath[] = '~/app/admin/formwidgets';
     }
 
     public function initialize()
@@ -103,7 +102,6 @@ class TRLRepeater extends Repeater
 
     public function getLocaleSaveValue($value, $fieldName)
     {
-        //        $fieldName = $this->valueFrom ?: $this->fieldName;
         $localeData = $this->getLocaleSaveData($fieldName);
 
         $studKey = Str::studly(implode(' ', name_to_array($fieldName)));

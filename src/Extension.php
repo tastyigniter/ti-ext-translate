@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Event;
  */
 class Extension extends BaseExtension
 {
+    public $singletons = [
+        EventRegistry::class,
+    ];
+
     public function register()
     {
-        $this->app->singleton(EventRegistry::class);
+        parent::register();
 
         Event::listen('admin.form.extendFieldsBefore', function($widget) {
             resolve(EventRegistry::class)->registerFormFieldReplacements($widget);

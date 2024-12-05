@@ -10,7 +10,7 @@ trait TRLBase
     /**
      * @var string
      */
-    protected $activeLocale;
+    public $activeLocale;
 
     /**
      * @var bool

@@ -25,19 +25,12 @@ class EventRegistry
 
     public function registerModelTranslatableFields($widget)
     {
-        if (!$model = $widget->model) {
-            return;
-        }
-
-        if (!method_exists($model, 'isClassExtendedWith')) {
-            return;
-        }
-
-        if (!$model->isClassExtendedWith(\Igniter\Translate\Actions\TranslatableModel::class)) {
-            return;
-        }
-
-        if (!$model->hasTranslatableAttributes()) {
+        if (
+            !($model = $widget->model)
+            || !method_exists($model, 'isClassExtendedWith')
+            || !$model->isClassExtendedWith(\Igniter\Translate\Actions\TranslatableModel::class)
+            || !$model->hasTranslatableAttributes()
+        ) {
             return;
         }
 

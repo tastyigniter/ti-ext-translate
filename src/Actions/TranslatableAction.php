@@ -113,23 +113,19 @@ abstract class TranslatableAction extends ModelAction
     {
         $availableLocales = array_keys($this->translatableAttributes);
         foreach ($availableLocales as $locale) {
-            if (!$this->isTranslatableDirty(null, $locale)) {
-                continue;
+            if ($this->isTranslatableDirty(null, $locale)) {
+                $this->storeTranslatableAttributes($locale);
             }
-
-            $this->storeTranslatableAttributes($locale);
         }
 
-        if ($this->translatableActiveLocale == $this->translatableDefaultLocale) {
-            return;
+        if ($this->translatableActiveLocale !== $this->translatableDefaultLocale) {
+            // Restore translatable values to originals
+            $original = $this->model->getOriginal();
+            $attributes = $this->model->getAttributes();
+            $translatable = $this->model->getTranslatableAttributes();
+            $originalValues = array_intersect_key($original, array_flip($translatable));
+            $this->model->setRawAttributes(array_merge($attributes, $originalValues));
         }
-
-        // Restore translatable values to originals
-        $original = $this->model->getOriginal();
-        $attributes = $this->model->getAttributes();
-        $translatable = $this->model->getTranslatableAttributes();
-        $originalValues = array_intersect_key($original, array_flip($translatable));
-        $this->model->setRawAttributes(array_merge($attributes, $originalValues));
     }
 
     public function translatableSetActiveLocale($locale = null)
@@ -141,15 +137,10 @@ abstract class TranslatableAction extends ModelAction
 
     public function isTranslatableAttribute($key)
     {
-        if ($key === 'translatable' || $this->translatableDefaultLocale == $this->translatableActiveLocale) {
-            return false;
-        }
-
-        if ($this->model->hasRelation($key)) {
-            return false;
-        }
-
-        return in_array($key, $this->model->getTranslatableAttributes());
+        return $key !== 'translatable'
+            && $this->translatableDefaultLocale !== $this->translatableActiveLocale
+            && !$this->model->hasRelation($key)
+            && in_array($key, $this->model->getTranslatableAttributes());
     }
 
     public function isTranslatableDirty($attribute = null, $locale = null)
@@ -165,10 +156,7 @@ abstract class TranslatableAction extends ModelAction
 
     public function translatableGetDirty($locale = null)
     {
-        if (!$locale) {
-            $locale = $this->translatableActiveLocale;
-        }
-
+        $locale ??= $this->translatableActiveLocale;
         if (!array_key_exists($locale, $this->translatableAttributes)) {
             return [];
         }
