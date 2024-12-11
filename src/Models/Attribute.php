@@ -13,7 +13,9 @@ class Attribute extends Model
 
     protected $guarded = [];
 
-    public $morphTo = [
-        'translatable' => [],
+    public $relation = [
+        'morphTo' => [
+            'translatable' => [],
+        ],
     ];
 }
