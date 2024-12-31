@@ -1,3 +1,10 @@
+<p align="center">
+    <a href="https://github.com/tastyigniter/ti-ext-translate/actions"><img src="https://github.com/tastyigniter/ti-ext-translate/actions/workflows/pipeline.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-translate"><img src="https://img.shields.io/packagist/dt/tastyigniter/ti-ext-translate" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-translate"><img src="https://img.shields.io/packagist/v/tastyigniter/ti-ext-translate" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-translate"><img src="https://img.shields.io/packagist/l/tastyigniter/ti-ext-translate" alt="License"></a>
+</p>
+
 ## Introduction
 
 The TastyIgniter translate extension provides comprehensive multilingual support. It allows administrators to manage translations for dynamic content (models), and frontend users to choose their preferred language.
