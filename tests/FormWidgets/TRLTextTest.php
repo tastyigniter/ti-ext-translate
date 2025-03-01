@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Tests\FormWidgets;
 
 use Igniter\Admin\Classes\FormField;
@@ -11,13 +13,13 @@ use Mockery;
 use function Igniter\Translate\Tests\createSupportedLanguages;
 use function Igniter\Translate\Tests\mockRequest;
 
-beforeEach(function() {
+beforeEach(function(): void {
     $this->model = Mockery::mock(Model::class)->makePartial();
     $this->formField = new FormField('testField', 'Label');
     $this->trlText = new TRLText(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 });
 
-it('initializes locale correctly in TRLText', function() {
+it('initializes locale correctly in TRLText', function(): void {
     createSupportedLanguages();
 
     $this->trlText->initialize();
@@ -25,17 +27,17 @@ it('initializes locale correctly in TRLText', function() {
     expect($this->trlText->isSupported)->toBeTrue();
 });
 
-it('renders TRLText with locale support', function() {
+it('renders TRLText with locale support', function(): void {
     expect($this->trlText->render())->toBeString();
 });
 
-it('renders parent content only when locale is not supported in TRLText', function() {
+it('renders parent content only when locale is not supported in TRLText', function(): void {
     $this->trlText->isSupported = false;
 
     expect($this->trlText->render())->toBeString();
 });
 
-it('returns save value correctly when locale is supported in TRLText', function() {
+it('returns save value correctly when locale is supported in TRLText', function(): void {
     createSupportedLanguages();
 
     $this->trlText->isSupported = true;
@@ -49,7 +51,7 @@ it('returns save value correctly when locale is supported in TRLText', function(
     expect($result)->toBe('localeSaveValue');
 });
 
-it('returns original save value when locale is not supported in TRLText', function() {
+it('returns original save value when locale is not supported in TRLText', function(): void {
     $this->trlText->isSupported = false;
 
     $result = $this->trlText->getSaveValue('value');
@@ -57,7 +59,7 @@ it('returns original save value when locale is not supported in TRLText', functi
     expect($result)->toBe('value');
 });
 
-it('loads assets correctly in TRLText', function() {
+it('loads assets correctly in TRLText', function(): void {
     createSupportedLanguages();
 
     Assets::partialMock()
@@ -78,7 +80,7 @@ it('loads assets correctly in TRLText', function() {
     $this->trlText->loadAssets();
 });
 
-it('returns locale value correctly when model has custom mutate method in TRLBase', function() {
+it('returns locale value correctly when model has custom mutate method in TRLBase', function(): void {
     createSupportedLanguages();
     mockRequest([
         'TRLTranslate' => ['en' => ['testField' => 'value']],
@@ -92,7 +94,7 @@ it('returns locale value correctly when model has custom mutate method in TRLBas
     expect($result)->toBe('translatedValue');
 });
 
-it('returns locale value correctly when model has generic mutate method in TRLBase', function() {
+it('returns locale value correctly when model has generic mutate method in TRLBase', function(): void {
     createSupportedLanguages();
     mockRequest([
         'TRLTranslate' => ['en' => ['testField' => 'value']],
@@ -110,7 +112,7 @@ it('returns locale value correctly when model has generic mutate method in TRLBa
     expect($result)->toBe('translatedValue');
 });
 
-it('returns locale save value correctly when model has custom mutate method in TRLBase', function() {
+it('returns locale save value correctly when model has custom mutate method in TRLBase', function(): void {
     createSupportedLanguages();
     mockRequest([
         'TRLTranslate' => ['testField' => ['en' => 'testValue']],
@@ -124,7 +126,7 @@ it('returns locale save value correctly when model has custom mutate method in T
     expect($result)->toBe('testValue');
 });
 
-it('returns locale save value correctly when model has generic mutate method in TRLBase', function() {
+it('returns locale save value correctly when model has generic mutate method in TRLBase', function(): void {
     createSupportedLanguages();
     mockRequest([
         'TRLTranslate' => ['testField' => ['en' => 'testValue']],
@@ -138,7 +140,7 @@ it('returns locale save value correctly when model has generic mutate method in 
     expect($result)->toBe('testValue');
 });
 
-it('returns empty array when locale save data is not an array in TRLBase', function() {
+it('returns empty array when locale save data is not an array in TRLBase', function(): void {
     mockRequest([
         'TRLTranslate' => 'not an array',
     ]);
@@ -148,7 +150,7 @@ it('returns empty array when locale save data is not an array in TRLBase', funct
     expect($result)->toBe([]);
 });
 
-it('returns empty array when locale save data is empty in TRLBase', function() {
+it('returns empty array when locale save data is empty in TRLBase', function(): void {
     mockRequest([
         'TRLTranslate' => [],
     ]);

@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
+use Override;
 use Igniter\Admin\Classes\BaseFormWidget;
 
 class TRLText extends BaseFormWidget
 {
-    use \Igniter\Translate\FormWidgets\TRLBase;
+    use TRLBase;
 
     protected string $defaultAlias = 'trltext';
 
-    public function initialize()
+    #[Override]
+    public function initialize(): void
     {
         $this->initLocale();
     }
 
+    #[Override]
     public function render()
     {
         $this->prepareLocaleVars();
@@ -26,6 +31,7 @@ class TRLText extends BaseFormWidget
         return $this->renderFallbackField();
     }
 
+    #[Override]
     public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
@@ -35,7 +41,8 @@ class TRLText extends BaseFormWidget
         return $this->getLocaleSaveValue($value);
     }
 
-    public function loadAssets()
+    #[Override]
+    public function loadAssets(): void
     {
         $this->loadLocaleAssets();
         $this->addJs('$/igniter/translate/formwidgets/trlrepeater/assets/js/trlrepeater.js', 'trlrepeater-js');

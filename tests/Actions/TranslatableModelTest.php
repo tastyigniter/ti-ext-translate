@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Tests\Actions;
 
 use Igniter\Flame\Database\Model;
@@ -9,7 +11,7 @@ use Igniter\Translate\Models\Attribute;
 use Mockery;
 use ReflectionClass;
 
-beforeEach(function() {
+beforeEach(function(): void {
     $this->model = Mockery::mock(Model::class)->makePartial();
     $this->localization = Mockery::mock(Localization::class);
     app()->instance('translator.localization', $this->localization);
@@ -27,7 +29,7 @@ beforeEach(function() {
     ]);
 });
 
-it('stores translatable attributes for active locale when model exists', function() {
+it('stores translatable attributes for active locale when model exists', function(): void {
     $this->model->exists = true;
     $this->model->shouldReceive('getKey')->andReturn(1);
     $this->model->shouldReceive('getMorphClass')->andReturn('morphClass');
@@ -45,7 +47,7 @@ it('stores translatable attributes for active locale when model exists', functio
     ])->first()->attribute)->toBe('{"name":"translated_name"}');
 });
 
-it('stores translatable attributes for specified locale when model exists', function() {
+it('stores translatable attributes for specified locale when model exists', function(): void {
     $this->model->exists = true;
     $this->model->shouldReceive('getKey')->andReturn(1);
     $this->model->shouldReceive('getMorphClass')->andReturn('morphClass');
@@ -62,10 +64,10 @@ it('stores translatable attributes for specified locale when model exists', func
     ])->first())->not->toBeNull();
 });
 
-it('binds event to store translatable attributes after model creation', function() {
+it('binds event to store translatable attributes after model creation', function(): void {
     $this->model->exists = false;
     $this->model->shouldReceive('getMorphClass')->andReturn('morphClass');
-    $this->model->shouldReceive('bindEventOnce')->with('model.afterCreate', Mockery::on(function($callback) {
+    $this->model->shouldReceive('bindEventOnce')->with('model.afterCreate', Mockery::on(function($callback): true {
         $this->model->exists = true;
         $callback();
         return true;
@@ -80,7 +82,7 @@ it('binds event to store translatable attributes after model creation', function
     $method->invoke($this->translatableModel);
 });
 
-it('loads translatable attributes for active locale when model exists', function() {
+it('loads translatable attributes for active locale when model exists', function(): void {
     $this->model->exists = true;
     $this->model->shouldReceive('extendableGet')->with('translations')->andReturn(collect([
         new Attribute(['locale' => 'en', 'attribute' => json_encode(['name' => 'translated_name'])]),
@@ -92,12 +94,13 @@ it('loads translatable attributes for active locale when model exists', function
 
     $method = $reflection->getMethod('loadTranslatableAttributes');
     $method->setAccessible(true);
+
     $result = $method->invoke($this->translatableModel);
 
     expect($result)->toBe(['name' => 'translated_name']);
 });
 
-it('loads empty translatable attributes for active locale when model does not exist', closure: function() {
+it('loads empty translatable attributes for active locale when model does not exist', closure: function(): void {
     $this->model->exists = false;
     $reflection = new ReflectionClass($this->translatableModel);
     $translatableActiveLocale = $reflection->getProperty('translatableActiveLocale');
@@ -105,6 +108,7 @@ it('loads empty translatable attributes for active locale when model does not ex
 
     $method = $reflection->getMethod('loadTranslatableAttributes');
     $method->setAccessible(true);
+
     $result = $method->invoke($this->translatableModel);
 
     expect($result)->toBe([]);

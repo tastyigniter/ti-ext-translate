@@ -1,34 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Classes;
 
+use Igniter\Admin\Widgets\Form;
 use Igniter\Cart\Models\Category;
 use Igniter\Cart\Models\Ingredient;
 use Igniter\Cart\Models\Menu;
 use Igniter\Cart\Models\MenuOption;
 use Igniter\Cart\Models\MenuOptionValue;
+use Igniter\Flame\Database\Model;
 use Igniter\Local\Models\Location;
 use Igniter\Main\Template\Page as ThemePage;
 use Igniter\Pages\Classes\Page as StaticPage;
 use Igniter\Pages\Models\MenuItem;
 use Igniter\Pages\Models\Page;
 use Igniter\System\Models\MailTemplate;
+use Igniter\Translate\Actions\TranslatableModel;
 
 class EventRegistry
 {
-    public function registerFormFieldReplacements($widget)
+    public function registerFormFieldReplacements(Form $widget): void
     {
         $this->registerModelTranslatableFields($widget);
 
         $this->registerPageTranslatableFields($widget);
     }
 
-    public function registerModelTranslatableFields($widget)
+    public function registerModelTranslatableFields(Form $widget): void
     {
+        /** @var null|Model|TranslatableModel $model */
+        $model = $widget->model;
         if (
-            !($model = $widget->model)
+            !$model
             || !method_exists($model, 'isClassExtendedWith')
-            || !$model->isClassExtendedWith(\Igniter\Translate\Actions\TranslatableModel::class)
+            || !$model->isClassExtendedWith(TranslatableModel::class)
             || !$model->hasTranslatableAttributes()
         ) {
             return;
@@ -49,9 +56,9 @@ class EventRegistry
         }
     }
 
-    public function registerPageTranslatableFields($widget)
+    public function registerPageTranslatableFields(Form $widget): void
     {
-        if (!$model = $widget->model) {
+        if (($model = $widget->model) === null) {
             return;
         }
 
@@ -62,69 +69,51 @@ class EventRegistry
         }
     }
 
-    public function bootTranslatableModels()
+    public function bootTranslatableModels(): void
     {
-        Ingredient::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['name', 'description'];
-            });
+        Ingredient::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['name', 'description']);
         });
 
-        Category::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['name', 'description'];
-            });
+        Category::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['name', 'description']);
         });
 
-        Location::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['location_name', 'description'];
-            });
+        Location::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['location_name', 'description']);
         });
 
-        MailTemplate::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['subject', 'body'];
-            });
+        MailTemplate::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['subject', 'body']);
         });
 
-        MenuOption::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['option_name', 'option_values'];
-            });
+        MenuOption::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['option_name', 'option_values']);
         });
 
-        MenuOptionValue::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['value'];
-            });
+        MenuOptionValue::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['value']);
         });
 
-        Menu::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['menu_name', 'menu_description'];
-            });
+        Menu::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['menu_name', 'menu_description']);
         });
 
-        MenuItem::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['title', 'description'];
-            });
+        MenuItem::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['title', 'description']);
         });
 
-        Page::extend(function($model) {
-            $model->implement[] = \Igniter\Translate\Actions\TranslatableModel::class;
-            $model->addDynamicMethod('translatable', function() {
-                return ['title', 'content', 'meta_description', 'meta_keywords'];
-            });
+        Page::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['title', 'content', 'meta_description', 'meta_keywords']);
         });
     }
 
@@ -132,7 +121,7 @@ class EventRegistry
     // Helpers
     //
 
-    protected function processTranslatableFormFields($fields, $translatable)
+    protected function processTranslatableFormFields(array $fields, $translatable): array
     {
         foreach ($fields as $name => $config) {
             if (!array_key_exists($name, $translatable)) {

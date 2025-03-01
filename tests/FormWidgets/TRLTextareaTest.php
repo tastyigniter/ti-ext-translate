@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Tests\FormWidgets;
 
 use Igniter\Admin\Classes\FormField;
@@ -11,13 +13,13 @@ use Mockery;
 use function Igniter\Translate\Tests\createSupportedLanguages;
 use function Igniter\Translate\Tests\mockRequest;
 
-beforeEach(function() {
+beforeEach(function(): void {
     $this->model = Mockery::mock(Model::class)->makePartial();
     $this->formField = new FormField('testField', 'Label');
     $this->trlTextarea = new TRLTextarea(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 });
 
-it('initializes locale correctly in TRLTextarea', function() {
+it('initializes locale correctly in TRLTextarea', function(): void {
     createSupportedLanguages();
 
     $this->trlTextarea->initialize();
@@ -25,17 +27,17 @@ it('initializes locale correctly in TRLTextarea', function() {
     expect($this->trlTextarea->isSupported)->toBeTrue();
 });
 
-it('renders TRLTextarea with locale support', function() {
+it('renders TRLTextarea with locale support', function(): void {
     expect($this->trlTextarea->render())->toBeString();
 });
 
-it('renders parent content only when locale is not supported in TRLTextarea', function() {
+it('renders parent content only when locale is not supported in TRLTextarea', function(): void {
     $this->trlTextarea->isSupported = false;
 
     expect($this->trlTextarea->render())->toBeString();
 });
 
-it('returns save value correctly when locale is supported in TRLTextarea', function() {
+it('returns save value correctly when locale is supported in TRLTextarea', function(): void {
     createSupportedLanguages();
 
     $this->trlTextarea->isSupported = true;
@@ -49,7 +51,7 @@ it('returns save value correctly when locale is supported in TRLTextarea', funct
     expect($result)->toBe('localeSaveValue');
 });
 
-it('returns original save value when locale is not supported in TRLTextarea', function() {
+it('returns original save value when locale is not supported in TRLTextarea', function(): void {
     $this->trlTextarea->isSupported = false;
 
     $result = $this->trlTextarea->getSaveValue('value');
@@ -57,7 +59,7 @@ it('returns original save value when locale is not supported in TRLTextarea', fu
     expect($result)->toBe('value');
 });
 
-it('loads assets correctly in TRLTextarea', function() {
+it('loads assets correctly in TRLTextarea', function(): void {
     createSupportedLanguages();
 
     Assets::partialMock()

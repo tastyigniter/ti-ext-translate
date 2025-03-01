@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Tests;
 
+use SamPoyigi\Testbench\TestCase;
 use Igniter\System\Models\Language;
 use Illuminate\Http\Request;
 use Mockery;
 
-uses(\SamPoyigi\Testbench\TestCase::class)->in(__DIR__);
+uses(TestCase::class)->in(__DIR__);
 
 function mockRequest(array $data)
 {
@@ -18,7 +21,7 @@ function mockRequest(array $data)
     return $mockRequest;
 }
 
-function createSupportedLanguages()
+function createSupportedLanguages(): void
 {
     Language::$localesCache = [];
     Language::$activeLanguage = null;

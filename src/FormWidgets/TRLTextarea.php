@@ -1,22 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\Classes\BaseFormWidget;
+use Override;
 
 class TRLTextarea extends BaseFormWidget
 {
-    use \Igniter\Translate\FormWidgets\TRLBase;
+    use TRLBase;
 
-    const FALLBACK_TYPE = 'textarea';
+    public const string FALLBACK_TYPE = 'textarea';
 
     protected string $defaultAlias = 'trltextarea';
 
-    public function initialize()
+    #[Override]
+    public function initialize(): void
     {
         $this->initLocale();
     }
 
+    #[Override]
     public function render()
     {
         $this->prepareLocaleVars();
@@ -28,6 +33,7 @@ class TRLTextarea extends BaseFormWidget
         return $this->renderFallbackField();
     }
 
+    #[Override]
     public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {
@@ -37,7 +43,8 @@ class TRLTextarea extends BaseFormWidget
         return $this->getLocaleSaveValue($value);
     }
 
-    public function loadAssets()
+    #[Override]
+    public function loadAssets(): void
     {
         $this->loadLocaleAssets();
     }

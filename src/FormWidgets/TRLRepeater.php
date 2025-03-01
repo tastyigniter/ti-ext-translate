@@ -1,18 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
+use Igniter\Admin\Classes\AdminController;
+use Igniter\Admin\Classes\FormField;
+use Override;
 use Igniter\Admin\FormWidgets\Repeater;
 use Igniter\System\Models\Language;
 use Illuminate\Support\Str;
 
 class TRLRepeater extends Repeater
 {
-    use \Igniter\Translate\FormWidgets\TRLBase;
+    use TRLBase;
 
     protected string $defaultAlias = 'trlrepeater';
 
-    public function __construct($controller, $formField, $configuration = [])
+    public function __construct(AdminController $controller, FormField $formField, array $configuration = [])
     {
         $this->parentPartialPath[] = '~/app/admin/formwidgets';
         $this->parentPartialPath[] = '~/app/admin/formwidgets/repeater';
@@ -21,18 +26,18 @@ class TRLRepeater extends Repeater
         parent::__construct($controller, $formField, $configuration);
     }
 
-    public function initialize()
+    #[Override]
+    public function initialize(): void
     {
         parent::initialize();
 
         $this->initLocale();
     }
 
-    public function render()
+    #[Override]
+    public function render(): string
     {
-        $parentContent = $this->maskAsParent(function() {
-            return parent::render();
-        });
+        $parentContent = $this->maskAsParent(fn(): string => parent::render());
 
         if (!$this->isSupported) {
             return $parentContent;
@@ -43,15 +48,17 @@ class TRLRepeater extends Repeater
         return $this->makePartial('trlrepeater/trlrepeater');
     }
 
-    public function prepareVars()
+    #[Override]
+    public function prepareVars(): void
     {
         parent::prepareVars();
         $this->prepareLocaleVars();
     }
 
-    public function loadAssets()
+    #[Override]
+    public function loadAssets(): void
     {
-        $this->maskAsParent(function() {
+        $this->maskAsParent(function(): void {
             parent::loadAssets();
         });
 
@@ -61,6 +68,7 @@ class TRLRepeater extends Repeater
         }
     }
 
+    #[Override]
     protected function processItemDefinitions()
     {
         parent::processItemDefinitions();
@@ -81,7 +89,8 @@ class TRLRepeater extends Repeater
         }
     }
 
-    protected function processSaveValue($value): mixed
+    #[Override]
+    protected function processSaveValue(mixed $value): mixed
     {
         $value = parent::processSaveValue($value);
 

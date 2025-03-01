@@ -1,7 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate;
 
+use Override;
+use Igniter\Translate\FormWidgets\TRLText;
+use Igniter\Translate\FormWidgets\TRLTextarea;
+use Igniter\Translate\FormWidgets\TRLRichEditor;
+use Igniter\Translate\FormWidgets\TRLMarkdownEditor;
+use Igniter\Translate\FormWidgets\TRLRepeater;
+use Igniter\Admin\Widgets\Form;
 use Igniter\System\Classes\BaseExtension;
 use Igniter\Translate\Classes\EventRegistry;
 use Illuminate\Support\Facades\Event;
@@ -15,28 +24,31 @@ class Extension extends BaseExtension
         EventRegistry::class,
     ];
 
-    public function register()
+    #[Override]
+    public function register(): void
     {
         parent::register();
 
-        Event::listen('admin.form.extendFieldsBefore', function($widget) {
+        Event::listen('admin.form.extendFieldsBefore', function(Form $widget): void {
             resolve(EventRegistry::class)->registerFormFieldReplacements($widget);
-        }, -1);
+        });
     }
 
-    public function boot()
+    #[Override]
+    public function boot(): void
     {
         resolve(EventRegistry::class)->bootTranslatableModels();
     }
 
+    #[Override]
     public function registerFormWidgets(): array
     {
         return [
-            \Igniter\Translate\FormWidgets\TRLText::class => ['code' => 'trltext'],
-            \Igniter\Translate\FormWidgets\TRLTextarea::class => ['code' => 'trltextarea'],
-            \Igniter\Translate\FormWidgets\TRLRichEditor::class => ['code' => 'trlricheditor'],
-            \Igniter\Translate\FormWidgets\TRLMarkdownEditor::class => ['code' => 'trlmarkdowneditor'],
-            \Igniter\Translate\FormWidgets\TRLRepeater::class => ['code' => 'trlrepeater'],
+            TRLText::class => ['code' => 'trltext'],
+            TRLTextarea::class => ['code' => 'trltextarea'],
+            TRLRichEditor::class => ['code' => 'trlricheditor'],
+            TRLMarkdownEditor::class => ['code' => 'trlmarkdowneditor'],
+            TRLRepeater::class => ['code' => 'trlrepeater'],
         ];
     }
 }

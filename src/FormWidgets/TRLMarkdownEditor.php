@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
+use Igniter\Admin\Classes\AdminController;
+use Igniter\Admin\Classes\FormField;
+use Override;
 use Igniter\Admin\FormWidgets\MarkdownEditor;
 use Igniter\System\Models\Language;
 
 class TRLMarkdownEditor extends MarkdownEditor
 {
-    use \Igniter\Translate\FormWidgets\TRLBase;
+    use TRLBase;
 
     /**
      * {@inheritDoc}
@@ -18,7 +23,7 @@ class TRLMarkdownEditor extends MarkdownEditor
 
     public $originalViewPath;
 
-    public function __construct($controller, $formField, $configuration = [])
+    public function __construct(AdminController $controller, FormField $formField, array $configuration = [])
     {
         $this->parentPartialPath[] = 'igniter.admin::_partials.formwidgets';
         $this->parentPartialPath[] = 'igniter.admin::_partials.formwidgets.markdowneditor';
@@ -27,33 +32,35 @@ class TRLMarkdownEditor extends MarkdownEditor
         parent::__construct($controller, $formField, $configuration);
     }
 
-    public function initialize()
+    #[Override]
+    public function initialize(): void
     {
         parent::initialize();
 
         $this->initLocale();
     }
 
-    public function render()
+    #[Override]
+    public function render(): string
     {
-        $parentContent = $this->maskAsParent(function() {
-            return parent::render();
-        });
+        $parentContent = $this->maskAsParent(fn(): string => parent::render());
 
         $this->vars['markdowneditor'] = $parentContent;
 
         return $this->makePartial('trlmarkdowneditor/trlmarkdowneditor');
     }
 
-    public function prepareVars()
+    #[Override]
+    public function prepareVars(): void
     {
         parent::prepareVars();
         $this->prepareLocaleVars();
     }
 
-    public function loadAssets()
+    #[Override]
+    public function loadAssets(): void
     {
-        $this->maskAsParent(function() {
+        $this->maskAsParent(function(): void {
             parent::loadAssets();
         });
 
@@ -67,6 +74,7 @@ class TRLMarkdownEditor extends MarkdownEditor
      * Returns an array of translated values for this field
      * @return array
      */
+    #[Override]
     public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {

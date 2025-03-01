@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Actions;
 
+use Override;
+use Igniter\Flame\Database\Model;
 use Igniter\Translate\Models\Attribute;
 
 class TranslatableModel extends TranslatableAction
 {
-    public function __construct($model)
+    public function __construct(protected ?Model $model = null)
     {
         parent::__construct($model);
 
         $model->relation['morphMany']['translations'] = [
-            \Igniter\Translate\Models\Attribute::class, 'name' => 'translatable',
+            Attribute::class, 'name' => 'translatable',
         ];
     }
 
+    #[Override]
     protected function storeTranslatableAttributes($locale = null)
     {
         if (!$locale) {
@@ -22,7 +27,7 @@ class TranslatableModel extends TranslatableAction
         }
 
         if (!$this->model->exists) {
-            $this->model->bindEventOnce('model.afterCreate', function() use ($locale) {
+            $this->model->bindEventOnce('model.afterCreate', function() use ($locale): void {
                 $this->storeTranslatableAttributes($locale);
             });
 
@@ -40,6 +45,7 @@ class TranslatableModel extends TranslatableAction
         ]);
     }
 
+    #[Override]
     protected function loadTranslatableAttributes($locale = null)
     {
         if (!$locale) {
@@ -50,9 +56,7 @@ class TranslatableModel extends TranslatableAction
             return $this->translatableAttributes[$locale] = [];
         }
 
-        $translation = $this->model->translations->first(function($value, $key) use ($locale) {
-            return $value->getAttribute('locale') === $locale;
-        });
+        $translation = $this->model->translations->first(fn($value, $key): bool => $value->getAttribute('locale') === $locale);
 
         $result = $translation ? json_decode($translation->attribute, true) : [];
 

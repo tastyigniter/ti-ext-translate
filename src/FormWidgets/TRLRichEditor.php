@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
+use Igniter\Admin\Classes\AdminController;
+use Igniter\Admin\Classes\FormField;
+use Override;
 use Igniter\Admin\FormWidgets\RichEditor;
 use Igniter\System\Models\Language;
 
 class TRLRichEditor extends RichEditor
 {
-    use \Igniter\Translate\FormWidgets\TRLBase;
+    use TRLBase;
 
     /**
      * {@inheritDoc}
@@ -18,7 +23,7 @@ class TRLRichEditor extends RichEditor
 
     public $originalViewPath;
 
-    public function __construct($controller, $formField, $configuration = [])
+    public function __construct(AdminController $controller, FormField $formField, array $configuration = [])
     {
         $this->parentPartialPath[] = '~/app/admin/formwidgets';
         $this->parentPartialPath[] = '~/app/admin/formwidgets/richeditor';
@@ -27,18 +32,18 @@ class TRLRichEditor extends RichEditor
         parent::__construct($controller, $formField, $configuration);
     }
 
-    public function initialize()
+    #[Override]
+    public function initialize(): void
     {
         parent::initialize();
 
         $this->initLocale();
     }
 
-    public function render()
+    #[Override]
+    public function render(): string
     {
-        $parentContent = $this->maskAsParent(function() {
-            return parent::render();
-        });
+        $parentContent = $this->maskAsParent(fn(): string => parent::render());
 
         if (!$this->isSupported) {
             return $parentContent;
@@ -49,15 +54,17 @@ class TRLRichEditor extends RichEditor
         return $this->makePartial('trlricheditor/trlricheditor');
     }
 
-    public function prepareVars()
+    #[Override]
+    public function prepareVars(): void
     {
         parent::prepareVars();
         $this->prepareLocaleVars();
     }
 
-    public function loadAssets()
+    #[Override]
+    public function loadAssets(): void
     {
-        $this->maskAsParent(function() {
+        $this->maskAsParent(function(): void {
             parent::loadAssets();
         });
 
@@ -71,6 +78,7 @@ class TRLRichEditor extends RichEditor
      * Returns an array of translated values for this field
      * @return array
      */
+    #[Override]
     public function getSaveValue(mixed $value): mixed
     {
         if (!$this->isSupported) {

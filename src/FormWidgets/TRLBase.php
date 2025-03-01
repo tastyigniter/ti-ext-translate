@@ -1,40 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\FormWidgets;
 
+use Igniter\Flame\Database\Model;
 use Igniter\System\Models\Language;
+use Igniter\Translate\Actions\TranslatableModel;
 use Illuminate\Support\Str;
 
+/**
+ * TRLBase Trait
+ *
+ * @property null|Model|TranslatableModel $model
+ */
 trait TRLBase
 {
-    /**
-     * @var string
-     */
-    public $activeLocale;
+    public ?Language $activeLocale;
 
-    /**
-     * @var bool
-     */
-    public $isSupported;
+    public bool $isSupported;
 
     protected $parentPartialPath;
 
     protected $parentAssetPath;
 
-    public function initLocale()
+    public function initLocale(): void
     {
         $this->activeLocale = Language::getActiveLocale();
         $this->isSupported = Language::supportsLocale();
     }
 
-    public function prepareLocaleVars()
+    public function prepareLocaleVars(): void
     {
         $this->vars['activeLocale'] = $this->activeLocale;
         $this->vars['locales'] = Language::listSupported();
         $this->vars['field'] = $this->makeRenderFormField();
     }
 
-    public function loadLocaleAssets()
+    public function loadLocaleAssets(): void
     {
         $this->addJs('$/igniter/translate/assets/js/translatable.js', 'translatable-js');
         $this->addCss('$/igniter/translate/assets/css/translatable.css', 'translatable-css');

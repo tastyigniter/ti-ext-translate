@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Tests\FormWidgets;
 
 use Igniter\Admin\Classes\FormField;
@@ -11,13 +13,13 @@ use Mockery;
 use function Igniter\Translate\Tests\createSupportedLanguages;
 use function Igniter\Translate\Tests\mockRequest;
 
-beforeEach(function() {
+beforeEach(function(): void {
     $this->model = Mockery::mock(Model::class)->makePartial();
     $this->formField = new FormField('testField', 'Label');
     $this->trlMarkdownEditor = new TRLMarkdownEditor(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 });
 
-it('initializes locale correctly in TRLMarkdownEditor', function() {
+it('initializes locale correctly in TRLMarkdownEditor', function(): void {
     createSupportedLanguages();
 
     $this->trlMarkdownEditor->initialize();
@@ -25,13 +27,13 @@ it('initializes locale correctly in TRLMarkdownEditor', function() {
     expect($this->trlMarkdownEditor->isSupported)->toBeTrue();
 });
 
-it('renders TRLMarkdownEditor with parent content', function() {
+it('renders TRLMarkdownEditor with parent content', function(): void {
     $this->trlMarkdownEditor = new TRLMarkdownEditor(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 
     expect($this->trlMarkdownEditor->render())->toBeString();
 });
 
-it('prepares variables correctly in TRLMarkdownEditor', function() {
+it('prepares variables correctly in TRLMarkdownEditor', function(): void {
     $this->trlMarkdownEditor = new TRLMarkdownEditor(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 
     $this->trlMarkdownEditor->prepareVars();
@@ -39,7 +41,7 @@ it('prepares variables correctly in TRLMarkdownEditor', function() {
     expect($this->trlMarkdownEditor->vars)->not->toBeEmpty();
 });
 
-it('loads assets correctly in TRLMarkdownEditor when locale is supported', function() {
+it('loads assets correctly in TRLMarkdownEditor when locale is supported', function(): void {
     createSupportedLanguages();
 
     Assets::partialMock()->shouldReceive('addJs')->with('js/trlmarkdowneditor.js', null)->once();
@@ -57,7 +59,7 @@ it('loads assets correctly in TRLMarkdownEditor when locale is supported', funct
     $this->trlMarkdownEditor->loadAssets();
 });
 
-it('returns save value correctly when locale is supported in TRLMarkdownEditor', function() {
+it('returns save value correctly when locale is supported in TRLMarkdownEditor', function(): void {
     $this->trlMarkdownEditor->isSupported = true;
 
     mockRequest([
@@ -69,7 +71,7 @@ it('returns save value correctly when locale is supported in TRLMarkdownEditor',
     expect($result)->toBe('localeSaveValue');
 });
 
-it('returns original save value when locale is not supported in TRLMarkdownEditor', function() {
+it('returns original save value when locale is not supported in TRLMarkdownEditor', function(): void {
     $this->trlMarkdownEditor->isSupported = false;
 
     $result = $this->trlMarkdownEditor->getSaveValue('value');

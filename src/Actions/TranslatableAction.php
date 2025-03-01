@@ -1,14 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Translate\Actions;
 
+use Igniter\Flame\Database\Model;
 use Igniter\System\Actions\ModelAction;
+use Igniter\System\Models\Translation;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
 /**
  * Translatable Model Action base Class
  *
  * Adapted from rainlab\translate\classes\TranslatableBehavior
+ *
+ * @property static|Model $model
+ * @property Collection<int, Translation> $translations
+ * @method array translatable()
  */
 abstract class TranslatableAction extends ModelAction
 {
@@ -42,11 +51,7 @@ abstract class TranslatableAction extends ModelAction
      */
     protected array $requiredProperties = [];
 
-    /**
-     * Constructor
-     * @param \Illuminate\Database\Eloquent\Model $model The extended model.
-     */
-    public function __construct($model)
+    public function __construct(protected ?Model $model = null)
     {
         parent::__construct($model);
 
@@ -63,23 +68,21 @@ abstract class TranslatableAction extends ModelAction
                 return $this->performSetTranslatableAttribute($key, $value);
             }
 
-            if (in_array($key, $this->model->getTranslatableAttributes()) && is_array($value)) {
-                if (array_key_exists($this->translatableActiveLocale, $value)) {
-                    foreach ($value as $locale => $_value) {
-                        $this->setAttributeTranslatedValue($key, $_value, $locale);
-                    }
-
-                    return array_get($value, $this->translatableActiveLocale, $value);
+            if (in_array($key, $this->model->getTranslatableAttributes()) && is_array($value) && array_key_exists($this->translatableActiveLocale, $value)) {
+                foreach ($value as $locale => $_value) {
+                    $this->setAttributeTranslatedValue($key, $_value, $locale);
                 }
+
+                return array_get($value, $this->translatableActiveLocale, $value);
             }
         });
 
-        $this->model->bindEvent('model.saveInternal', function() {
+        $this->model->bindEvent('model.saveInternal', function(): void {
             $this->syncTranslatableAttributes();
         });
     }
 
-    public function initTranslatableLocale()
+    public function initTranslatableLocale(): void
     {
         $localization = app('translator.localization');
         $this->translatableActiveLocale = $localization->getLocale();
@@ -109,7 +112,7 @@ abstract class TranslatableAction extends ModelAction
         return $value;
     }
 
-    public function syncTranslatableAttributes()
+    public function syncTranslatableAttributes(): void
     {
         $availableLocales = array_keys($this->translatableAttributes);
         foreach ($availableLocales as $locale) {
@@ -189,7 +192,7 @@ abstract class TranslatableAction extends ModelAction
         return $this->model;
     }
 
-    public function hasTranslation($key, $locale)
+    public function hasTranslation(string $key, $locale)
     {
         if ($locale == $this->translatableActiveLocale) {
             $translatableAttributes = $this->model->getAttributes();
@@ -229,7 +232,7 @@ abstract class TranslatableAction extends ModelAction
         return $result;
     }
 
-    public function setAttributeTranslatedValue($key, $value, $locale = null)
+    public function setAttributeTranslatedValue(string $key, $value, $locale = null)
     {
         if (is_null($locale)) {
             $locale = $this->translatableActiveLocale;
@@ -256,15 +259,15 @@ abstract class TranslatableAction extends ModelAction
     public function hasTranslatableAttributes()
     {
         return is_array($this->model->translatable()) &&
-            count($this->model->translatable()) > 0;
+            $this->model->translatable() !== [];
     }
 
-    protected function getAttributeFromData($data, $attribute)
+    protected function getAttributeFromData($data, string $attribute)
     {
         return array_get($data, implode('.', name_to_array($attribute)));
     }
 
-    protected function setAttributeFromData(&$data, $attribute, $value)
+    protected function setAttributeFromData(&$data, string $attribute, $value)
     {
         array_set($data, implode('.', name_to_array($attribute)), $value);
 
@@ -285,7 +288,7 @@ abstract class TranslatableAction extends ModelAction
      */
     abstract protected function loadTranslatableAttributes($locale = null);
 
-    public static function extend(callable $callback)
+    public static function extend(callable $callback): void
     {
         self::extensionExtendCallback($callback);
     }
