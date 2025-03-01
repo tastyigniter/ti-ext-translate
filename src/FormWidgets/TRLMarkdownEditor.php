@@ -6,9 +6,9 @@ namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\Classes\AdminController;
 use Igniter\Admin\Classes\FormField;
-use Override;
 use Igniter\Admin\FormWidgets\MarkdownEditor;
 use Igniter\System\Models\Language;
+use Override;
 
 class TRLMarkdownEditor extends MarkdownEditor
 {

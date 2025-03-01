@@ -40,6 +40,7 @@ it('registers form field replacements in register method', function(): void {
             public function __construct() {}
         };
         $callback($formWidget);
+
         return true;
     }))->once();
 

@@ -10,6 +10,7 @@ use Igniter\Flame\Database\Model;
 use Igniter\System\Facades\Assets;
 use Igniter\Translate\FormWidgets\TRLText;
 use Mockery;
+
 use function Igniter\Translate\Tests\createSupportedLanguages;
 use function Igniter\Translate\Tests\mockRequest;
 

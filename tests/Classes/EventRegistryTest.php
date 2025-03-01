@@ -34,7 +34,7 @@ it('registers form field replacements for model with translatable attributes', f
     $this->formWidget->config = ['fields' => ['name' => ['type' => 'text'], 'description' => ['type' => 'textarea']]];
     $this->formWidget->fields = $this->formWidget->config['fields'];
 
-    (new EventRegistry())->registerFormFieldReplacements($this->formWidget);
+    (new EventRegistry)->registerFormFieldReplacements($this->formWidget);
 
     expect($this->formWidget->fields['name']['type'])->toBe('trltext')
         ->and($this->formWidget->fields['description']['type'])->toBe('trltextarea');
@@ -47,7 +47,7 @@ it('registers form field replacements for ThemePage model', function(): void {
     $this->formWidget->model = $model;
     $this->formWidget->fields = ['settings[url]' => ['type' => 'text']];
 
-    (new EventRegistry())->registerFormFieldReplacements($this->formWidget);
+    (new EventRegistry)->registerFormFieldReplacements($this->formWidget);
 
     expect($this->formWidget->fields['settings[url]']['type'])->toBe('trltext');
 });
@@ -58,7 +58,7 @@ it('registers form field replacements for StaticPage model', function(): void {
 
     $this->formWidget->fields = ['viewBag[url]' => ['type' => 'text']];
 
-    (new EventRegistry())->registerFormFieldReplacements($this->formWidget);
+    (new EventRegistry)->registerFormFieldReplacements($this->formWidget);
 
     expect($this->formWidget->fields['viewBag[url]']['type'])->toBe('trltext');
 });
@@ -71,7 +71,7 @@ it('does not register form field replacements for model without translatable att
     $this->formWidget->config = ['fields' => ['name' => ['type' => 'text'], 'description' => ['type' => 'textarea']]];
     $this->formWidget->fields = $this->formWidget->config['fields'];
 
-    (new EventRegistry())->registerFormFieldReplacements($this->formWidget);
+    (new EventRegistry)->registerFormFieldReplacements($this->formWidget);
 
     expect($this->formWidget->fields['name']['type'])->toBe('text')
         ->and($this->formWidget->fields['description']['type'])->toBe('textarea');
@@ -83,7 +83,7 @@ it('does not register form field replacements for non-ThemePage and non-StaticPa
 
     $this->formWidget->fields = ['viewBag[url]' => ['type' => 'text']];
 
-    (new EventRegistry())->registerFormFieldReplacements($this->formWidget);
+    (new EventRegistry)->registerFormFieldReplacements($this->formWidget);
 
     expect($this->formWidget->fields['viewBag[url]']['type'])->toBe('text');
 });
@@ -103,7 +103,7 @@ it('registers translatable fields for model with translatable attributes', funct
     $this->formWidget->tabs = $this->formWidget->config['tabs'];
     $this->formWidget->secondaryTabs = $this->formWidget->config['secondaryTabs'];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerModelTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields['name']['type'])->toBe('trltext')
@@ -119,7 +119,7 @@ it('skips translatable fields for model without translatable attributes', functi
     $this->formWidget->config = ['fields' => ['description' => ['type' => 'textarea']]];
     $this->formWidget->fields = $this->formWidget->config['fields'];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerModelTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields)->not->toHaveKey('name')
@@ -134,7 +134,7 @@ it('does not register translatable fields for model without translatable attribu
     $this->formWidget->config = ['fields' => ['name' => ['type' => 'text'], 'description' => ['type' => 'textarea']]];
     $this->formWidget->fields = $this->formWidget->config['fields'];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerModelTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields['name']['type'])->toBe('text')
@@ -147,7 +147,7 @@ it('registers translatable fields for ThemePage model', function(): void {
 
     $this->formWidget->fields = ['settings[url]' => ['type' => 'text']];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerPageTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields['settings[url]']['type'])->toBe('trltext');
@@ -162,7 +162,7 @@ it('registers translatable fields for StaticPage model', function(): void {
 
     $this->formWidget->fields = ['viewBag[url]' => ['type' => 'text']];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerPageTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields['viewBag[url]']['type'])->toBe('trltext');
@@ -174,24 +174,24 @@ it('does not register translatable fields for non-ThemePage and non-StaticPage m
 
     $this->formWidget->fields = ['viewBag[url]' => ['type' => 'text']];
 
-    $eventRegistry = new EventRegistry();
+    $eventRegistry = new EventRegistry;
     $eventRegistry->registerPageTranslatableFields($this->formWidget);
 
     expect($this->formWidget->fields['viewBag[url]']['type'])->toBe('text');
 });
 
 it('extends models with translatable attributes', function(): void {
-    (new EventRegistry())->bootTranslatableModels();
+    (new EventRegistry)->bootTranslatableModels();
 
-    $ingredient = new Ingredient();
-    $category = new Category();
-    $location = new Location();
-    $mailTemplate = new MailTemplate();
-    $menuOption = new MenuOption();
-    $menuOptionValue = new MenuOptionValue();
-    $menu = new Menu();
-    $menuItem = new MenuItem();
-    $pages = new \Igniter\Pages\Models\Page();
+    $ingredient = new Ingredient;
+    $category = new Category;
+    $location = new Location;
+    $mailTemplate = new MailTemplate;
+    $menuOption = new MenuOption;
+    $menuOptionValue = new MenuOptionValue;
+    $menu = new Menu;
+    $menuItem = new MenuItem;
+    $pages = new \Igniter\Pages\Models\Page;
 
     expect($ingredient->implement)->toContain(TranslatableModel::class)
         ->and($ingredient->translatable())->toBe(['name', 'description'])

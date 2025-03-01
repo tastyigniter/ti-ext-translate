@@ -49,14 +49,17 @@ it('initializes translatable locale correctly', function(): void {
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
     $model->shouldReceive('bindEvent')->with('model.beforeGetAttribute', Mockery::on(function($callback): true {
         $callback('name');
+
         return true;
     }))->twice();
     $model->shouldReceive('bindEvent')->with('model.beforeSetAttribute', Mockery::on(function($callback): true {
         $callback('name', ['en' => 'translated_name']);
+
         return true;
     }))->twice();
     $model->shouldReceive('bindEvent')->with('model.saveInternal', Mockery::on(function($callback): true {
         $callback();
+
         return true;
     }))->twice();
 

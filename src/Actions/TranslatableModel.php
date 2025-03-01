@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Igniter\Translate\Actions;
 
-use Override;
 use Igniter\Flame\Database\Model;
 use Igniter\Translate\Models\Attribute;
+use Override;
 
 class TranslatableModel extends TranslatableAction
 {

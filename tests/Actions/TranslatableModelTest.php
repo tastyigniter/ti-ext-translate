@@ -70,6 +70,7 @@ it('binds event to store translatable attributes after model creation', function
     $this->model->shouldReceive('bindEventOnce')->with('model.afterCreate', Mockery::on(function($callback): true {
         $this->model->exists = true;
         $callback();
+
         return true;
     }))->once();
 

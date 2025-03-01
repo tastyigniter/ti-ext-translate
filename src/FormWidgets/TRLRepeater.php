@@ -6,10 +6,10 @@ namespace Igniter\Translate\FormWidgets;
 
 use Igniter\Admin\Classes\AdminController;
 use Igniter\Admin\Classes\FormField;
-use Override;
 use Igniter\Admin\FormWidgets\Repeater;
 use Igniter\System\Models\Language;
 use Illuminate\Support\Str;
+use Override;
 
 class TRLRepeater extends Repeater
 {

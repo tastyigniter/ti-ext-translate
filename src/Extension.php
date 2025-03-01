@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Igniter\Translate;
 
-use Override;
-use Igniter\Translate\FormWidgets\TRLText;
-use Igniter\Translate\FormWidgets\TRLTextarea;
-use Igniter\Translate\FormWidgets\TRLRichEditor;
-use Igniter\Translate\FormWidgets\TRLMarkdownEditor;
-use Igniter\Translate\FormWidgets\TRLRepeater;
 use Igniter\Admin\Widgets\Form;
 use Igniter\System\Classes\BaseExtension;
 use Igniter\Translate\Classes\EventRegistry;
+use Igniter\Translate\FormWidgets\TRLMarkdownEditor;
+use Igniter\Translate\FormWidgets\TRLRepeater;
+use Igniter\Translate\FormWidgets\TRLRichEditor;
+use Igniter\Translate\FormWidgets\TRLText;
+use Igniter\Translate\FormWidgets\TRLTextarea;
 use Illuminate\Support\Facades\Event;
+use Override;
 
 /**
  * Translate Extension Information File

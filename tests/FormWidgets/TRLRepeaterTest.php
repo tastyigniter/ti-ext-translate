@@ -11,6 +11,7 @@ use Igniter\System\Facades\Assets;
 use Igniter\Translate\FormWidgets\TRLRepeater;
 use Mockery;
 use ReflectionClass;
+
 use function Igniter\Translate\Tests\createSupportedLanguages;
 use function Igniter\Translate\Tests\mockRequest;
 
