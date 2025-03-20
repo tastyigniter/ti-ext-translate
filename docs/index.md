@@ -1,3 +1,9 @@
+---
+title: "Translate"
+section: "extensions"
+sortOrder: 120
+---
+
 ## Installation
 
 You can install the extension via composer using the following command:
