@@ -58,7 +58,7 @@ class TranslatableModel extends TranslatableAction
 
         $translation = $this->model->translations->first(fn($value, $key): bool => $value->getAttribute('locale') === $locale);
 
-        $result = $translation ? json_decode($translation->attribute, true) : [];
+        $result = $translation ? json_decode((string) $translation->attribute, true) : [];
 
         return $this->translatableOriginals[$locale] = $this->translatableAttributes[$locale] = $result;
     }
