@@ -109,7 +109,7 @@ class TRLRepeater extends Repeater
         return $result;
     }
 
-    public function getLocaleSaveValue($value, $fieldName)
+    public function getLocaleSaveValue($value, $fieldName = null)
     {
         $localeData = $this->getLocaleSaveData($fieldName);
 
@@ -127,7 +127,7 @@ class TRLRepeater extends Repeater
         return $value;
     }
 
-    public function getLocaleSaveData($fieldName = null)
+    public function getLocaleSaveData($fieldName = null): array
     {
         $values = [];
         $data = post('TRLTranslate');

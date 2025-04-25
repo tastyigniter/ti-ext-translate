@@ -258,8 +258,7 @@ abstract class TranslatableAction extends ModelAction
 
     public function hasTranslatableAttributes()
     {
-        return is_array($this->model->translatable()) &&
-            $this->model->translatable() !== [];
+        return $this->getTranslatableAttributes() !== [];
     }
 
     protected function getAttributeFromData($data, string $attribute)
