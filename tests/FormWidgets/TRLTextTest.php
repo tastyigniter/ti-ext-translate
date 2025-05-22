@@ -65,18 +65,21 @@ it('loads assets correctly in TRLText', function(): void {
 
     Assets::partialMock()
         ->shouldReceive('addJs')
-        ->with('$/igniter/translate/formwidgets/trlrepeater/assets/js/trlrepeater.js', 'trlrepeater-js')
-        ->once();
+        ->withArgs(
+            fn($path, $name) => ends_with($path, '/js/trlrepeater.js'),
+        )->once();
 
     Assets::partialMock()
         ->shouldReceive('addJs')
-        ->with('$/igniter/translate/assets/js/translatable.js', 'translatable-js')
-        ->once();
+        ->withArgs(
+            fn($path, $name) => ends_with($path, '/js/translatable.js'),
+        )->once();
 
     Assets::partialMock()
         ->shouldReceive('addCss')
-        ->with('$/igniter/translate/assets/css/translatable.css', 'translatable-css')
-        ->once();
+        ->withArgs(
+            fn($path, $name) => ends_with($path, '/css/translatable.css'),
+        )->once();
 
     $this->trlText->loadAssets();
 });

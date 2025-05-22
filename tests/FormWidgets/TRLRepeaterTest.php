@@ -51,16 +51,18 @@ it('prepares variables correctly in TRLRepeater', function(): void {
 it('loads assets correctly in TRLRepeater when locale is supported', function(): void {
     createSupportedLanguages();
 
-    Assets::partialMock()->shouldReceive('addJs')->with('js/trlrepeater.js', null)->once();
+    Assets::partialMock()->shouldReceive('addJs')->withArgs(
+        fn($path, $name) => ends_with($path, '/js/trlrepeater.js'),
+    )->once();
 
     Assets::partialMock()
         ->shouldReceive('addJs')
-        ->with('$/igniter/translate/assets/js/translatable.js', 'translatable-js')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/translatable.js'))
         ->once();
 
     Assets::partialMock()
         ->shouldReceive('addCss')
-        ->with('$/igniter/translate/assets/css/translatable.css', 'translatable-css')
+        ->withArgs(fn($path, $name) => ends_with($path, '/css/translatable.css'))
         ->once();
 
     $this->trlRepeater->loadAssets();

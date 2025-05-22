@@ -66,7 +66,7 @@ class TRLMarkdownEditor extends MarkdownEditor
 
         if (Language::supportsLocale()) {
             $this->loadLocaleAssets();
-            $this->addJs('js/trlmarkdowneditor.js');
+            $this->addJs('igniter.translate::/js/trlmarkdowneditor.js');
         }
     }
 

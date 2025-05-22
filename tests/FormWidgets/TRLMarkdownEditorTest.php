@@ -45,16 +45,19 @@ it('prepares variables correctly in TRLMarkdownEditor', function(): void {
 it('loads assets correctly in TRLMarkdownEditor when locale is supported', function(): void {
     createSupportedLanguages();
 
-    Assets::partialMock()->shouldReceive('addJs')->with('js/trlmarkdowneditor.js', null)->once();
+    Assets::partialMock()
+        ->shouldReceive('addJs')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/trlmarkdowneditor.js'))
+        ->once();
 
     Assets::partialMock()
         ->shouldReceive('addJs')
-        ->with('$/igniter/translate/assets/js/translatable.js', 'translatable-js')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/translatable.js'))
         ->once();
 
     Assets::partialMock()
         ->shouldReceive('addCss')
-        ->with('$/igniter/translate/assets/css/translatable.css', 'translatable-css')
+        ->withArgs(fn($path, $name) => ends_with($path, '/css/translatable.css'))
         ->once();
 
     $this->trlMarkdownEditor->loadAssets();

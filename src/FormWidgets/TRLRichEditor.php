@@ -70,7 +70,7 @@ class TRLRichEditor extends RichEditor
 
         if (Language::supportsLocale()) {
             $this->loadLocaleAssets();
-            $this->addJs('js/trlricheditor.js');
+            $this->addJs('igniter.translate::/js/trlricheditor.js');
         }
     }
 

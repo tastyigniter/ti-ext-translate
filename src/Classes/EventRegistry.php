@@ -7,6 +7,7 @@ namespace Igniter\Translate\Classes;
 use Igniter\Admin\Widgets\Form;
 use Igniter\Cart\Models\Category;
 use Igniter\Cart\Models\Ingredient;
+use Igniter\Cart\Models\Mealtime;
 use Igniter\Cart\Models\Menu;
 use Igniter\Cart\Models\MenuOption;
 use Igniter\Cart\Models\MenuOptionValue;
@@ -71,6 +72,11 @@ class EventRegistry
 
     public function bootTranslatableModels(): void
     {
+        Mealtime::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['mealtime_name']);
+        });
+
         Ingredient::extend(function($model): void {
             $model->implement[] = TranslatableModel::class;
             $model->addDynamicMethod('translatable', fn(): array => ['name', 'description']);
@@ -93,7 +99,7 @@ class EventRegistry
 
         MenuOption::extend(function($model): void {
             $model->implement[] = TranslatableModel::class;
-            $model->addDynamicMethod('translatable', fn(): array => ['option_name', 'option_values']);
+            $model->addDynamicMethod('translatable', fn(): array => ['option_name', 'values']);
         });
 
         MenuOptionValue::extend(function($model): void {
