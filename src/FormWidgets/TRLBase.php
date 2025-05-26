@@ -39,8 +39,8 @@ trait TRLBase
 
     public function loadLocaleAssets(): void
     {
-        $this->addJs('$/igniter/translate/assets/js/translatable.js', 'translatable-js');
-        $this->addCss('$/igniter/translate/assets/css/translatable.css', 'translatable-css');
+        $this->addJs('igniter.translate::/js/translatable.js', 'translatable-js');
+        $this->addCss('igniter.translate::/css/translatable.css', 'translatable-css');
     }
 
     public function renderFallbackField()

@@ -8,6 +8,7 @@ use Igniter\Admin\Classes\FormField;
 use Igniter\Cart\Http\Controllers\Menus;
 use Igniter\Flame\Database\Model;
 use Igniter\System\Facades\Assets;
+use Igniter\System\Models\Language;
 use Igniter\Translate\FormWidgets\TRLRichEditor;
 use Mockery;
 
@@ -53,16 +54,19 @@ it('prepares variables correctly in TRLRichEditor', function(): void {
 it('loads assets correctly in TRLRichEditor when locale is supported', function(): void {
     createSupportedLanguages();
 
-    Assets::partialMock()->shouldReceive('addJs')->with('js/trlricheditor.js', null)->twice();
+    Assets::partialMock()
+        ->shouldReceive('addJs')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/trlricheditor.js'))
+        ->twice();
 
     Assets::partialMock()
         ->shouldReceive('addJs')
-        ->with('$/igniter/translate/assets/js/translatable.js', 'translatable-js')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/translatable.js'))
         ->twice();
 
     Assets::partialMock()
         ->shouldReceive('addCss')
-        ->with('$/igniter/translate/assets/css/translatable.css', 'translatable-css')
+        ->withArgs(fn($path, $name) => ends_with($path, '/css/translatable.css'))
         ->twice();
 
     $trlRichEditor = new TRLRichEditor(resolve(Menus::class), $this->formField, ['model' => $this->model]);
@@ -71,9 +75,13 @@ it('loads assets correctly in TRLRichEditor when locale is supported', function(
 });
 
 it('does not load locale assets in TRLRichEditor when locale is not supported', function(): void {
-    createSupportedLanguages();
+    Language::$localesCache = [];
+    Language::$activeLanguage = null;
+    Language::$supportedLocalesCache = null;
 
-    Assets::partialMock()->shouldNotReceive('addJs')->with('js/trlricheditor.js', null)->twice();
+    Assets::partialMock()
+        ->shouldNotReceive('addJs')
+        ->withArgs(fn($path, $name) => ends_with($path, '/js/trlricheditor.js'));
 
     $trlRichEditor = new TRLRichEditor(resolve(Menus::class), $this->formField, ['model' => $this->model]);
 

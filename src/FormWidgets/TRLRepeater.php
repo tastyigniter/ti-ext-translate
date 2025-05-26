@@ -64,7 +64,7 @@ class TRLRepeater extends Repeater
 
         if (Language::supportsLocale()) {
             $this->loadLocaleAssets();
-            $this->addJs('js/trlrepeater.js');
+            $this->addJs('igniter.translate::/js/trlrepeater.js');
         }
     }
 

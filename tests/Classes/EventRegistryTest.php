@@ -7,6 +7,7 @@ namespace Igniter\Translate\Tests\Classes;
 use Igniter\Admin\Widgets\Form;
 use Igniter\Cart\Models\Category;
 use Igniter\Cart\Models\Ingredient;
+use Igniter\Cart\Models\Mealtime;
 use Igniter\Cart\Models\Menu;
 use Igniter\Cart\Models\MenuOption;
 use Igniter\Cart\Models\MenuOptionValue;
@@ -187,6 +188,7 @@ it('extends models with translatable attributes', function(): void {
     $category = new Category;
     $location = new Location;
     $mailTemplate = new MailTemplate;
+    $mealtime = new Mealtime;
     $menuOption = new MenuOption;
     $menuOptionValue = new MenuOptionValue;
     $menu = new Menu;
@@ -202,7 +204,9 @@ it('extends models with translatable attributes', function(): void {
         ->and($mailTemplate->implement)->toContain(TranslatableModel::class)
         ->and($mailTemplate->translatable())->toBe(['subject', 'body'])
         ->and($menuOption->implement)->toContain(TranslatableModel::class)
-        ->and($menuOption->translatable())->toBe(['option_name', 'option_values'])
+        ->and($menuOption->translatable())->toBe(['option_name', 'values'])
+        ->and($mealtime->implement)->toContain(TranslatableModel::class)
+        ->and($mealtime->translatable())->toBe(['mealtime_name'])
         ->and($menuOptionValue->implement)->toContain(TranslatableModel::class)
         ->and($menuOptionValue->translatable())->toBe(['value'])
         ->and($menu->implement)->toContain(TranslatableModel::class)
