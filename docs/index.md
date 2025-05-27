@@ -44,7 +44,7 @@ The `Igniter\Flame\Translation\Middleware\Localization` middleware is used to se
 
 #### Frontend
 
-To allow visitors to switch the language, you can [create a component](https://tastyigniter.com/docs/customize/components) to show a dropdown with the available languages. The component will change the language of the page depending on the selection. Here is an example creating a language picker [livewire component](https://tastyigniter.com/docs/customize/components#livewire-components):
+To allow visitors to switch the language, you can [create a component](https://tastyigniter.com/docs/extend/components) to show a dropdown with the available languages. The component will change the language of the page depending on the selection. Here is an example creating a language picker [livewire component](https://tastyigniter.com/docs/extend/components#livewire-components):
 
 ```php
 use Igniter\System\Models\Language;
