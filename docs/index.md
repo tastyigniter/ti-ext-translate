@@ -38,7 +38,7 @@ Visitors as well as administrators can choose their preferred language, which wi
 
 #### Admin area
 
-In the admin area, you can switch the language by selecting the desired language from the dropdown on the staff profile page. Navigate to `Manage > Staff members > Edit Staff` and select the desired language from the `Language` dropdown. The admin area will be displayed in the selected language.
+In the admin area, you can switch the language by selecting the desired language from the dropdown on the staff profile page. Navigate to `Manage > Staff members > Edit Staff` and select the desired language from the `Language` field dropdown. The admin area will be displayed in the selected language.
 
 The `Igniter\Flame\Translation\Middleware\Localization` middleware is used to set the language of the admin area. The middleware checks if the staff member has a language set in their profile and sets the language accordingly.
 
@@ -69,7 +69,7 @@ class LocalePicker extends Component
 }
 ```
 
-The `listSupported` method on the `Language` model returns an array of supported languages, where the key is the language code and the value is the language name. The `getLocale` method on the `translator.localization` service is used to get the current language. The `setLocale` method on the `translator.localization` service is used to change the language of the page.
+The `listSupported` method on the `Igniter\System\Models\Language` model returns an array of supported languages, where the key is the language code and the value is the language name. The `getLocale` method on the `translator.localization` service is used to get the current language. The `setLocale` method on the `translator.localization` service is used to change the language of the page.
 
 The component view file `localepicker.blade.php`:
 
@@ -112,7 +112,7 @@ class Category extends Model
 }
 ```
 
-You can also translate models on other extensions by adding extending the model class within your extension class `boot` method. Here is an example of how to translate the `Category` model from the `Igniter.Cart` extension:
+You can also translate models on other extensions by adding extending the model class within your extension class `boot` method. Here is an example of how to translate the `Igniter\Local\Models\Category` model from the `Igniter.Cart` extension:
 
 ```php
 use Igniter\Cart\Models\Category;
@@ -133,7 +133,7 @@ The `addDynamicMethod` method is used to add a new method to the model class.
 
 ### Setting translations
 
-You can store translations for the active locale by setting the model attribute value using the model property. Here is an example of setting the `name` attribute of a `Category` model to a french translation, assuming the active locale is set to `fr`:
+You can store translations for the active locale by setting the model attribute value using the model property. Here is an example of setting the `name` attribute of a `Igniter\Local\Models\Category` model to a french translation, assuming the active locale is set to `fr`:
 
 ```php
 $category = Category::find(1);
@@ -177,7 +177,7 @@ $category->save();
 
 ### Retrieving translations
 
-You can retrieve translations for the active locale by accessing the model attribute value. Here is an example of retrieving the `name` attribute of a `Category` model, assuming the active locale is set to `fr`:
+You can retrieve translations for the active locale by accessing the model attribute value. Here is an example of retrieving the `name` attribute of a `Igniter\Local\Models\Category` model, assuming the active locale is set to `fr`:
 
 ```php
 $category = Category::find(1);
