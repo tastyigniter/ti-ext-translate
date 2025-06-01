@@ -102,7 +102,7 @@ class TRLRepeater extends Repeater
         $localeData = array_get(post('TRLTranslate'), $fieldName);
 
         $result = [];
-        foreach ($value as $index => $data) {
+        foreach ($value ?? [] as $index => $data) {
             $result[$index] = array_merge($data, array_get($localeData, $index, []));
         }
 
