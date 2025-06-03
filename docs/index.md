@@ -258,4 +258,3 @@ The `trlrepeater` form widget is used to create a repeater input field that can 
 ```
 
 The options for the `trlrepeater` form widget type are the same as the [`repeater` form widget type](https://tastyigniter.com/docs/extend/forms#repeater).
-
