@@ -35,8 +35,8 @@
             "name": "Translate",
             "icon": {
                 "class": "fa fa-language",
-                "backgroundColor": "#7BE4FF",
-                "color": "#198BA6"
+                "backgroundColor": "#FF4900",
+                "color": "#FFFFFF"
             },
             "homepage": "https://github.com/tastyigniter/ti-ext-translate"
         },
