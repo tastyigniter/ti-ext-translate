@@ -208,7 +208,7 @@ it('extends models with translatable attributes', function(): void {
         ->and($mealtime->implement)->toContain(TranslatableModel::class)
         ->and($mealtime->translatable())->toBe(['mealtime_name'])
         ->and($menuOptionValue->implement)->toContain(TranslatableModel::class)
-        ->and($menuOptionValue->translatable())->toBe(['value'])
+        ->and($menuOptionValue->translatable())->toBe(['name'])
         ->and($menu->implement)->toContain(TranslatableModel::class)
         ->and($menu->translatable())->toBe(['menu_name', 'menu_description'])
         ->and($menuItem->implement)->toContain(TranslatableModel::class)
