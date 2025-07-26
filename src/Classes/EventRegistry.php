@@ -104,7 +104,7 @@ class EventRegistry
 
         MenuOptionValue::extend(function($model): void {
             $model->implement[] = TranslatableModel::class;
-            $model->addDynamicMethod('translatable', fn(): array => ['value']);
+            $model->addDynamicMethod('translatable', fn(): array => ['name']);
         });
 
         Menu::extend(function($model): void {
