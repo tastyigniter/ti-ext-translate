@@ -15,7 +15,8 @@ use Igniter\Flame\Database\Model;
 use Igniter\Local\Models\Location;
 use Igniter\Main\Template\Page as ThemePage;
 use Igniter\Pages\Classes\Page as StaticPage;
-use Igniter\Pages\Models\MenuItem;
+use Igniter\Pages\Models\Menu as StaticPageMenu;
+use Igniter\Pages\Models\MenuItem as StaticPageMenuItem;
 use Igniter\Pages\Models\Page;
 use Igniter\System\Models\MailTemplate;
 use Igniter\Translate\Actions\TranslatableModel;
@@ -112,7 +113,12 @@ class EventRegistry
             $model->addDynamicMethod('translatable', fn(): array => ['menu_name', 'menu_description']);
         });
 
-        MenuItem::extend(function($model): void {
+        StaticPageMenu::extend(function($model): void {
+            $model->implement[] = TranslatableModel::class;
+            $model->addDynamicMethod('translatable', fn(): array => ['name']);
+        });
+
+        StaticPageMenuItem::extend(function($model): void {
             $model->implement[] = TranslatableModel::class;
             $model->addDynamicMethod('translatable', fn(): array => ['title', 'description']);
         });
