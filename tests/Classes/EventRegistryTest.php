@@ -13,7 +13,8 @@ use Igniter\Cart\Models\MenuOption;
 use Igniter\Cart\Models\MenuOptionValue;
 use Igniter\Local\Models\Location;
 use Igniter\Pages\Classes\Page;
-use Igniter\Pages\Models\MenuItem;
+use Igniter\Pages\Models\Menu as StaticPageMenu;
+use Igniter\Pages\Models\MenuItem as StaticPageMenuItem;
 use Igniter\System\Models\MailTemplate;
 use Igniter\Translate\Actions\TranslatableModel;
 use Igniter\Translate\Classes\EventRegistry;
@@ -192,7 +193,8 @@ it('extends models with translatable attributes', function(): void {
     $menuOption = new MenuOption;
     $menuOptionValue = new MenuOptionValue;
     $menu = new Menu;
-    $menuItem = new MenuItem;
+    $staticMenu = new StaticPageMenu;
+    $staticMenuItem = new StaticPageMenuItem;
     $pages = new \Igniter\Pages\Models\Page;
 
     expect($ingredient->implement)->toContain(TranslatableModel::class)
@@ -211,8 +213,10 @@ it('extends models with translatable attributes', function(): void {
         ->and($menuOptionValue->translatable())->toBe(['name'])
         ->and($menu->implement)->toContain(TranslatableModel::class)
         ->and($menu->translatable())->toBe(['menu_name', 'menu_description'])
-        ->and($menuItem->implement)->toContain(TranslatableModel::class)
-        ->and($menuItem->translatable())->toBe(['title', 'description'])
+        ->and($staticMenu->implement)->toContain(TranslatableModel::class)
+        ->and($staticMenu->translatable())->toBe(['name'])
+        ->and($staticMenuItem->implement)->toContain(TranslatableModel::class)
+        ->and($staticMenuItem->translatable())->toBe(['title', 'description'])
         ->and($pages->implement)->toContain(TranslatableModel::class)
         ->and($pages->translatable())->toBe(['title', 'content', 'meta_description', 'meta_keywords']);
 });

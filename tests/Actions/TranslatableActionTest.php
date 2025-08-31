@@ -78,10 +78,8 @@ it('initializes translatable locale correctly', function(): void {
 
     $reflection = new ReflectionClass($translatableAction);
     $translatableActiveLocale = $reflection->getProperty('translatableActiveLocale');
-    $translatableActiveLocale->setAccessible(true);
 
     $translatableDefaultLocale = $reflection->getProperty('translatableDefaultLocale');
-    $translatableDefaultLocale->setAccessible(true);
 
     expect($translatableActiveLocale->getValue($translatableAction))->toBe('fr')
         ->and($translatableDefaultLocale->getValue($translatableAction))->toBe('en');
@@ -149,7 +147,6 @@ it('sets active locale correctly', function(): void {
 
     $reflection = new ReflectionClass($this->translatableAction);
     $translatableActiveLocale = $reflection->getProperty('translatableActiveLocale');
-    $translatableActiveLocale->setAccessible(true);
 
     expect($translatableActiveLocale->getValue($this->translatableAction))->toBe('fr');
 });
@@ -170,7 +167,6 @@ it('sets translated attribute value correctly', function(): void {
 
     $reflection = new ReflectionClass($this->translatableAction);
     $translatableAttributes = $reflection->getProperty('translatableAttributes');
-    $translatableAttributes->setAccessible(true);
 
     $translatableAttributesValue = $translatableAttributes->getValue($this->translatableAction);
 
@@ -218,7 +214,6 @@ it('disables translation fallback locale', function(): void {
 
     $reflection = new ReflectionClass($this->translatableAction);
     $translatableUseFallback = $reflection->getProperty('translatableUseFallback');
-    $translatableUseFallback->setAccessible(true);
 
     expect($translatableUseFallback->getValue($this->translatableAction))->toBeFalse()
         ->and($result)->toBeInstanceOf(Model::class);
