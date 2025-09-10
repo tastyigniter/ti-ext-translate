@@ -37,7 +37,6 @@ it('stores translatable attributes for active locale when model exists', functio
 
     $reflection = new ReflectionClass($this->translatableModel);
     $method = $reflection->getMethod('storeTranslatableAttributes');
-    $method->setAccessible(true);
     $method->invoke($this->translatableModel);
 
     expect(Attribute::where([
@@ -54,7 +53,6 @@ it('stores translatable attributes for specified locale when model exists', func
 
     $reflection = new ReflectionClass($this->translatableModel);
     $method = $reflection->getMethod('storeTranslatableAttributes');
-    $method->setAccessible(true);
     $method->invoke($this->translatableModel, 'fr');
 
     expect(Attribute::where([
@@ -79,7 +77,6 @@ it('binds event to store translatable attributes after model creation', function
     $translatableActiveLocale->setValue($this->translatableModel, 'en');
 
     $method = $reflection->getMethod('storeTranslatableAttributes');
-    $method->setAccessible(true);
     $method->invoke($this->translatableModel);
 });
 
@@ -94,7 +91,6 @@ it('loads translatable attributes for active locale when model exists', function
     $translatableActiveLocale->setValue($this->translatableModel, 'en');
 
     $method = $reflection->getMethod('loadTranslatableAttributes');
-    $method->setAccessible(true);
 
     $result = $method->invoke($this->translatableModel);
 
@@ -108,7 +104,6 @@ it('loads empty translatable attributes for active locale when model does not ex
     $translatableActiveLocale->setValue($this->translatableModel, 'en');
 
     $method = $reflection->getMethod('loadTranslatableAttributes');
-    $method->setAccessible(true);
 
     $result = $method->invoke($this->translatableModel);
 

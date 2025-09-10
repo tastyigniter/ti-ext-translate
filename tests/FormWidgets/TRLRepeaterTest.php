@@ -82,7 +82,6 @@ it('processes item definitions correctly in TRLRepeater', function(): void {
 
     $reflection = new ReflectionClass($trlRepeater);
     $itemDefinitions = $reflection->getProperty('itemDefinitions');
-    $itemDefinitions->setAccessible(true);
 
     $itemDefinitionsValue = $itemDefinitions->getValue($trlRepeater);
 
