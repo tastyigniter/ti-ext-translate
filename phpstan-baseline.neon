@@ -1,6 +1,85 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Access to an undefined property Igniter\\\\Flame\\\\Database\\\\Model\\:\\:\\$translations\\.$#"
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:getTranslatableAttributes\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: src/Actions/TranslatableAction.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatable\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Actions/TranslatableAction.php
+
+		-
+			message: '#^Method Igniter\\Translate\\Actions\\TranslatableAction\:\:translatableNoFallbackLocale\(\) should return Igniter\\Translate\\Actions\\TranslatableAction but returns Igniter\\Flame\\Database\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Actions/TranslatableAction.php
+
+		-
+			message: '#^Access to an undefined property Igniter\\Flame\\Database\\Model\:\:\$translations\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Actions/TranslatableModel.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLMarkdownEditor.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatableNoFallbackLocale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLMarkdownEditor.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLRepeater.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatableNoFallbackLocale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLRepeater.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLRichEditor.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatableNoFallbackLocale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLRichEditor.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLText.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatableNoFallbackLocale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLText.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLTextarea.php
+
+		-
+			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:translatableNoFallbackLocale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormWidgets/TRLTextarea.php
