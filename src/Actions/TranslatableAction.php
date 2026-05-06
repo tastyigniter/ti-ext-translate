@@ -141,7 +141,6 @@ abstract class TranslatableAction extends ModelAction
     public function isTranslatableAttribute($key)
     {
         return $key !== 'translatable'
-            && $this->translatableDefaultLocale !== $this->translatableActiveLocale
             && !$this->model->hasRelation($key)
             && in_array($key, $this->model->getTranslatableAttributes());
     }
