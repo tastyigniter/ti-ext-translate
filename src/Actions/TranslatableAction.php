@@ -240,7 +240,11 @@ abstract class TranslatableAction extends ModelAction
         $this->setAttributeFromData($this->translatableAttributes[$locale],$key,$value);
 
         if ($locale == $this->translatableActiveLocale) {
-            $this->model->setAttribute($key, $value);
+
+            $attributes = $this->model->getAttributes();
+            $attributes[$key] = $value;
+
+            $this->model->setRawAttributes($attributes);
         }
 
         return $value;
