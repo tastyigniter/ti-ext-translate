@@ -219,9 +219,9 @@ abstract class TranslatableAction extends ModelAction
         }
 
         if ($this->hasTranslation($key, $locale)) {
-            $result = $this->getAttributeFromData($this->translatableAttributes[$locale],$key);
-        } elseif ( $locale == $this->translatableDefaultLocale || $this->translatableUseFallback) {
-            $result = $this->getAttributeFromData( $this->model->getAttributes(),$key);
+            $result = $this->getAttributeFromData($this->translatableAttributes[$locale], $key);
+        } elseif ($locale == $this->translatableDefaultLocale || $this->translatableUseFallback) {
+            $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
         }
 
         return $result;
@@ -237,7 +237,7 @@ abstract class TranslatableAction extends ModelAction
             $this->loadTranslatableAttributes($locale);
         }
 
-        $this->setAttributeFromData($this->translatableAttributes[$locale],$key,$value);
+        $this->setAttributeFromData($this->translatableAttributes[$locale], $key, $value);
 
         if ($locale == $this->translatableActiveLocale) {
 
