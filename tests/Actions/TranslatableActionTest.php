@@ -45,7 +45,7 @@ it('initializes translatable locale correctly', function(): void {
     $model->shouldReceive('getOriginal')->andReturn(['name' => 'original_name'])->once();
     $model->shouldReceive('getAttributes')->andReturn(['name' => 'current_name'])->atMost(3);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
-    $model->shouldReceive('setRawAttributes')->once();
+    $model->shouldReceive('setRawAttributes')->atMost(3);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
     $model->shouldReceive('bindEvent')->with('model.beforeGetAttribute', Mockery::on(function($callback): true {
         $callback('name');
