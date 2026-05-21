@@ -141,7 +141,6 @@ abstract class TranslatableAction extends ModelAction
     public function isTranslatableAttribute($key)
     {
         return $key !== 'translatable'
-            && $this->translatableDefaultLocale !== $this->translatableActiveLocale
             && !$this->model->hasRelation($key)
             && in_array($key, $this->model->getTranslatableAttributes());
     }
@@ -215,18 +214,14 @@ abstract class TranslatableAction extends ModelAction
 
         $result = '';
 
-        if ($locale == $this->translatableDefaultLocale) {
-            $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
-        } else {
-            if (!array_key_exists($locale, $this->translatableAttributes)) {
-                $this->loadTranslatableAttributes($locale);
-            }
+        if (!array_key_exists($locale, $this->translatableAttributes)) {
+            $this->loadTranslatableAttributes($locale);
+        }
 
-            if ($this->hasTranslation($key, $locale)) {
-                $result = $this->getAttributeFromData($this->translatableAttributes[$locale], $key);
-            } elseif ($this->translatableUseFallback) {
-                $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
-            }
+        if ($this->hasTranslation($key, $locale)) {
+            $result = $this->getAttributeFromData($this->translatableAttributes[$locale], $key);
+        } elseif ($locale == $this->translatableDefaultLocale || $this->translatableUseFallback) {
+            $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
         }
 
         return $result;
@@ -238,17 +233,21 @@ abstract class TranslatableAction extends ModelAction
             $locale = $this->translatableActiveLocale;
         }
 
-        if ($locale == $this->translatableDefaultLocale) {
-            $attributes = $this->model->getAttributes();
-
-            return $this->setAttributeFromData($attributes, $key, $value);
-        }
-
         if (!array_key_exists($locale, $this->translatableAttributes)) {
             $this->loadTranslatableAttributes($locale);
         }
 
-        return $this->setAttributeFromData($this->translatableAttributes[$locale], $key, $value);
+        $this->setAttributeFromData($this->translatableAttributes[$locale], $key, $value);
+
+        if ($locale == $this->translatableActiveLocale) {
+
+            $attributes = $this->model->getAttributes();
+            $attributes[$key] = $value;
+
+            $this->model->setRawAttributes($attributes);
+        }
+
+        return $value;
     }
 
     public function getTranslatableAttributes()
