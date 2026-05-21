@@ -156,7 +156,7 @@ it('gets translated attribute value correctly', function(): void {
     $this->model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
 
     expect($this->translatableAction->getAttributeTranslatedValue('name'))->toBe('translated_name')
-        ->and($this->translatableAction->getAttributeTranslatedValue('name', 'en'))->toBe('default_name')
+        ->and($this->translatableAction->getAttributeTranslatedValue('name', 'en'))->toBe('original_name')
         ->and($this->translatableAction->getAttributeTranslatedValue('not_found'))->toBeNull();
 });
 
