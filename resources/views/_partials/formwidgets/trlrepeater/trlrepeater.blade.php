@@ -2,7 +2,7 @@
     id="{{ $this->getId('trl-control') }}"
     class="field-translatable field-translatable-repeater"
     data-control="trlrepeater"
-    data-locale-active="{{ $activeLocale->code }}"
+    data-locale-active="{{ $activeLocale }}"
 >
     <div class="dropdown">
         <button

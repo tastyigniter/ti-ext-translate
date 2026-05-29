@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
  */
 trait TRLBase
 {
-    public ?Language $activeLocale;
+    public string $activeLocale;
 
     public bool $isSupported;
 
@@ -26,7 +26,8 @@ trait TRLBase
 
     public function initLocale(): void
     {
-        $this->activeLocale = Language::getActiveLocale();
+        $localization = app('translator.localization');
+        $this->activeLocale = $localization->getLocale();
         $this->isSupported = Language::supportsLocale();
     }
 
@@ -67,7 +68,7 @@ trait TRLBase
 
         if ($this->model->methodExists($mutateMethod)) {
             $value = $this->model->$mutateMethod($locale);
-        } elseif ($this->activeLocale->code != $locale && $this->model->methodExists('getAttributeTranslatedValue')) {
+        } elseif ($this->activeLocale != $locale && $this->model->methodExists('getAttributeTranslatedValue')) {
             $value = $this->model->translatableNoFallbackLocale()->getAttributeTranslatedValue($key, $locale);
         } else {
             $value = $this->formField->value;
@@ -92,7 +93,7 @@ trait TRLBase
             }
         }
 
-        return array_get($localeData, $this->activeLocale->code, $value);
+        return array_get($localeData, $this->activeLocale, $value);
     }
 
     public function getLocaleSaveData()

@@ -5,7 +5,7 @@
         id="{{ $this->getId('trl-control') }}"
         class="field-translatable field-translatable-textarea dropdown"
         data-control="{{ $field->getConfig('controlType', 'translatable') }}"
-        data-locale-active="{{ $activeLocale->code }}"
+        data-locale-active="{{ $activeLocale }}"
         data-placeholder-field="#{{ $field->getId('placeholderField') }}"
     >
         <textarea
