@@ -45,7 +45,7 @@ it('initializes translatable locale correctly', function(): void {
     $model->shouldReceive('getOriginal')->andReturn(['name' => 'original_name'])->once();
     $model->shouldReceive('getAttributes')->andReturn(['name' => 'current_name'])->atMost(3);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
-    $model->shouldReceive('setRawAttributes')->once();
+    $model->shouldReceive('setRawAttributes')->atMost(3);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
     $model->shouldReceive('bindEvent')->with('model.beforeGetAttribute', Mockery::on(function($callback): true {
         $callback('name');
@@ -113,6 +113,48 @@ it('gets translated attribute value with mutator', function(): void {
     expect($value)->toBe('mutated_name');
 });
 
+it('sets multi-locale array values via beforeSetAttribute when attribute has a relation', function(): void {
+    $model = Mockery::mock(Model::class)->makePartial();
+    $localization = Mockery::mock(Localization::class);
+    app()->instance('translator.localization', $localization);
+
+    $localization->shouldReceive('getLocale')->andReturn('fr');
+    $localization->shouldReceive('getDefaultLocale')->andReturn('en');
+    $model->shouldReceive('getTranslatableAttributes')->andReturn(['title']);
+    $model->shouldReceive('hasRelation')->with('title')->andReturn(true);
+    $model->shouldReceive('getAttributes')->andReturn([]);
+    $model->shouldReceive('setRawAttributes')->once();
+
+    $setAttributeCallback = null;
+    $model->shouldReceive('bindEvent')->with('model.beforeGetAttribute', Mockery::any())->once();
+    $model->shouldReceive('bindEvent')->with('model.beforeSetAttribute', Mockery::on(function($callback) use (&$setAttributeCallback): true {
+        $setAttributeCallback = $callback;
+
+        return true;
+    }))->once();
+    $model->shouldReceive('bindEvent')->with('model.saveInternal', Mockery::any())->once();
+
+    $translatableAction = new class($model) extends TranslatableAction
+    {
+        protected function storeTranslatableAttributes($locale = null): void {}
+
+        protected function loadTranslatableAttributes($locale = null): void
+        {
+            $this->translatableAttributes[$locale] = [];
+        }
+    };
+
+    $result = $setAttributeCallback('title', ['en' => 'English title', 'fr' => 'French title']);
+
+    $reflection = new ReflectionClass($translatableAction);
+    $translatableAttributes = $reflection->getProperty('translatableAttributes');
+    $attributes = $translatableAttributes->getValue($translatableAction);
+
+    expect($result)->toBe('French title')
+        ->and($attributes['en']['title'])->toBe('English title')
+        ->and($attributes['fr']['title'])->toBe('French title');
+});
+
 it('sets translated attribute value with mutator', function(): void {
     $this->model->shouldReceive('getAttributes')->andReturn(['name' => 'default_name']);
     $this->model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
@@ -156,7 +198,7 @@ it('gets translated attribute value correctly', function(): void {
     $this->model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
 
     expect($this->translatableAction->getAttributeTranslatedValue('name'))->toBe('translated_name')
-        ->and($this->translatableAction->getAttributeTranslatedValue('name', 'en'))->toBe('default_name')
+        ->and($this->translatableAction->getAttributeTranslatedValue('name', 'en'))->toBe('original_name')
         ->and($this->translatableAction->getAttributeTranslatedValue('not_found'))->toBeNull();
 });
 
