@@ -108,10 +108,10 @@ abstract class TranslatableAction extends ModelAction
                 $this->setAttributeTranslatedValue($key, $_value, $locale);
             }
 
-            return $this->getAttributeTranslatedValue($key,$this->translatableActiveLocale);
+            return $this->getAttributeTranslatedValue($key, $this->translatableActiveLocale);
         }
 
-        if ($this->translatableActiveLocale === $this->translatableDefaultLocale  && !is_array($value)) {
+        if ($this->translatableActiveLocale === $this->translatableDefaultLocale && !is_array($value)) {
             return $value;
         } else {
             $value = $this->setAttributeTranslatedValue($key, $value);

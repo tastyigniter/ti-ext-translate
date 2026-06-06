@@ -26,9 +26,9 @@ function createSupportedLanguages(): void
     Language::$localesCache = [];
     Language::$activeLanguage = null;
     Language::$supportedLocalesCache = null;
+    Language::clearDefaultModels();
 
-    Language::factory()->createMany([
-        ['code' => 'en', 'name' => 'English', 'status' => 1, 'is_default' => 1],
-        ['code' => 'fr', 'name' => 'French', 'status' => 1, 'is_default' => 0],
+    Language::factory()->createQuietly([
+        'code' => 'fr', 'name' => 'French', 'status' => 1, 'is_default' => 0,
     ]);
 }
