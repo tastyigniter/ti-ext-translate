@@ -2,7 +2,7 @@
     id="{{ $this->getId('trl-control') }}"
     data-control="trlricheditor"
     data-textarea-element="#{{ $this->getId('textarea') }}"
-    data-locale-active="{{ $activeLocale->code }}"
+    data-locale-active="{{ $activeLocale }}"
     data-placeholder-field="#{{ $this->getId('textarea') }}"
     class="field-translatable field-translatable-richeditor size-{{ $size }}"
 >

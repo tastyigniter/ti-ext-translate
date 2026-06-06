@@ -103,10 +103,22 @@ abstract class TranslatableAction extends ModelAction
 
     public function performSetTranslatableAttribute($key, $value)
     {
-        $value = $this->setAttributeTranslatedValue($key, $value);
-        if ($this->model->hasSetMutator($key)) {
-            $method = 'set'.Str::studly($key).'Attribute';
-            $value = $this->model->{$method}($value);
+        if (is_array($value) && array_key_exists($this->translatableActiveLocale, $value)) {
+            foreach ($value as $locale => $_value) {
+                $this->setAttributeTranslatedValue($key, $_value, $locale);
+            }
+
+            return $this->getAttributeTranslatedValue($key,$this->translatableActiveLocale);
+        }
+
+        if ($this->translatableActiveLocale === $this->translatableDefaultLocale  && !is_array($value)) {
+            return $value;
+        } else {
+            $value = $this->setAttributeTranslatedValue($key, $value);
+            if ($this->model->hasSetMutator($key)) {
+                $method = 'set'.Str::studly($key).'Attribute';
+                $value = $this->model->{$method}($value);
+            }
         }
 
         return $value;
