@@ -60,7 +60,7 @@ class EventRegistry
 
     public function registerPageTranslatableFields(Form $widget): void
     {
-        if (($model = $widget->model) === null) {
+        if (($model = $widget->model) === null || !$widget->fields) {
             return;
         }
 

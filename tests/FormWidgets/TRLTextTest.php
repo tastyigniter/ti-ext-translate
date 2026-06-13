@@ -104,7 +104,7 @@ it('returns locale value correctly when model has generic mutate method in TRLBa
         'TRLTranslate' => ['en' => ['testField' => 'value']],
     ]);
 
-    $this->trlText->activeLocale->code = 'fr';
+    $this->trlText->activeLocale = 'fr';
     $this->model->shouldReceive('methodExists')->with('getAttributeTranslatedValue')->andReturn(true);
     $this->model->shouldReceive('extendableCall')->with('translatableNoFallbackLocale', [])->andReturnSelf();
     $this->model->shouldReceive('extendableCall')
