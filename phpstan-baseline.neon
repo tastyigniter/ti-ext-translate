@@ -19,12 +19,6 @@ parameters:
 			path: src/Actions/TranslatableAction.php
 
 		-
-			message: '#^Access to an undefined property Igniter\\Flame\\Database\\Model\:\:\$translations\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Actions/TranslatableModel.php
-
-		-
 			message: '#^Call to an undefined method Igniter\\Flame\\Database\\Model\:\:setAttributeTranslatedValue\(\)\.$#'
 			identifier: method.notFound
 			count: 1

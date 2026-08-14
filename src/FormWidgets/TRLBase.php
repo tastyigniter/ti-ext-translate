@@ -27,7 +27,9 @@ trait TRLBase
     public function initLocale(): void
     {
         $localization = app('translator.localization');
-        $this->activeLocale = $localization->getLocale();
+        $this->activeLocale = (string) ($localization->getLocale()
+            ?: $localization->getDefaultLocale()
+            ?: app()->getLocale());
         $this->isSupported = Language::supportsLocale();
     }
 
