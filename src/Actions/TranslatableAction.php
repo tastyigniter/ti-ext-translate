@@ -114,6 +114,7 @@ abstract class TranslatableAction extends ModelAction
         if ($this->translatableActiveLocale === $this->translatableDefaultLocale && !is_array($value)) {
             return $value;
         }
+
         $value = $this->setAttributeTranslatedValue($key, $value);
         if ($this->model->hasSetMutator($key)) {
             $method = 'set'.Str::studly($key).'Attribute';

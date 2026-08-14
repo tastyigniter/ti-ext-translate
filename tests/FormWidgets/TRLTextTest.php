@@ -28,6 +28,30 @@ it('initializes locale correctly in TRLText', function(): void {
     expect($this->trlText->isSupported)->toBeTrue();
 });
 
+it('falls back to default locale when active locale is empty in TRLBase', function(): void {
+    $localization = Mockery::mock(\Igniter\Flame\Translation\Localization::class);
+    $localization->shouldReceive('getLocale')->andReturn(null);
+    $localization->shouldReceive('getDefaultLocale')->andReturn('en');
+    app()->instance('translator.localization', $localization);
+
+    $this->trlText->initialize();
+
+    expect($this->trlText->activeLocale)->toBe('en');
+});
+
+it('falls back to app locale when localization locales are empty in TRLBase', function(): void {
+    $localization = Mockery::mock(\Igniter\Flame\Translation\Localization::class);
+    $localization->shouldReceive('getLocale')->andReturn(null);
+    $localization->shouldReceive('getDefaultLocale')->andReturn(null);
+    app()->instance('translator.localization', $localization);
+
+    app()->setLocale('es');
+
+    $this->trlText->initialize();
+
+    expect($this->trlText->activeLocale)->toBe('es');
+});
+
 it('renders TRLText with locale support', function(): void {
     expect($this->trlText->render())->toBeString();
 });
