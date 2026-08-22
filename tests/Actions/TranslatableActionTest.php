@@ -43,7 +43,7 @@ it('initializes translatable locale correctly', function(): void {
     $localization->shouldReceive('getLocale')->andReturn('fr');
     $localization->shouldReceive('getDefaultLocale')->andReturn('en');
     $model->shouldReceive('getOriginal')->andReturn(['name' => 'original_name'])->once();
-    $model->shouldReceive('getAttributes')->andReturn(['name' => 'current_name'])->atMost()->times(3);
+    $model->shouldReceive('getAttributes')->andReturn(['name' => 'current_name'])->atMost()->times(6);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
     $model->shouldReceive('setRawAttributes')->atMost()->times(3);
     $model->shouldReceive('getTranslatableAttributes')->andReturn(['name']);
