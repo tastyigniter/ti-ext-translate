@@ -46,7 +46,7 @@ class TranslatableModel extends TranslatableAction
     }
 
     #[Override]
-    protected function loadTranslatableAttributes($locale = null)
+    protected function loadTranslatableAttributes($locale = null): array
     {
         if (!$locale) {
             $locale = $this->translatableActiveLocale;
@@ -56,10 +56,19 @@ class TranslatableModel extends TranslatableAction
             return $this->translatableAttributes[$locale] = [];
         }
 
-        $translation = $this->model->translations->first(fn($value, $key): bool => $value->getAttribute('locale') === $locale);
+        // Query the attributes table directly. Loading via the translations
+        // morphMany relation is unsafe while Relation::noConstraints() is
+        // active (e.g. admin Relation form widgets), because parent scoping
+        // is disabled and every model can pick up another model's translation.
+        /** @var Attribute|null $translation */
+        $translation = Attribute::query()
+            ->where('locale', $locale)
+            ->where('translatable_id', $this->model->getKey())
+            ->where('translatable_type', $this->model->getMorphClass())
+            ->first();
 
         $result = $translation ? json_decode((string)$translation->attribute, true) : [];
 
-        return $this->translatableOriginals[$locale] = $this->translatableAttributes[$locale] = $result;
+        return $this->translatableOriginals[$locale] = $this->translatableAttributes[$locale] = is_array($result) ? $result : [];
     }
 }

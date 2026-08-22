@@ -7,6 +7,7 @@ namespace Igniter\Translate\Tests\FormWidgets;
 use Igniter\Admin\Classes\FormField;
 use Igniter\Cart\Http\Controllers\Menus;
 use Igniter\Flame\Database\Model;
+use Igniter\Flame\Translation\Localization;
 use Igniter\System\Facades\Assets;
 use Igniter\Translate\FormWidgets\TRLText;
 use Mockery;
@@ -26,6 +27,30 @@ it('initializes locale correctly in TRLText', function(): void {
     $this->trlText->initialize();
 
     expect($this->trlText->isSupported)->toBeTrue();
+});
+
+it('falls back to default locale when active locale is empty in TRLBase', function(): void {
+    $localization = Mockery::mock(Localization::class);
+    $localization->shouldReceive('getLocale')->andReturn(null);
+    $localization->shouldReceive('getDefaultLocale')->andReturn('en');
+    app()->instance('translator.localization', $localization);
+
+    $this->trlText->initialize();
+
+    expect($this->trlText->activeLocale)->toBe('en');
+});
+
+it('falls back to app locale when localization locales are empty in TRLBase', function(): void {
+    $localization = Mockery::mock(Localization::class);
+    $localization->shouldReceive('getLocale')->andReturn(null);
+    $localization->shouldReceive('getDefaultLocale')->andReturn(null);
+    app()->instance('translator.localization', $localization);
+
+    app()->setLocale('es');
+
+    $this->trlText->initialize();
+
+    expect($this->trlText->activeLocale)->toBe('es');
 });
 
 it('renders TRLText with locale support', function(): void {

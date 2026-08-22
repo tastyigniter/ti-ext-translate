@@ -8,6 +8,7 @@ use Igniter\Flame\Database\Model;
 use Igniter\Flame\Translation\Localization;
 use Igniter\Translate\Actions\TranslatableModel;
 use Igniter\Translate\Models\Attribute;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Mockery;
 use ReflectionClass;
 
@@ -82,9 +83,15 @@ it('binds event to store translatable attributes after model creation', function
 
 it('loads translatable attributes for active locale when model exists', function(): void {
     $this->model->exists = true;
-    $this->model->shouldReceive('extendableGet')->with('translations')->andReturn(collect([
-        new Attribute(['locale' => 'en', 'attribute' => json_encode(['name' => 'translated_name'])]),
-    ]));
+    $this->model->shouldReceive('getKey')->andReturn(1);
+    $this->model->shouldReceive('getMorphClass')->andReturn('morphClass');
+
+    Attribute::query()->create([
+        'locale' => 'en',
+        'translatable_id' => 1,
+        'translatable_type' => 'morphClass',
+        'attribute' => json_encode(['name' => 'translated_name']),
+    ]);
 
     $reflection = new ReflectionClass($this->translatableModel);
     $translatableActiveLocale = $reflection->getProperty('translatableActiveLocale');
@@ -95,6 +102,32 @@ it('loads translatable attributes for active locale when model exists', function
     $result = $method->invoke($this->translatableModel);
 
     expect($result)->toBe(['name' => 'translated_name']);
+});
+
+it('loads only this model translations when eloquent relation constraints are disabled', function(): void {
+    $this->model->exists = true;
+    $this->model->shouldReceive('getKey')->andReturn(2);
+    $this->model->shouldReceive('getMorphClass')->andReturn('locations');
+
+    Attribute::query()->create([
+        'locale' => 'en',
+        'translatable_id' => 1,
+        'translatable_type' => 'locations',
+        'attribute' => json_encode(['name' => 'Default']),
+    ]);
+    Attribute::query()->create([
+        'locale' => 'en',
+        'translatable_id' => 2,
+        'translatable_type' => 'locations',
+        'attribute' => json_encode(['name' => 'Norman Foremann']),
+    ]);
+
+    $reflection = new ReflectionClass($this->translatableModel);
+    $method = $reflection->getMethod('loadTranslatableAttributes');
+
+    $result = Relation::noConstraints(fn(): mixed => $method->invoke($this->translatableModel, 'en'));
+
+    expect($result)->toBe(['name' => 'Norman Foremann']);
 });
 
 it('loads empty translatable attributes for active locale when model does not exist', closure: function(): void {
