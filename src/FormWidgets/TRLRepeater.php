@@ -136,9 +136,7 @@ class TRLRepeater extends Repeater
             return $values;
         }
 
-        if (is_null($fieldName)) {
-            $fieldName = implode('.', name_to_array($this->fieldName));
-        }
+        $fieldName ??= implode('.', name_to_array($this->fieldName));
 
         foreach ($data as $locale => $_data) {
             $value = array_get($_data, $fieldName);
