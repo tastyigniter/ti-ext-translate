@@ -418,3 +418,27 @@ it('extends functionality with callback', function(): void {
 
     expect(TranslatableAction::extend($callback))->toBeNull();
 });
+
+it('returns the model attribute for the active locale when no translation is stored', function(): void {
+    $model = Mockery::mock(Model::class)->makePartial();
+    $localization = Mockery::mock(Localization::class);
+    app()->instance('translator.localization', $localization);
+    $localization->shouldReceive('getLocale')->andReturn('en');
+    $localization->shouldReceive('getDefaultLocale')->andReturn('en');
+    $model->shouldReceive('getTranslatableAttributes')->andReturn(['content']);
+    $model->shouldReceive('bindEvent');
+    $model->shouldReceive('getAttributes')->andReturn(['content' => 'Stored in the main table']);
+
+    $action = new class($model) extends TranslatableAction
+    {
+        protected function storeTranslatableAttributes($locale = null): void {}
+
+        protected function loadTranslatableAttributes($locale = null): void
+        {
+            $this->translatableAttributes = ['en' => []];
+        }
+    };
+
+    expect($action->getAttributeTranslatedValue('content'))->toBe('Stored in the main table')
+        ->and($action->getAttributeTranslatedValue('content', 'en'))->toBe('Stored in the main table');
+});

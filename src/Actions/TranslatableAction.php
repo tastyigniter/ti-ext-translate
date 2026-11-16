@@ -220,9 +220,7 @@ abstract class TranslatableAction extends ModelAction
 
     public function getAttributeTranslatedValue($key, $locale = null)
     {
-        if (is_null($locale)) {
-            $locale = $this->translatableActiveLocale;
-        }
+        $locale ??= $this->translatableActiveLocale;
 
         $result = '';
 
@@ -232,6 +230,12 @@ abstract class TranslatableAction extends ModelAction
 
         if ($this->hasTranslation($key, $locale)) {
             $result = $this->getAttributeFromData($this->translatableAttributes[$locale], $key);
+
+            // hasTranslation() checks the model attributes for the active locale, which
+            // may have no stored translation yet (e.g. the default locale), so use them.
+            if ($result === null && $locale == $this->translatableActiveLocale) {
+                $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
+            }
         } elseif ($locale == $this->translatableDefaultLocale || $this->translatableUseFallback) {
             $result = $this->getAttributeFromData($this->model->getAttributes(), $key);
         }
@@ -241,9 +245,7 @@ abstract class TranslatableAction extends ModelAction
 
     public function setAttributeTranslatedValue(string $key, $value, $locale = null)
     {
-        if (is_null($locale)) {
-            $locale = $this->translatableActiveLocale;
-        }
+        $locale ??= $this->translatableActiveLocale;
 
         if (!array_key_exists($locale, $this->translatableAttributes)) {
             $this->loadTranslatableAttributes($locale);
